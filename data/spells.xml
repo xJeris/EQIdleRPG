@@ -109,9 +109,11 @@
   <spell id="94" name="Bleed Essence Rk. III" class="Necromancer" minLevel="91" maxLevel="99" baseDamage="4089" />
   <spell id="95" name="Plunder Essence Rk. III" class="Necromancer" minLevel="96" maxLevel="101" baseDamage="4959" />
   <!-- Paladin -->
-
-
-
+  <spell id="96" name="Crush of Compunction Rk. III" class="Paladin" minLevel="85" maxLevel="85" baseDamage="1260" />
+  <spell id="97" name="Elegy Rk. III" class="Paladin" minLevel="86" maxLevel="90" baseDamage="2162" />
+  <spell id="98" name="Paean Rk. III" class="Paladin" minLevel="91" maxLevel="95" baseDamage="2622" />
+  <spell id="99" name="Laudation Rk. III" class="Paladin" minLevel="96" maxLevel="99" baseDamage="3253" />
+  <spell id="100" name="Glorious Expurgation Rk. III" class="Paladin" minLevel="100" maxLevel="101" baseDamage="3806" />
   <!-- Shadowknight -->
   <spell id="140" name="Spike of Disease" class="Shadowknight" minLevel="1" maxLevel="5" baseDamage="15" />
 
