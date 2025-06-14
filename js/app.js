@@ -400,10 +400,10 @@ function updateStatsUI() {
   if (player.pet) {
     const petStats = {
       "Pet": player.pet.name + " (L" + player.pet.level + ")",
-      "Pet HP": player.pet.hp + " / " + player.pet.HP,  // Show HP dynamically
-      "Pet ATK": player.pet.atk,
-      "Pet DEF": player.pet.def,
-      "Pet MAG": player.pet.mag
+      "Pet HP": player.pet.HP + " / " + player.pet.HP,  // Show HP dynamically
+      "Pet ATK": player.pet.ATK,
+      "Pet DEF": player.pet.DEF,
+      "Pet MAG": player.pet.MAG
     };
 
     for (const key in petStats) {
