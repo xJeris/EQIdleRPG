@@ -278,6 +278,28 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// Configure the percent chance for the player to cast a spell (if they are allowed to cast).
+const spellCastChance = {
+  Cleric: 30,   // percent chance to cast a spell
+  Druid: 60,
+  Enchanter: 30,
+  Magician: 60,
+  Necromancer: 60,
+  Paladin: 10,   
+  Shaman: 70,
+  Shadowknight: 30,
+  Wizard: 90     
+};
+
+// Helper function to retrieve available spells for a given class.
+function getAvailableSpellsForClass(cls, level) {
+  return spells.filter(spell => 
+    spell.class === cls &&
+    level >= spell.minLevel &&
+    level <= spell.maxLevel
+  );
+}
+
 // Calculate spell damage based on MAG stat for each class
 function calculateSpellDamage(spell, player) {
   // Example formula: effectiveDamage = baseDamage + (player.MAG * scalingFactor)
@@ -595,7 +617,7 @@ async function simulateBossBattle() {
   }
   
   // **Phase 1: Pet Combat (if a pet is available)**
-  while (currentBoss.HP > 0 && player.pet && player.pet.hp > 0) {
+  while (currentBoss.HP > 0 && player.pet && player.pet.HP > 0) {
     let damageDealt = Math.max(player.pet.ATK - currentBoss.DEF, 1);
     currentBoss.HP -= damageDealt;
     appendLog("Round: " + player.pet.name + " attacks, dealing " + damageDealt + " damage! Boss HP: " + currentBoss.HP);
@@ -603,14 +625,14 @@ async function simulateBossBattle() {
 
     if (currentBoss.HP <= 0) break;
 
-    let damageReceived = Math.max(currentBoss.ATK - player.pet.def, 1);
-    player.pet.hp -= damageReceived;
-    appendLog("Round: " + currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.hp);
+    let damageReceived = Math.max(currentBoss.ATK - player.pet.DEF, 1);
+    player.pet.HP -= damageReceived;
+    appendLog("Round: " + currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.HP);
     await delay(1000);
 
     updateStatsUI();
 
-    if (player.pet.hp <= 0) {
+    if (player.pet.HP <= 0) {
       appendLog("<span style='color: red;'>Your pet " + player.pet.name + " has fallen!</span>");
       petDied = true;
     }
@@ -622,6 +644,33 @@ async function simulateBossBattle() {
     await delay(1000);
 
     while (currentBoss.HP > 0 && player.currentHP > 0) {
+      // ---- Begin Spell Casting Branch ----
+      let availableSpells = getAvailableSpellsForClass(player.class, player.level);
+      let chance = spellCastChance[player.class] || 0;
+      if (availableSpells.length > 0 && Math.random() < chance / 100) {
+        // Cast a spell instead of a physical attack.
+        let chosenSpell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
+        let damageDealt = calculateSpellDamage(chosenSpell, player);
+        currentBoss.HP -= damageDealt;
+        appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Boss HP: " + currentBoss.HP);
+        await delay(1000);
+      
+        if (currentBoss.HP <= 0) break;
+      
+        // Enemy counterattack remains physical.
+        let damageReceived = Math.max(currentBoss.ATK - player.DEF, 1);
+        player.currentHP -= damageReceived;
+        appendLog(currentBoss.name + " counterattacks for " + damageReceived + " damage. Your HP: " + player.currentHP);
+        await delay(1000);
+      
+        updateStatsUI();
+      
+        // Continue to the next iteration of the loop.
+        continue;
+      }
+      // ---- End Spell Casting Branch ----
+    
+      // Otherwise, use physical attack.
       let playerDamage = Math.max(player.ATK - currentBoss.DEF, 1);
       currentBoss.HP -= playerDamage;
       appendLog("Round: You attack " + currentBoss.name + " dealing " + playerDamage + " damage! Boss HP: " + currentBoss.HP);
@@ -682,7 +731,7 @@ async function simulateCombat() {
   // Pick an enemy valid for the player's level and current area.
   let validEnemies = enemies.filter(enemy =>
     player.level >= enemy.minLevel &&
-    player.level <= enemy.maxLevel &&
+    player.level <= Math.min(enemy.maxLevel, player.level + 2) &&
     enemy.allowedAreas.includes(player.currentArea.id)
   );
 
@@ -696,7 +745,7 @@ async function simulateCombat() {
   let enemy = validEnemies[Math.floor(Math.random() * validEnemies.length)];
 
   // Determine a random enemy level within the allowed range.
-  let maxEnemyLevel = Math.min(enemy.maxLevel, player.currentArea.maxLevel);
+  let maxEnemyLevel = Math.min(Math.min(enemy.maxLevel, player.level + 2), player.currentArea.maxLevel);
   let enemyLevel =
     Math.floor(Math.random() * (maxEnemyLevel - enemy.minLevel + 1)) + enemy.minLevel;
 
@@ -715,7 +764,7 @@ async function simulateCombat() {
   // Determine active combatant.
   // If a pet exists and is alive, let it fight; otherwise, use the player.
   let petDied = false;
-  let activeCombatant = (player.pet && player.pet.hp > 0) ? player.pet : player;
+  let activeCombatant = (player.pet && player.pet.HP > 0) ? player.pet : player;
 
   // If the pet does not exist at all, mark petDied as true so we immediately use the player.
   //if (!player.pet) {
@@ -729,34 +778,51 @@ async function simulateCombat() {
      (activeCombatant !== player && activeCombatant.HP > 0))
   ) {
     let attackerName, attackerATK, currentHealth;
-    
+  
     if (activeCombatant === player) {
       attackerName = "You";
-      attackerATK = player.ATK;
+      // Check if the player is allowed to cast spells.
+      let availableSpells = getAvailableSpellsForClass(player.class, player.level);
+      let chance = spellCastChance[player.class] || 0;
+      if (availableSpells.length > 0 && Math.random() < chance / 100) {
+        // Cast a spell instead of a physical attack.
+        let chosenSpell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
+        let damageDealt = calculateSpellDamage(chosenSpell, player);
+        currentEnemy.HP -= damageDealt;
+        appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Enemy HP: " + currentEnemy.HP);
+        await delay(1000);
+        if (currentEnemy.HP <= 0) break;
+        
+        // Enemy counterattack remains physical.
+        let damageReceived = Math.max(currentEnemy.ATK - player.DEF, 1);
+        player.currentHP -= damageReceived;
+        currentHealth = player.currentHP;
+        appendLog(currentEnemy.name + " counterattacks for " + damageReceived + " damage. Your HP: " + currentHealth);
+        await delay(1000);
+        
+        updateStatsUI();
+        continue; // Proceed to the next loop iteration.
+      } else {
+        // Otherwise, use physical attack.
+        attackerATK = player.ATK;
+      }
     } else {
+      // Pet's turn (we already assume pet uses physical attacks).
       attackerName = player.pet.name;
       attackerATK = player.pet.ATK;
     }
     
-    // Calculate damage dealt.
+    // If no spell was cast, do the physical attack:
     let damageDealt = Math.max(attackerATK - currentEnemy.DEF, 1);
     currentEnemy.HP -= damageDealt;
-    appendLog(
-      attackerName + " attacks, dealing " + damageDealt + " damage! Enemy HP: " + currentEnemy.HP
-    );
+    appendLog(attackerName + " attacks, dealing " + damageDealt + " damage! Enemy HP: " + currentEnemy.HP);
     await delay(1000);
     
     if (currentEnemy.HP <= 0) break;
     
     // Enemy counterattack.
-    let defenderDEF;
-    if (activeCombatant === player) {
-      defenderDEF = player.DEF;
-    } else {
-      defenderDEF = player.pet.DEF;
-    }
+    let defenderDEF = (activeCombatant === player) ? player.DEF : player.pet.DEF;
     let damageReceived = Math.max(currentEnemy.ATK - defenderDEF, 1);
-    
     if (activeCombatant === player) {
       player.currentHP -= damageReceived;
       currentHealth = player.currentHP;
@@ -765,15 +831,12 @@ async function simulateCombat() {
       currentHealth = player.pet.HP;
     }
     
-    appendLog(
-      currentEnemy.name + " attacks for " + damageReceived +
-      " damage. " + attackerName + " HP: " + currentHealth
-    );
+    appendLog(currentEnemy.name + " attacks for " + damageReceived + " damage. " + attackerName + " HP: " + currentHealth);
     await delay(1000);
     
     updateStatsUI();
     
-    // If pet dies during combat, switch to player.
+    // Switch from pet to player if needed.
     if (activeCombatant !== player && player.pet.HP <= 0 && !petDied) {
       appendLog("<span style='color: red;'>Your pet " + player.pet.name + " has fallen!</span>");
       petDied = true;
