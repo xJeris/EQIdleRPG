@@ -72,21 +72,21 @@ ATK, DEF, and MAG scaling (CEILING 0.045) are all matching the players scale.
   <pet id="63" name="Fire Ritual Summoning" class="Magician" level="73" hp="2119" atk="333" def="348" mag="683" />
   <pet id="64" name="Water Ritual of Discord" class="Magician" level="74" hp="2225" atk="348" def="364" mag="714" />
 <!-- Beastlord Pets-->
-  <pet id="65" name="Spirit of Sharik" class="Beastlord" level="8" hp="115" atk="14" def="14" mag="20" />
-  <pet id="66" name="Spirit of Khaliz" class="Beastlord" level="15" hp="154" atk="20" def="22" mag="21" />
-  <pet id="67" name="Spirit of Keshuval" class="Beastlord" level="21" hp="220" atk="32" def="34" mag="22" />
-  <pet id="68" name="Spirit of Herikol" class="Beastlord" level="30" hp="337" atk="54" def="56" mag="23" />
-  <pet id="69" name="Spirit of Yekan" class="Beastlord" level="39" hp="89" atk="80" def="84" mag="25" />
-  <pet id="70" name="Spirit of Hashek" class="Beastlord" level="46" hp="93" atk="116" def="122" mag="27" />
-  <pet id="71" name="Spirit of Omakin" class="Beastlord" level="54" hp="97" atk="145" def="152" mag="29" />
-  <pet id="72" name="Spirit of Zehkes" class="Beastlord" level="56" hp="101" atk="160" def="167" mag="31" />
-  <pet id="73" name="Spirit of Khurenz" class="Beastlord" level="58" hp="106" atk="175" def="184" mag="33" />
-  <pet id="74" name="Spirit of Khati Sha" class="Beastlord" level="60" hp="111" atk="192" def="202" mag="35" />
-  <pet id="75" name="Spirit of Arag" class="Beastlord" level="62" hp="116" atk="211" def="221" mag="37" />
-  <pet id="76" name="Spirit of Sorsha" class="Beastlord" level="64" hp="121" atk="243" def="254" mag="39" />
-  <pet id="77" name="Spirit of Alladnu" class="Beastlord" level="68" hp="127" atk="278" def="291" mag="41" />
-  <pet id="78" name="Spirit of Rashara" class="Beastlord" level="70" hp="133" atk="312" def="326" mag="43" />
-  <pet id="79" name="Spirit of Uluanes" class="Beastlord" level="73" hp="139" atk="395" def="413" mag="45" />
+  <pet id="65" name="Spirit of Sharik" class="Beastlord" level="8" hp="115" atk="14" def="14" mag="14" />
+  <pet id="66" name="Spirit of Khaliz" class="Beastlord" level="15" hp="154" atk="20" def="22" mag="22" />
+  <pet id="67" name="Spirit of Keshuval" class="Beastlord" level="21" hp="220" atk="32" def="34" mag="34" />
+  <pet id="68" name="Spirit of Herikol" class="Beastlord" level="30" hp="337" atk="54" def="56" mag="56" />
+  <pet id="69" name="Spirit of Yekan" class="Beastlord" level="39" hp="89" atk="80" def="84" mag="84" />
+  <pet id="70" name="Spirit of Hashek" class="Beastlord" level="46" hp="93" atk="116" def="122" mag="122" />
+  <pet id="71" name="Spirit of Omakin" class="Beastlord" level="54" hp="97" atk="145" def="152" mag="152" />
+  <pet id="72" name="Spirit of Zehkes" class="Beastlord" level="56" hp="101" atk="160" def="167" mag="167" />
+  <pet id="73" name="Spirit of Khurenz" class="Beastlord" level="58" hp="106" atk="175" def="184" mag="184" />
+  <pet id="74" name="Spirit of Khati Sha" class="Beastlord" level="60" hp="111" atk="192" def="202" mag="202" />
+  <pet id="75" name="Spirit of Arag" class="Beastlord" level="62" hp="116" atk="211" def="221" mag="221" />
+  <pet id="76" name="Spirit of Sorsha" class="Beastlord" level="64" hp="121" atk="243" def="254" mag="254" />
+  <pet id="77" name="Spirit of Alladnu" class="Beastlord" level="68" hp="127" atk="278" def="291" mag="291" />
+  <pet id="78" name="Spirit of Rashara" class="Beastlord" level="70" hp="133" atk="312" def="326" mag="326" />
+  <pet id="79" name="Spirit of Uluanes" class="Beastlord" level="73" hp="139" atk="395" def="413" mag="413" />
 <!-- Necromancer Pets-->
   <pet id="80" name="Cavorting Bones" class="Necromancer" level="1" hp="50" atk="3" def="3" mag="20" />
   <pet id="81" name="Learing Corpse" class="Necromancer" level="4" hp="85" atk="7" def="8" mag="23" />
