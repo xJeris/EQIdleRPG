@@ -69,13 +69,31 @@
   <spell id="56" name="Spectral Assault Rk. III" class="Enchanter" minLevel="88" maxLevel="89" baseDamage="5199" />
   <spell id="57" name="Mindblade Rk. III" class="Enchanter" minLevel="90" maxLevel="94" baseDamage="9966" />
   <spell id="58" name="Mindscythe Rk. III" class="Enchanter" minLevel="95" maxLevel="99" baseDamage="13735" />
-  <spell id="59" name="Tears of Syrkl Rk. III" class="Enchanter" minLevel="95" maxLevel="99" baseDamage="15086" />
+  <spell id="59" name="Tears of Syrkl Rk. III" class="Enchanter" minLevel="100" maxLevel="101" baseDamage="15086" />
   <!-- Magician -->
-  <spell id="38" name="Fire Flux" class="Magician" minLevel="1" maxLevel="5" baseDamage="12" />
-
+  <spell id="60" name="Fire Flux" class="Magician" minLevel="1" maxLevel="3" baseDamage="12" />
+  <spell id="61" name="Burn" class="Magician" minLevel="4" maxLevel="6" baseDamage="14" />
+  <spell id="62" name="Shock of Blades" class="Magician" minLevel="7" maxLevel="14" baseDamage="42" />
+  <spell id="63" name="Shock of Flame" class="Magician" minLevel="15" maxLevel="22" baseDamage="122" />
+  <spell id="64" name="Shock of Spikes" class="Magician" minLevel="23" maxLevel="30" baseDamage="227" />
+  <spell id="65" name="Blaze" class="Magician" minLevel="31" maxLevel="40" baseDamage="418" />
+  <spell id="66" name="Shock of Swords" class="Magician" minLevel="41" maxLevel="51" baseDamage="584" />
+  <spell id="67" name="Char" class="Magician" minLevel="52" maxLevel="56" baseDamage="974" />
+  <spell id="68" name="Shock of Steel" class="Magician" minLevel="57" maxLevel="59" baseDamage="1193" />
+  <spell id="69" name="Ancient: Shock of Sun" class="Magician" minLevel="60" maxLevel="62" baseDamage="1350" />
+  <spell id="70" name="Black Steel" class="Magician" minLevel="63" maxLevel="64" baseDamage="1475" />
+  <spell id="71" name="Ancient: Chaos Vortex" class="Magician" minLevel="65" maxLevel="67" baseDamage="1920" />
+  <spell id="72" name="Blade Strike" class="Magician" minLevel="68" maxLevel="69" baseDamage="2029" />
+  <spell id="73" name="Ancient: Nova Strike" class="Magician" minLevel="70" maxLevel="71" baseDamage="2377" />
+  <spell id="74" name="Shock of Silvered Steel Rk. III" class="Magician" minLevel="72" maxLevel="76" baseDamage="2740" />
+  <spell id="75" name="Shock of Cineral Steel Rk. III" class="Magician" minLevel="77" maxLevel="81" baseDamage="3562" />
+  <spell id="76" name="Shock of Discordant Steel Rk. III" class="Magician" minLevel="82" maxLevel="86" baseDamage="4451" />
+  <spell id="77" name="Shock of Ethereal Steel Rk. III" class="Magician" minLevel="87" maxLevel="91" baseDamage="6306" />
+  <spell id="78" name="Shock of Argathian Steel Rk. III" class="Magician" minLevel="92" maxLevel="96" baseDamage="7821" />
+  <spell id="79" name="Shock of Blistersteel Rk. III" class="Magician" minLevel="97" maxLevel="101" baseDamage="10821" />
 
   <!-- Necromancer -->
-  <spell id="4" name="Life Tap" class="Necromancer" minLevel="1" maxLevel="5" baseDamage="6" />
+  <spell id="100" name="Life Tap" class="Necromancer" minLevel="1" maxLevel="5" baseDamage="6" />
 
 
   <!-- Paladin -->
@@ -83,13 +101,13 @@
 
 
   <!-- Shadowknight -->
-  <spell id="5" name="Spike of Disease" class="Shadowknight" minLevel="1" maxLevel="5" baseDamage="15" />
+  <spell id="140" name="Spike of Disease" class="Shadowknight" minLevel="1" maxLevel="5" baseDamage="15" />
 
 
   <!-- Shaman -->
-  <spell id="6" name="Burst of Flame" class="Shaman" minLevel="1" maxLevel="5" baseDamage="5" />
+  <spell id="170" name="Burst of Flame" class="Shaman" minLevel="1" maxLevel="5" baseDamage="5" />
 
 
   <!-- Wizard -->
-  <spell id="7" name="Blast of Cold" class="Wizard" minLevel="1" maxLevel="5" baseDamage="18" />
+  <spell id="200" name="Blast of Cold" class="Wizard" minLevel="1" maxLevel="5" baseDamage="18" />
 </spells>
