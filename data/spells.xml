@@ -8,11 +8,88 @@
     baseDamage – The spell's base damage before applying any MAG scaling.
 -->
 <spells>
-  <spell id="1" name="Strike" class="Cleric" minLevel="1" maxLevel="5" baseDamage="10" />
-  <spell id="2" name="Burst of Flame" class="Druid" minLevel="1" maxLevel="5" baseDamage="5" />
-  <spell id="3" name="Fire Flux" class="Magician" minLevel="1" maxLevel="5" baseDamage="12" />
+  <!-- Cleric-->
+  <spell id="1" name="Strike" class="Cleric" minLevel="1" maxLevel="4" baseDamage="10" />
+  <spell id="2" name="Furor" class="Cleric" minLevel="5" maxLevel="13" baseDamage="33" />
+  <spell id="3" name="Smite" class="Cleric" minLevel="14" maxLevel="28" baseDamage="88" />
+  <spell id="4" name="Wrath" class="Cleric" minLevel="29" maxLevel="43" baseDamage="176" />
+  <spell id="5" name="Retribution" class="Cleric" minLevel="44" maxLevel="53" baseDamage="390" />
+  <spell id="6" name="Reckoning" class="Cleric" minLevel="54" maxLevel="55" baseDamage="571" />
+  <spell id="7" name="Judgement" class="Cleric" minLevel="56" maxLevel="61" baseDamage="842" />
+  <spell id="8" name="Condemnation" class="Cleric" minLevel="62" maxLevel="64" baseDamage="1175" />
+  <spell id="9" name="Ancient: Chaos Censure" class="Cleric" minLevel="65" maxLevel="66" baseDamage="1329" />
+  <spell id="10" name="Reproach" class="Cleric" minLevel="67" maxLevel="69" baseDamage="1424" />
+  <spell id="11" name="Ancient: Pious Conscience" class="Cleric" minLevel="70" maxLevel="71" baseDamage="1646" />
+  <spell id="12" name="Reproval Rk. III" class="Cleric" minLevel="72" maxLevel="76" baseDamage="2043" />
+  <spell id="13" name="Divine Censure Rk. III" class="Cleric" minLevel="77" maxLevel="83" baseDamage="2656" />
+  <spell id="14" name="Glorious Denunciation Rk. III" class="Cleric" minLevel="84" maxLevel="84" baseDamage="3320" />
+  <spell id="15" name="Holy Contravention Strike Rk. III" class="Cleric" minLevel="85" maxLevel="89" baseDamage="5881" />
+  <spell id="16" name="Celestial Contravention Strike Rk. III" class="Cleric" minLevel="90" maxLevel="94" baseDamage="7922" />
+  <spell id="17" name="Elysian Contravention Strike Rk. III" class="Cleric" minLevel="95" maxLevel="100" baseDamage="9258" />
+  <spell id="18" name="Virtuous Contravention Strike Rk. III" class="Cleric" minLevel="100" maxLevel="101" baseDamage="11228" />
+  <!-- Druid -->
+  <spell id="19" name="Burst of Flame" class="Druid" minLevel="1" maxLevel="2" baseDamage="5" />
+  <spell id="20" name="Burst of Fire" class="Druid" minLevel="3" maxLevel="7" baseDamage="14" />
+  <spell id="21" name="Ignite" class="Druid" minLevel="8" maxLevel="15" baseDamage="46" />
+  <spell id="22" name="Careless Lightning" class="Druid" minLevel="16" maxLevel="20" baseDamage="105" />
+  <spell id="23" name="Combust" class="Druid" minLevel="28" maxLevel="37" baseDamage="182" />
+  <spell id="24" name="Firestrike" class="Druid" minLevel="38" maxLevel="42" baseDamage="422" />
+  <spell id="25" name="Dustdevil" class="Druid" minLevel="43" maxLevel="47" baseDamage="582" />
+  <spell id="26" name="Starfire" class="Druid" minLevel="48" maxLevel="53" baseDamage="634" />
+  <spell id="27" name="Scoriae" class="Druid" minLevel="54" maxLevel="58" baseDamage="986" />
+  <spell id="28" name="Wildfire" class="Druid" minLevel="59" maxLevel="63" baseDamage="1294" />
+  <spell id="29" name="Summer's Flame" class="Druid" minLevel="64" maxLevel="64" baseDamage="1600" />
+  <spell id="30" name="Sylvan Fire" class="Druid" minLevel="65" maxLevel="68" baseDamage="1761" />
+  <spell id="31" name="Solstice Strike" class="Druid" minLevel="69" maxLevel="73" baseDamage="2201" />
+  <spell id="32" name="Equinox Burn Rk. III" class="Druid" minLevel="74" maxLevel="78" baseDamage="2972" />
+  <spell id="33" name="Equinox Brand Rk. III" class="Druid" minLevel="79" maxLevel="83" baseDamage="3864" />
+  <spell id="34" name="Summer Solstice Rk. III" class="Druid" minLevel="84" maxLevel="88" baseDamage="4829" />
+  <spell id="35" name="Summer Prominence Rk. III" class="Druid" minLevel="89" maxLevel="93" baseDamage="6109" />
+  <spell id="36" name="Summer Zenith Rk. III" class="Druid" minLevel="94" maxLevel="98" baseDamage="8083" />
+  <spell id="37" name="Summer Suncrest Rk. III" class="Druid" minLevel="99" maxLevel="101" baseDamage="9803" />
+  <!-- Enchanter -->
+  <spell id="38" name="Shallow Breath" class="Enchanter" minLevel="1" maxLevel="3" baseDamage="5" />
+  <spell id="39" name="Suffocating Sphere" class="Enchanter" minLevel="4" maxLevel="6" baseDamage="13" />
+  <spell id="40" name="Chaotic Feedback" class="Enchanter" minLevel="7" maxLevel="10" baseDamage="32" />
+  <spell id="41" name="Choke" class="Enchanter" minLevel="11" maxLevel="15" baseDamage="35" />
+  <spell id="42" name="Sanity Warp" class="Enchanter" minLevel="16" maxLevel="20" baseDamage="87" />
+  <spell id="43" name="Chaos Flux" class="Enchanter" minLevel="21" maxLevel="31" baseDamage="175" />
+  <spell id="44" name="Anarchy" class="Enchanter" minLevel="32" maxLevel="42" baseDamage="275" />
+  <spell id="45" name="Discordant Mind" class="Enchanter" minLevel="43" maxLevel="53" baseDamage="387" />
+  <spell id="46" name="Dementia" class="Enchanter" minLevel="54" maxLevel="57" baseDamage="571" />
+  <spell id="47" name="Dementing Vision" class="Enchanter" minLevel="58" maxLevel="59" baseDamage="836" />
+  <spell id="48" name="Ancient: Chaotic Vision" class="Enchanter" minLevel="60" maxLevel="63" baseDamage="880" />
+  <spell id="49" name="Insanity" class="Enchanter" minLevel="64" maxLevel="64" baseDamage="1100" />
+  <spell id="50" name="Madness of Ikkibi" class="Enchanter" minLevel="65" maxLevel="67" baseDamage="1210" />
+  <spell id="51" name="Psychosis" class="Enchanter" minLevel="68" maxLevel="72" baseDamage="1513" />
+  <spell id="52" name="Polychromatic Assault Rk. III" class="Enchanter" minLevel="73" maxLevel="77" baseDamage="2043" />
+  <spell id="53" name="Multichromatic Assault Rk. III" class="Enchanter" minLevel="78" maxLevel="82" baseDamage="2656" />
+  <spell id="54" name="Polychaotic Assault Rk. III" class="Enchanter" minLevel="83" maxLevel="85" baseDamage="3320" />
+  <spell id="55" name="Chromatic Jab Rk. III" class="Enchanter" minLevel="86" maxLevel="87" baseDamage="4135" />
+  <spell id="56" name="Spectral Assault Rk. III" class="Enchanter" minLevel="88" maxLevel="89" baseDamage="5199" />
+  <spell id="57" name="Mindblade Rk. III" class="Enchanter" minLevel="90" maxLevel="94" baseDamage="9966" />
+  <spell id="58" name="Mindscythe Rk. III" class="Enchanter" minLevel="95" maxLevel="99" baseDamage="13735" />
+  <spell id="59" name="Tears of Syrkl Rk. III" class="Enchanter" minLevel="95" maxLevel="99" baseDamage="15086" />
+  <!-- Magician -->
+  <spell id="38" name="Fire Flux" class="Magician" minLevel="1" maxLevel="5" baseDamage="12" />
+
+
+  <!-- Necromancer -->
   <spell id="4" name="Life Tap" class="Necromancer" minLevel="1" maxLevel="5" baseDamage="6" />
+
+
+  <!-- Paladin -->
+
+
+
+  <!-- Shadowknight -->
   <spell id="5" name="Spike of Disease" class="Shadowknight" minLevel="1" maxLevel="5" baseDamage="15" />
+
+
+  <!-- Shaman -->
   <spell id="6" name="Burst of Flame" class="Shaman" minLevel="1" maxLevel="5" baseDamage="5" />
+
+
+  <!-- Wizard -->
   <spell id="7" name="Blast of Cold" class="Wizard" minLevel="1" maxLevel="5" baseDamage="18" />
 </spells>
