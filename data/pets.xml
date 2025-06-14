@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+HP Scaling (FLOOR 0.0502) is set so that at level 100 the pet has about 8000 HP. We don't want to give them too 
+much HP, as the player will fight as well if the pet dies.
+
+ATK, DEF, and MAG scaling (CEILING 0.045) are all matching the players scale.
+-->
+<pets>
+<!-- Magician Pets-->
+  <pet id="1" name="Air Elementalkin" class="Magician" level="2" hp="75" atk="4" def="5" mag="20" />
+  <pet id="2" name="Earth Elementalkin" class="Magician" level="3" hp="78" atk="5" def="6" mag="21" />
+  <pet id="3" name="Fire Elementalkin" class="Magician" level="4" hp="81" atk="6" def="7" mag="22" />
+  <pet id="4" name="Water Elementalkin" class="Magician" level="5" hp="85" atk="7" def="8" mag="23" />
+
+  <pet id="5" name="Air Elementaling" class="Magician" level="6" hp="89" atk="8" def="9" mag="25" />
+  <pet id="6" name="Earth Elementaling" class="Magician" level="7" hp="93" atk="9" def="10" mag="27" />
+  <pet id="7" name="Fire Elementaling" class="Magician" level="8" hp="97" atk="10" def="11" mag="29" />
+  <pet id="8" name="Water Elementaling" class="Magician" level="9" hp="101" atk="11" def="12" mag="31" />
+
+  <pet id="9" name="Air Elemental" class="Magician" level="10" hp="106" atk="12" def="13" mag="33" />
+  <pet id="10" name="Earth Elemental" class="Magician" level="11" hp="111" atk="13" def="14" mag="35" />
+  <pet id="11" name="Fire Elemental" class="Magician" level="12" hp="116" atk="14" def="15" mag="37" />
+  <pet id="12" name="Water Elemental" class="Magician" level="13" hp="121" atk="15" def="16" mag="39" />
+
+  <pet id="13" name="Air Minor Summoning" class="Magician" level="14" hp="127" atk="16" def="17" mag="41" />
+  <pet id="14" name="Earth Minor Summoning" class="Magician" level="15" hp="133" atk="17" def="18" mag="43" />
+  <pet id="15" name="Fire Minor Summoning" class="Magician" level="16" hp="139" atk="18" def="19" mag="45" />
+  <pet id="16" name="Water Minor Summoning" class="Magician" level="17" hp="145" atk="19" def="20" mag="48" />
+
+  <pet id="17" name="Air Lesser Summoning" class="Magician" level="18" hp="152" atk="20" def="21" mag="51" />
+  <pet id="18" name="Earth Lesser Summoning" class="Magician" level="19" hp="159" atk="21" def="22" mag="54" />
+  <pet id="19" name="Fire Lesser Summoning" class="Magician" level="20" hp="166" atk="22" def="23" mag="57" />
+  <pet id="20" name="Water Lesser Summoning" class="Magician" level="21" hp="174" atk="23" def="25" mag="60" />
+
+
+
+<!-- Beastlord Pets-->
+
+
+
+<!-- Necromancer Pets-->
+
+
+</pets>

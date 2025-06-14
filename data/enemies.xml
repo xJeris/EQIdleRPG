@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- minLevel -> Lowest level encounter for that mob. -->
+<!-- maxLevel -> Highest level encounter for that mob. -->
+<!-- area -> area by id found in areas.xml where that mob can appear. -->
+<enemies>
+  <enemy id="1" name="a cave bat" minLevel="1" maxLevel="1" HP="30" ATK="1" DEF="1" xp="50">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  <enemy id="2" name="a cave rat" minLevel="2" maxLevel="2" HP="50" ATK="2" DEF="1" xp="75">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  <enemy id="3" name="a dark elf slave" minLevel="3" maxLevel="3" HP="70" ATK="2" DEF="2" xp="100">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  <enemy id="4" name="a gloomfang lurker" minLevel="4" maxLevel="4" HP="90" ATK="3" DEF="2" xp="125">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  <enemy id="5" name="a goblin slave" minLevel="5" maxLevel="5" HP="110" ATK="4" DEF="3" xp="175">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  <enemy id="6" name="a garroted kobold" minLevel="6" maxLevel="8" HP="125" ATK="5" DEF="4" xp="200">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  <enemy id="7" name="a Gloomingdeep captain" minLevel="7" maxLevel="7" HP="150" ATK="6" DEF="6" xp="250">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  <enemy id="8" name="a trampled kobold" minLevel="7" maxLevel="7" HP="150" ATK="6" DEF="5" xp="225">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  <enemy id="9" name="Slavemaster Ruga" minLevel="8" maxLevel="8" HP="200" ATK="7" DEF="6" xp="300">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  <enemy id="10" name="Gloomingdeep Spiritweaver" minLevel="8" maxLevel="8" HP="185" ATK="6" DEF="5" xp="275">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+  </enemy>
+  <enemy id="12" name="Pox" minLevel="9" maxLevel="9" HP="300" ATK="8" DEF="6" xp="350">
+    <areas>
+      <area id="1"/>
+    </areas>
+  </enemy>
+</enemies>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    id – A unique identifier.
+    name – The spell name.
+    class – Which class can cast the spell.
+    minLevel – The minimum character level required to cast it.
+    maxLevel – The maximum character level the spell will be cast at.
+    baseDamage – The spell's base damage before applying any MAG scaling.
+-->
+<spells>
+  <spell id="1" name="Strike" class="Cleric" minLevel="1" maxLevel="5" baseDamage="10" />
+  <spell id="2" name="Burst of Flame" class="Druid" minLevel="1" maxLevel="5" baseDamage="5" />
+  <spell id="3" name="Fire Flux" class="Magician" minLevel="1" maxLevel="5" baseDamage="12" />
+  <spell id="4" name="Life Tap" class="Necromancer" minLevel="1" maxLevel="5" baseDamage="6" />
+  <spell id="5" name="Spike of Disease" class="Shadowknight" minLevel="1" maxLevel="5" baseDamage="15" />
+  <spell id="6" name="Burst of Flame" class="Shaman" minLevel="1" maxLevel="5" baseDamage="5" />
+  <spell id="7" name="Blast of Cold" class="Wizard" minLevel="1" maxLevel="5" baseDamage="18" />
+</spells>

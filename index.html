@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Idle RPG Adventure</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Character Creation Screen -->
+  <div id="characterCreation">
+    <h2>Create Your Character</h2>
+    <form id="characterForm">
+      <label>
+        Name:
+        <input type="text" id="playerName" value="Frizznik" required />
+      </label>
+      <label>
+        Race:
+        <select id="playerRace" required>
+          <option value="Human">Human</option>
+          <option value="Half Elf">Half Elf</option>
+          <option value="High Elf">High Elf</option>
+          <option value="Dark Elf">Dark Elf</option>
+          <option value="Wood Elf">Wood Elf</option>
+          <option value="Dwarf">Dwarf</option>
+          <option value="Iksar">Iksar</option>
+          <option value="Ogre">Ogre</option>
+          <option value="Troll">Troll</option>
+          <option value="Froglok">Froglok</option>
+          <option value="Drakkin">Drakkin</option>
+          <option value="Barbarian">Barbarian</option>
+          <option value="Erudite">Erudite</option>
+          <option value="Gnome" selected>Gnome</option>
+          <option value="Halfling">Halfling</option>
+          <option value="Vah Shir">Vah Shir</option>
+        </select>
+      </label>
+      <label>
+        Class:
+        <select id="playerClass" required>
+          <option value="Bard">Bard</option>
+          <option value="Beastlord">Beastlord</option>
+          <option value="Beserker">Beserker</option>
+          <option value="Cleric">Cleric</option>
+          <option value="Druid">Druid</option>
+          <option value="Enchanter">Enchanter</option>
+          <option value="Magician">Magician</option>
+          <option value="Monk">Monk</option>
+          <option value="Necromancer">Necromancer</option>
+          <option value="Paladin">Paladin</option>
+          <option value="Ranger">Ranger</option>
+          <option value="Rogue">Rogue</option>
+          <option value="Shadowknight">Shadowknight</option>
+          <option value="Shaman">Shaman</option>
+          <option value="Warrior">Warrior</option>
+          <option value="Wizard" selected>Wizard</option>
+        </select>
+      </label>
+      <label>
+        Gender:
+        <select id="playerGender" required>
+          <option value="Male" selected>Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+      <button id="resetCharacter">Reset</button> <br /><br />
+      <button id="startAdv" type="submit">Start Adventure</button>
+    </form>
+  </div>
+
+  <!-- Main Game UI (hidden until character creation is complete) -->
+  <div id="gameUI" style="display: none;">
+    <div id="playerStats">
+      <h2>Character Info</h2>
+      <p id="playerInfo">Name: - | Race: - | Class: -</p>
+      <ul id="statsList">
+        <!-- The JS will populate this list -->
+      </ul>
+      <ul id="petsList">
+        <!-- The JS will populate this list -->
+      </ul>
+      <p id="currentArea">Area: -</p>
+      <div id="equipment">
+        <ul id="equipmentList">
+          <!-- The JS will populate this list -->
+        </ul>
+      </div>
+      <br />
+      <button id="resetButton">Reset Game</button>
+    </div>
+    <div id="gameText">
+      <h2>Adventure Log</h2>
+      <div id="combatLog"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

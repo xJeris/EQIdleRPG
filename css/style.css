@@ -1,0 +1,95 @@
+/* Global styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #282c34;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  h2 {
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 5px;
+  }​
+  
+  /* Container styling: using flexbox for split view */
+  #gameUI {
+    display: flex;
+    height: 100vh;
+  }
+  #playerStats {
+    width: 30%;
+    padding: 20px;
+    background-color: #3a3f47;
+    box-shadow: inset -2px 0 5px rgba(0,0,0,0.5);
+    font-size: 14px;
+  }
+  #gameText {
+    width: 70%;
+    padding: 20px;
+    background-color: #20252b;
+    overflow-y: auto;
+  }
+  
+  /* Combat log styling */
+  #combatLog {
+    height: calc(40vh - 70px);
+    overflow-y: auto;
+    border: 1px solid #444;
+    background: #12141b;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .winOutcome {
+    color: green;
+  }
+  
+  .loseOutcome {
+    color: red;
+  }
+  
+  /* Character creation form styling */
+  #characterCreation {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #3a3f47;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  }
+  #characterCreation label {
+    display: block;
+    margin: 10px 0;
+  }
+  #characterCreation input, 
+  #characterCreation select {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  /* #characterCreation button { */
+  #startAdv {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    background: #61dafb;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #resetCharacter {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    background: #f2ff7b;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
