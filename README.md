@@ -2,7 +2,7 @@
 
 An idle RPG based on the EverQuest universe. Written in Javascript, CSS and HTML. This code was developed using Microsoft Copilot (AI).
 
-![Game example image](img\game_sample.png)
+<img src="img/game_sample.png" alt="game sample img" width="80%"/>
 
 ## Table of Contents
 
