@@ -4,10 +4,10 @@ An idle RPG based on the EverQuest universe. Written in Javascript, CSS and HTML
 
 ## Table of Contents
 
-- [Features](#features)
-- [Improvements](#improvements)
-- [Installation](#installation)
-- [License](#license)
+- [Features](#Features)
+- [Improvements](#Improvements)
+- [Installation](#Installation)
+- [License](#License)
 
 ## Features
 
