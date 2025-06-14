@@ -91,11 +91,23 @@
   <spell id="77" name="Shock of Ethereal Steel Rk. III" class="Magician" minLevel="87" maxLevel="91" baseDamage="6306" />
   <spell id="78" name="Shock of Argathian Steel Rk. III" class="Magician" minLevel="92" maxLevel="96" baseDamage="7821" />
   <spell id="79" name="Shock of Blistersteel Rk. III" class="Magician" minLevel="97" maxLevel="101" baseDamage="10821" />
-
   <!-- Necromancer -->
-  <spell id="100" name="Life Tap" class="Necromancer" minLevel="1" maxLevel="5" baseDamage="6" />
-
-
+  <spell id="80" name="Life Tap" class="Necromancer" minLevel="1" maxLevel="11" baseDamage="6" />
+  <spell id="81" name="Lifedraw" class="Necromancer" minLevel="12" maxLevel="19" baseDamage="105" />
+  <spell id="82" name="Siphon Life" class="Necromancer" minLevel="20" maxLevel="25" baseDamage="150" />
+  <spell id="83" name="Spirit Tap" class="Necromancer" minLevel="26" maxLevel="31" baseDamage="210" />
+  <spell id="84" name="Torbas' Acid Blast" class="Necromancer" minLevel="32" maxLevel="47" baseDamage="332" />
+  <spell id="85" name="Drain Soul" class="Necromancer" minLevel="48" maxLevel="48" baseDamage="406" />
+  <spell id="86" name="Torbas' Poison Blast" class="Necromancer" minLevel="49" maxLevel="53" baseDamage="466" />
+  <spell id="87" name="Deflux" class="Necromancer" minLevel="54" maxLevel="58" baseDamage="535" />
+  <spell id="88" name="Touch of Night" class="Necromancer" minLevel="59" maxLevel="59" baseDamage="708" />
+  <spell id="89" name="Anicent: Lifebane" class="Necromancer" minLevel="60" maxLevel="65" baseDamage="1050" />
+  <spell id="90" name="Acikin" class="Necromancer" minLevel="66" maxLevel="75" baseDamage="1823" />
+  <spell id="91" name="Phantasmal Orb Rk. III" class="Necromancer" minLevel="76" maxLevel="80" baseDamage="1932" />
+  <spell id="92" name="Drain Essence Rk. III" class="Necromancer" minLevel="81" maxLevel="85" baseDamage="2641" />
+  <spell id="93" name="Divert Essence Rk. III" class="Necromancer" minLevel="86" maxLevel="90" baseDamage="3341" />
+  <spell id="94" name="Bleed Essence Rk. III" class="Necromancer" minLevel="91" maxLevel="99" baseDamage="4089" />
+  <spell id="95" name="Plunder Essence Rk. III" class="Necromancer" minLevel="96" maxLevel="101" baseDamage="4959" />
   <!-- Paladin -->
 
 
