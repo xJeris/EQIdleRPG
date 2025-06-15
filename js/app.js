@@ -717,11 +717,23 @@ async function simulateBossBattle() {
   
   const playerDRFactor = 50;  // Used to reduce damage taken by boss from player/pet gradually. 50 is about half.
   const bossDRFactor = 50;  // Used to reduce damage taken by player/pet from boss gradually. 50 is about half.
+  const playerPhysicalCritChance = 0.3; // 3% chance for player to deal crit damage on physical attacks.
+  const playerPhysicalCritMultiplier = 1.5; // Multiplier for player physical critical hits.
+  const playerSpellCritChance = 0.03; // 5% chance for player to deal crit damage on spells.
+  const playerSpellCritMultiplier = 1.5; // Multiplier for spell critical hits.
+  const bossPhysicalCritChance = 0.05; // 3% chance for enemy to deal crit damage on physical attacks.
+  const bossPhysicalCritMultiplier = 2.0; // Multiplier for enemy physical critical hits.
 
   // **Phase 1: Pet Combat (if a pet is available)**
   if (petAllowed) {
     while (currentBoss.HP > 0 && player.pet && player.pet.currentHP > 0) {;
       let damageDealt = Math.max(Math.floor(player.pet.ATK * (playerDRFactor / (playerDRFactor + currentBoss.DEF))), 1);
+
+      // Check for a crit on player's pet physical attack.
+      if (Math.random() < playerPhysicalCritChance) {
+        damageDealt = Math.floor(damageDealt * playerPhysicalCritMultiplier);
+        appendLog("<span style='color: orange;'>Your pet land a <strong>Critical Hit</strong>!</span>");
+      }
 
       currentBoss.HP -= damageDealt;
       appendLog("Round: " + player.pet.name + " attacks, dealing " + damageDealt + " damage! Boss HP: " + currentBoss.HP);
@@ -730,6 +742,13 @@ async function simulateBossBattle() {
       if (currentBoss.HP <= 0) break;
 
       let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossDRFactor / (bossDRFactor + player.pet.DEF))), 1);
+      
+      // Check for a crit on bosses physical attack.
+      if (Math.random() < bossPhysicalCritChance) {
+        damageReceived = Math.floor(damageReceived * bossPhysicalCritMultiplier);
+        appendLog("<span style='color: orange;'>The boss landed a <strong>Critical Spell Hit</strong>!</span>");
+      }
+      
       player.pet.currentHP -= damageReceived;
       appendLog("Round: " + currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.currentHP);
       await delay(1000);
@@ -760,6 +779,13 @@ async function simulateBossBattle() {
         // Cast a spell instead of a physical attack.
         let chosenSpell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
         let damageDealt = calculateSpellDamage(chosenSpell, player, currentBoss);
+
+        // Check for a crit on player's spell attack.
+        if (Math.random() < playerSpellCritChance) {
+          damageDealt = Math.floor(damageDealt * playerSpellCritMultiplier);
+          appendLog("<span style='color: orange;'>You land a <strong>Critical Spell Hit</strong>!</span>");
+        }
+
         currentBoss.HP -= damageDealt;
         appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Boss HP: " + currentBoss.HP);
         await delay(1000);
@@ -769,6 +795,12 @@ async function simulateBossBattle() {
         // Enemy counterattack remains physical.
         let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossDRFactor / (bossDRFactor + player.DEF))), 1);
     
+        // Check for a crit on bosses physical attack.
+        if (Math.random() < bossPhysicalCritChance) {
+          damageReceived = Math.floor(damageReceived * bossPhysicalCritMultiplier);
+          appendLog("<span style='color: orange;'>The boss landed a <strong>Critical Hit</strong>!</span>");
+        }
+
         player.currentHP -= damageReceived;
         appendLog(currentBoss.name + " counterattacks for " + damageReceived + " damage. Your HP: " + player.currentHP);
         await delay(1000);
@@ -783,6 +815,12 @@ async function simulateBossBattle() {
       // Otherwise, use physical attack.
       let playerDamage = Math.max(Math.floor(player.ATK * (playerDRFactor / (playerDRFactor + currentBoss.DEF))), 1);
 
+      // Check for a crit on player's physical attack.
+      if (Math.random() < playerPhysicalCritChance) {
+        playerDamage = Math.floor(playerDamage * playerPhysicalCritMultiplier);
+        appendLog("<span style='color: orange;'>You land a <strong>Critical Hit</strong>!</span>");
+      }
+
       currentBoss.HP -= playerDamage;
       appendLog("Round: You attack " + currentBoss.name + " dealing " + playerDamage + " damage! Boss HP: " + currentBoss.HP);
       await delay(1000);
@@ -790,6 +828,13 @@ async function simulateBossBattle() {
       if (currentBoss.HP <= 0) break;
 
       let bossDamage = Math.max(Math.floor(currentBoss.ATK * (bossDRFactor / (bossDRFactor + player.DEF))), 1);
+      
+      // Check for a crit on bosses physical attack.
+      if (Math.random() < bossPhysicalCritChance) {
+        bossDamage = Math.floor(bossDamage * bossPhysicalCritMultiplier);
+        appendLog("<span style='color: orange;'>The boss landed a <strong>Critical Hit</strong>!</span>");
+      }
+      
       player.currentHP -= bossDamage;
       appendLog("Round: " + currentBoss.name + " attacks for " + bossDamage + " damage. Your HP: " + player.currentHP);
       await delay(1000);
@@ -954,6 +999,12 @@ async function simulateCombat() {
 
   const playerDRFactor = 50;  // Used to reduce damage taken by enemy from player/pet gradually. 50 is about half.
   const enemyDRFactor = 50;  // Used to reduce damage taken by player/pet from enemy gradually. 50 is about half.
+  const playerPhysicalCritChance = 0.05; // 5% chance for player to deal crit damage on physical attacks.
+  const playerPhysicalCritMultiplier = 1.5; // Multiplier for player physical critical hits.
+  const playerSpellCritChance = 0.05; // 5% chance for player to deal crit damage on spells.
+  const playerSpellCritMultiplier = 1.5; // Multiplier for spell critical hits.
+  const enemyPhysicalCritChance = 0.03; // 3% chance for enemy to deal crit damage on physical attacks.
+  const enemyPhysicalCritMultiplier = 1.5; // Multiplier for enemy physical critical hits.
 
   // Main combat loop:
   while (
@@ -972,6 +1023,13 @@ async function simulateCombat() {
         // Cast a spell instead of a physical attack.
         let chosenSpell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
         let damageDealt = calculateSpellDamage(chosenSpell, player, currentEnemy);
+
+        // Check for a crit on player's spell attack.
+        if (Math.random() < playerSpellCritChance) {
+          damageDealt = Math.floor(damageDealt * playerSpellCritMultiplier);
+          appendLog("<span style='color: orange;'>You land a <strong>Critical Spell Hit</strong>!</span>");
+        }
+
         currentEnemy.HP -= damageDealt;
         appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Enemy HP: " + currentEnemy.HP);
         await delay(1000);
@@ -979,6 +1037,12 @@ async function simulateCombat() {
         
         // Enemy counterattack remains physical.
         let damageReceived = Math.max(Math.floor(currentEnemy.ATK * (enemyDRFactor / (enemyDRFactor + player.DEF))), 1);
+
+        // Check for a crit on enemy's physical attack.
+        if (Math.random() < enemyPhysicalCritChance) {
+          damageReceived = Math.floor(damageReceived * enemyPhysicalCritMultiplier);
+          appendLog("<span style='color: orange;'>The Enemy lands a <strong>Critical Hit</strong>!</span>");
+        }
 
         player.currentHP -= damageReceived;
         currentHealth = player.currentHP;
@@ -999,6 +1063,13 @@ async function simulateCombat() {
     
     // If no spell was cast, do the physical attack:
     let damageDealt = Math.max(Math.floor(attackerATK * (playerDRFactor / (playerDRFactor + currentEnemy.DEF))), 1);
+    
+    // Check for a crit in player's physical attack.
+    if (Math.random() < playerPhysicalCritChance) {
+      damageDealt = Math.floor(damageDealt * playerPhysicalCritMultiplier);
+      appendLog("<span style='color: orange;'>You land a <strong>Critical Hit</strong>!</span>");
+    }
+    
     currentEnemy.HP -= damageDealt;
     appendLog(attackerName + " attacks, dealing " + damageDealt + " damage! Enemy HP: " + currentEnemy.HP);
     await delay(1000);
@@ -1008,6 +1079,12 @@ async function simulateCombat() {
     // Enemy counterattack.
     let defenderDEF = (activeCombatant === player) ? player.DEF : player.pet.DEF;
     let damageReceived = Math.max(Math.floor(currentEnemy.ATK * (enemyDRFactor / (enemyDRFactor + defenderDEF))), 1);
+
+    // Check for a crit on enemy's physical attack.
+    if (Math.random() < enemyPhysicalCritChance) {
+      damageReceived = Math.floor(damageReceived * enemyPhysicalCritMultiplier);
+      appendLog("<span style='color: orange;'>The Enemy lands a <strong>Critical Hit</strong>!</span>");
+    }
 
     if (activeCombatant === player) {
       player.currentHP -= damageReceived;
