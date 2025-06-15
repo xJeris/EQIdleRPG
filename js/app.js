@@ -616,16 +616,20 @@ async function simulateBossBattle() {
     petDied = true;
   }
   
+  const playerDRFactor = 50;  // Used to reduce damage taken by boss from player/pet gradually. 50 is about half.
+  const bossDRFactor = 50;  // Used to reduce damage taken by player/pet from boss gradually. 50 is about half.
+
   // **Phase 1: Pet Combat (if a pet is available)**
-  while (currentBoss.HP > 0 && player.pet && player.pet.HP > 0) {
-    let damageDealt = Math.max(player.pet.ATK - currentBoss.DEF, 1);
+  while (currentBoss.HP > 0 && player.pet && player.pet.HP > 0) {;
+    let damageDealt = Math.max(Math.floor(player.pet.ATK * (playerDRFactor / (playerDRFactor + currentBoss.DEF))), 1);
+
     currentBoss.HP -= damageDealt;
     appendLog("Round: " + player.pet.name + " attacks, dealing " + damageDealt + " damage! Boss HP: " + currentBoss.HP);
     await delay(1000);
 
     if (currentBoss.HP <= 0) break;
 
-    let damageReceived = Math.max(currentBoss.ATK - player.pet.DEF, 1);
+    let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossDRFactor / (bossDRFactor + player.pet.DEF))), 1);
     player.pet.HP -= damageReceived;
     appendLog("Round: " + currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.HP);
     await delay(1000);
@@ -658,7 +662,8 @@ async function simulateBossBattle() {
         if (currentBoss.HP <= 0) break;
       
         // Enemy counterattack remains physical.
-        let damageReceived = Math.max(currentBoss.ATK - player.DEF, 1);
+        let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossDRFactor / (bossDRFactor + player.DEF))), 1);
+    
         player.currentHP -= damageReceived;
         appendLog(currentBoss.name + " counterattacks for " + damageReceived + " damage. Your HP: " + player.currentHP);
         await delay(1000);
@@ -671,14 +676,15 @@ async function simulateBossBattle() {
       // ---- End Spell Casting Branch ----
     
       // Otherwise, use physical attack.
-      let playerDamage = Math.max(player.ATK - currentBoss.DEF, 1);
+      let playerDamage = Math.max(Math.floor(player.ATK * (playerDRFactor / (playerDRFactor + currentBoss.DEF))), 1);
+
       currentBoss.HP -= playerDamage;
       appendLog("Round: You attack " + currentBoss.name + " dealing " + playerDamage + " damage! Boss HP: " + currentBoss.HP);
       await delay(1000);
 
       if (currentBoss.HP <= 0) break;
 
-      let bossDamage = Math.max(currentBoss.ATK - player.DEF, 1);
+      let bossDamage = Math.max(Math.floor(currentBoss.ATK * (bossDRFactor / (bossDRFactor + player.DEF))), 1);
       player.currentHP -= bossDamage;
       appendLog("Round: " + currentBoss.name + " attacks for " + bossDamage + " damage. Your HP: " + player.currentHP);
       await delay(1000);
@@ -753,10 +759,10 @@ async function simulateCombat() {
   let currentEnemy = {
     name: enemy.name,
     level: enemyLevel,
-    HP: enemy.HP + (enemyLevel - enemy.minLevel) * 10,
-    ATK: enemy.ATK + (enemyLevel - enemy.minLevel) * 2,
-    DEF: enemy.DEF + (enemyLevel - enemy.minLevel) * 1,
-    xp: enemy.xp * enemyLevel
+    HP: enemy.HP + (enemyLevel - enemy.minLevel) * 25,  // Adds 25 HP per level over mobs base
+    ATK: enemy.ATK + (enemyLevel - enemy.minLevel) * 4, // Adds 4 ATK per level over mobs base
+    DEF: enemy.DEF + (enemyLevel - enemy.minLevel) * 2, // Adds 2 DEF per level over mobs base
+    xp: enemy.xp + (enemyLevel - enemy.minLevel) * 50  // Adds 50 xp per level over mobs base
   };
 
   appendLog("A wild " + currentEnemy.name + " (Level " + currentEnemy.level + ") appears!");
@@ -766,10 +772,8 @@ async function simulateCombat() {
   let petDied = false;
   let activeCombatant = (player.pet && player.pet.HP > 0) ? player.pet : player;
 
-  // If the pet does not exist at all, mark petDied as true so we immediately use the player.
-  //if (!player.pet) {
-  //  petDied = true;
-  //}
+  const playerDRFactor = 50;  // Used to reduce damage taken by enemy from player/pet gradually. 50 is about half.
+  const enemyDRFactor = 50;  // Used to reduce damage taken by player/pet from enemy gradually. 50 is about half.
 
   // Main combat loop:
   while (
@@ -794,7 +798,8 @@ async function simulateCombat() {
         if (currentEnemy.HP <= 0) break;
         
         // Enemy counterattack remains physical.
-        let damageReceived = Math.max(currentEnemy.ATK - player.DEF, 1);
+        let damageReceived = Math.max(Math.floor(currentEnemy.ATK * (enemyDRFactor / (enemyDRFactor + player.DEF))), 1);
+
         player.currentHP -= damageReceived;
         currentHealth = player.currentHP;
         appendLog(currentEnemy.name + " counterattacks for " + damageReceived + " damage. Your HP: " + currentHealth);
@@ -813,7 +818,7 @@ async function simulateCombat() {
     }
     
     // If no spell was cast, do the physical attack:
-    let damageDealt = Math.max(attackerATK - currentEnemy.DEF, 1);
+    let damageDealt = Math.max(Math.floor(attackerATK * (playerDRFactor / (playerDRFactor + currentEnemy.DEF))), 1);
     currentEnemy.HP -= damageDealt;
     appendLog(attackerName + " attacks, dealing " + damageDealt + " damage! Enemy HP: " + currentEnemy.HP);
     await delay(1000);
@@ -822,7 +827,8 @@ async function simulateCombat() {
     
     // Enemy counterattack.
     let defenderDEF = (activeCombatant === player) ? player.DEF : player.pet.DEF;
-    let damageReceived = Math.max(currentEnemy.ATK - defenderDEF, 1);
+    let damageReceived = Math.max(Math.floor(currentEnemy.ATK * (enemyDRFactor / (enemyDRFactor + defenderDEF))), 1);
+
     if (activeCombatant === player) {
       player.currentHP -= damageReceived;
       currentHealth = player.currentHP;
@@ -899,7 +905,7 @@ async function simulateCombat() {
 async function startGameLoop() {
   gameRunning = true;
   while (gameRunning) {
-    // 1% chance to encounter a boss (0.02 probability)
+    // 2% chance to encounter a boss (0.02 probability)
     if (Math.random() < 0.02) {
       await simulateBossBattle();
     } else {
