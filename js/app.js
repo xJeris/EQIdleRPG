@@ -75,6 +75,7 @@ function loadXMLData() {
         ATK: parseInt(item.getAttribute("ATK")),
         DEF: parseInt(item.getAttribute("DEF")),
         MAG: parseInt(item.getAttribute("MAG")),
+        MR: parseInt(item.getAttribute("MR")),
         level: parseInt(item.getAttribute("level"))
       }));
 
@@ -462,7 +463,7 @@ function updateEquipmentUI() {
   Object.entries(player.equipment).forEach(([slot, item]) => {
     const li = document.createElement("li");
     li.textContent = item 
-      ? `${slot}: ${item.name} (L${item.level}, ATK +${item.ATK}, DEF +${item.DEF}, MAG +${item.MAG})`
+      ? `${slot}: ${item.name} (L${item.level}, A +${item.ATK}, D +${item.DEF}, MG +${item.MAG}, MR +${item.MR})`
       : `${slot}: None`;
     equipmentList.appendChild(li);
   });
