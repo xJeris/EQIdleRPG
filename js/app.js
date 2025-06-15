@@ -812,17 +812,16 @@ async function simulateBossBattle() {
 
 // Automated Combat Simulation (async version) with pet mechanics
 async function simulateCombat() {
-  // Filter enemies based on a desired range: [player.level - 1, player.level + 2]
+  // Filter enemies based on the desired range: [player.level - 1, player.level + 2]
   let validEnemies = enemies.filter(enemy => {
     const desiredMin = player.level - 1;
     const desiredMax = player.level + 2;
-    // Effective range is the overlap between enemy's range and our desired range.
     const effectiveMin = Math.max(enemy.minLevel, desiredMin);
     const effectiveMax = Math.min(enemy.maxLevel, desiredMax, player.currentArea.maxLevel);
     return (effectiveMin <= effectiveMax) && enemy.allowedAreas.includes(player.currentArea.id);
   });
 
-  // Fallback: If no enemy passes the area + level filter, fallback to level-only check.
+  // Fallback: If no enemy passes the area+level filter, fallback to level-only check.
   if (validEnemies.length === 0) {
     validEnemies = enemies.filter(enemy => {
       const desiredMin = player.level - 1;
@@ -833,25 +832,60 @@ async function simulateCombat() {
     });
   }
 
-  let enemy = validEnemies[Math.floor(Math.random() * validEnemies.length)];
+  // Make sure to declare a variable for the selected enemy.
+  let selectedEnemy = validEnemies[Math.floor(Math.random() * validEnemies.length)];
 
   // Determine effective min and max enemy levels.
   const desiredMin = player.level - 1;
   const desiredMax = player.level + 2;
-  let effectiveMin = Math.max(enemy.minLevel, desiredMin);
-  let effectiveMax = Math.min(enemy.maxLevel, desiredMax, player.currentArea.maxLevel);
+  let effectiveMin = Math.max(selectedEnemy.minLevel, desiredMin);
+  let effectiveMax = Math.min(selectedEnemy.maxLevel, desiredMax, player.currentArea.maxLevel);
 
-  // Generate a random level between effectiveMin and effectiveMax (inclusive).
-  let enemyLevel = Math.floor(Math.random() * (effectiveMax - effectiveMin + 1)) + effectiveMin;
+  // Build an array of candidate levels based on the effective range.
+  let candidateLevels = [];
+  for (let L = effectiveMin; L <= effectiveMax; L++) {
+    candidateLevels.push(L);
+  }
+
+  // Define weights for each candidate level.
+  let weights = [];
+  let totalWeight = 0;
+  candidateLevels.forEach(L => {
+    let d = L - player.level;
+    let weight;
+    if (d <= 0) {
+      weight = 1.0;  // Full weight for same level or lower.
+    } else if (d === 1) {
+      weight = 0.75; // Slightly lower chance for 1 level above.
+    } else if (d === 2) {
+      weight = 0.5;  // Even lower chance for 2 levels above.
+    } else {
+      weight = 0.5 / d; // Fallback.
+    }
+    totalWeight += weight;
+    weights.push(weight);
+  });
+
+  // Pick a random level based on the weights.
+  let rand = Math.random() * totalWeight;
+  let enemyLevel;
+  let cumulative = 0;
+  for (let i = 0; i < candidateLevels.length; i++) {
+    cumulative += weights[i];
+    if (rand < cumulative) {
+      enemyLevel = candidateLevels[i];
+      break;
+    }
+  }
 
   // Create a scaled copy of the enemy.
   let currentEnemy = {
-    name: enemy.name,
+    name: selectedEnemy.name,
     level: enemyLevel,
-    HP: enemy.HP + (enemyLevel - enemy.minLevel) * 25,  // Adds 25 HP per level over mobs base
-    ATK: enemy.ATK + (enemyLevel - enemy.minLevel) * 5, // Adds 4 ATK per level over mobs base
-    DEF: enemy.DEF + (enemyLevel - enemy.minLevel) * 2, // Adds 2 DEF per level over mobs base
-    xp: enemy.xp + (enemyLevel - enemy.minLevel) * 50  // Adds 50 xp per level over mobs base
+    HP: selectedEnemy.HP + (enemyLevel - selectedEnemy.minLevel) * 25,  // Adds 25 HP per level over mob's base
+    ATK: selectedEnemy.ATK + (enemyLevel - selectedEnemy.minLevel) * 5, // Adds 4 ATK per level over mob's base
+    DEF: selectedEnemy.DEF + (enemyLevel - selectedEnemy.minLevel) * 2, // Adds 2 DEF per level over mob's base
+    xp: selectedEnemy.xp + (enemyLevel - selectedEnemy.minLevel) * 50  // Adds 50 xp per level over mob's base
   };
 
   // Customize enemy appearance message based on level difference with player.
