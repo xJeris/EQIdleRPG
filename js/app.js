@@ -1025,6 +1025,11 @@ async function simulateCombat() {
       appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
       assignPetToPlayer();
     }
+  } else if (petAllowed && player.petDied && player.currentHP <= 0) {
+    appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
+    player.currentHP = player.HP;
+    player.xp = Math.floor(player.xp * 0.9);
+    assignPetToPlayer();
   } else {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
     player.currentHP = player.HP;
