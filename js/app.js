@@ -692,25 +692,27 @@ async function simulateBossBattle() {
   const bossDRFactor = 50;  // Used to reduce damage taken by player/pet from boss gradually. 50 is about half.
 
   // **Phase 1: Pet Combat (if a pet is available)**
-  while (currentBoss.HP > 0 && player.pet && player.pet.HP > 0) {;
-    let damageDealt = Math.max(Math.floor(player.pet.ATK * (playerDRFactor / (playerDRFactor + currentBoss.DEF))), 1);
+  if (petAllowed) {
+    while (currentBoss.HP > 0 && player.pet && player.pet.HP > 0) {;
+      let damageDealt = Math.max(Math.floor(player.pet.ATK * (playerDRFactor / (playerDRFactor + currentBoss.DEF))), 1);
 
-    currentBoss.HP -= damageDealt;
-    appendLog("Round: " + player.pet.name + " attacks, dealing " + damageDealt + " damage! Boss HP: " + currentBoss.HP);
-    await delay(1000);
+      currentBoss.HP -= damageDealt;
+      appendLog("Round: " + player.pet.name + " attacks, dealing " + damageDealt + " damage! Boss HP: " + currentBoss.HP);
+      await delay(1000);
 
-    if (currentBoss.HP <= 0) break;
+      if (currentBoss.HP <= 0) break;
 
-    let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossDRFactor / (bossDRFactor + player.pet.DEF))), 1);
-    player.pet.HP -= damageReceived;
-    appendLog("Round: " + currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.HP);
-    await delay(1000);
+      let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossDRFactor / (bossDRFactor + player.pet.DEF))), 1);
+      player.pet.HP -= damageReceived;
+      appendLog("Round: " + currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.HP);
+      await delay(1000);
 
-    updateStatsUI();
+      updateStatsUI();
 
-    if (player.pet.HP <= 0) {
-      appendLog("<span style='color: red;'>Your pet " + player.pet.name + " has fallen!</span>");
-      petDied = true;
+      if (player.pet.HP <= 0) {
+        appendLog("<span style='color: red;'>Your pet " + player.pet.name + " has fallen!</span>");
+        petDied = true;
+      }
     }
   }
 
