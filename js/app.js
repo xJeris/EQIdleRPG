@@ -192,36 +192,99 @@ const raceClassRestrictions = {
   "Vah Shir":   ["Bard", "Beastlord", "Berserker", "Rogue", "Shaman", "Warrior"]
 };
 
-// Selecting a race first
+// Returns an array of classes for the given race.
 function getAvailableClasses(selectedRace) {
   return raceClassRestrictions[selectedRace] || [];
 }
 
-// Selecting a class first
+// Returns an array of races that support a given class.
 function getAvailableRaces(selectedClass) {
   return Object.keys(raceClassRestrictions).filter(race => 
     raceClassRestrictions[race].includes(selectedClass)
   );
 }
 
-// Reset character choices
+// Update the race dropdown with the given raceList.
+function updateRaceSelection(raceList) {
+  const raceDropdown = document.getElementById("playerRace");
+  // Clear existing options.
+  raceDropdown.innerHTML = "";
+  // Add a default "Select Race" option (optional).
+  let defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "-- Select Race --";
+  raceDropdown.appendChild(defaultOption);
+  // Add each race.
+  raceList.forEach(race => {
+    let option = document.createElement("option");
+    option.value = race;
+    option.textContent = race;
+    raceDropdown.appendChild(option);
+  });
+}
+
+// Update the class dropdown with the given classList.
+function updateClassSelection(classList) {
+  const classDropdown = document.getElementById("playerClass");
+  // Clear existing options.
+  classDropdown.innerHTML = "";
+  // Add a default "Select Class" option (optional).
+  let defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "-- Select Class --";
+  classDropdown.appendChild(defaultOption);
+  // Add each class.
+  classList.forEach(cls => {
+    let option = document.createElement("option");
+    option.value = cls;
+    option.textContent = cls;
+    classDropdown.appendChild(option);
+  });
+}
+
+// When a race is selected, update the class dropdown accordingly.
+document.getElementById("playerRace").addEventListener("change", function() {
+  const selectedRace = this.value;
+  if (selectedRace) {
+    const classes = getAvailableClasses(selectedRace);
+    updateClassSelection(classes);
+  } else {
+    // If blank, repopulate all classes.
+    const allClasses = [...new Set(Object.values(raceClassRestrictions).flat())];
+    updateClassSelection(allClasses);
+  }
+});
+
+// When a class is selected, update the race dropdown accordingly.
+document.getElementById("playerClass").addEventListener("change", function() {
+  const selectedClass = this.value;
+  if (selectedClass) {
+    const races = getAvailableRaces(selectedClass);
+    updateRaceSelection(races);
+  } else {
+    // If blank, repopulate full list of races.
+    updateRaceSelection(Object.keys(raceClassRestrictions));
+  }
+});
+
+// Reset character choices.
 function resetCharacterCreation() {
-  // Reset player object
+  // Reset player object (assuming "player" is a global object).
   player.name = "";
   player.race = "";
   player.class = "";
   player.gender = "";
-
-  // Reset form fields
+  
+  // Clear form fields.
   document.getElementById("playerName").value = "";
   document.getElementById("playerRace").selectedIndex = 0;
   document.getElementById("playerClass").selectedIndex = 0;
   document.getElementById("playerGender").selectedIndex = 0;
-
-  // Restore full lists of races and classes, ensuring uniqueness
-  updateRaceSelection(Object.keys(raceClassRestrictions));  // Show all races
-  const allClasses = [...new Set(Object.values(raceClassRestrictions).flat())]; // Remove duplicates
-  updateClassSelection(allClasses);  // Show all unique classes
+  
+  // Restore full lists.
+  updateRaceSelection(Object.keys(raceClassRestrictions));  // All races.
+  const allClasses = [...new Set(Object.values(raceClassRestrictions).flat())]; // Unique list.
+  updateClassSelection(allClasses);  // All classes.
 }
 
 document.getElementById("resetCharacter").addEventListener("click", resetCharacterCreation);
