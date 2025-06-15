@@ -328,7 +328,8 @@ function assignPetToPlayer() {
         name: newPet.name,
         class: newPet.class,
         level: newPet.level,
-        HP: newPet.hp,   // HP is used as the current (and max) health value
+        currentHP: newPet.hp, // define pets current hp as a subset of max hp.
+        HP: newPet.hp,         // HP is used as the max health value
         ATK: newPet.atk,
         DEF: newPet.def,
         MAG: newPet.mag
@@ -675,9 +676,6 @@ async function simulateBossBattle() {
   appendLog("<span style='color: #da0000;'><strong>A Boss Encounter!</strong> A fearsome " + currentBoss.name + " (Level " + currentBoss.level + ") appears!</span>");
 
   let petDied = false;
-  // define pets current hp as a subset of total hp.
-  player.pet.currentHP = player.pet.HP;
-
   const petAllowed = classesWithPets.includes(player.class);
   if (petAllowed && !player.pet) {
     // Attempt to assign a pet before combat begins.
@@ -913,9 +911,6 @@ async function simulateCombat() {
   // Determine active combatant.
   // If a pet exists and is alive, let it fight; otherwise, use the player.
   let petDied = false;
-  // define pets current hp as a subset of total hp.
-  player.pet.currentHP = player.pet.HP;
-  
   const petAllowed = classesWithPets.includes(player.class);
   if (petAllowed && !player.pet) {
     // Attempt to assign a pet before combat begins.
