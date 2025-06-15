@@ -9,6 +9,7 @@ An idle RPG based on the EverQuest universe. Written in Javascript, CSS and HTML
 - [Features](#Features)
 - [Improvements](#Improvements)
 - [Installation](#Installation)
+- [Changelog](#Changelog)
 - [License](#License)
 
 ## Features
@@ -37,6 +38,12 @@ Possible future enhancements that could be made.
 ## Installation
 
 Place the folders and files in your desired web-server directory. Navigate to the index.html to begin playing.
+
+## Changelog
+
+Major Updates:
+- 06/15/25  :   Added Magic Resistance stat and capped resist at 75%.
+                Added Crit chance for players, pets, bosses, and regular enemies.
 
 ## License
 
