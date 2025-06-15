@@ -690,6 +690,7 @@ async function simulateBossBattle() {
     HP: randomBoss.HP,
     ATK: randomBoss.ATK,
     DEF: randomBoss.DEF,
+    MR: randomBoss.MR,
     xp: randomBoss.xp
   };
 
