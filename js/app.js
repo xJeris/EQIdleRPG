@@ -689,7 +689,7 @@ async function simulateBossBattle() {
     activeCombatant = player;
     // For classes that are allowed to have pets but the pet is missing (or dead),
     // you might want to set petDied to true so you know it lost an active pet.
-    if (petAllowed && !player.pet) {
+    if (petAllowed && (!player.pet || player.pet.currentHP <= 0)) {
       petDied = true;
     }
   }
@@ -923,7 +923,7 @@ async function simulateCombat() {
   } else {
     activeCombatant = player;
     // If the class can have a pet but there's none, you might set petDied to true if you want to trigger pet summon messages.
-    if (petAllowed && !player.pet) {
+    if (petAllowed && (!player.pet || player.pet.currentHP <= 0)) {
       petDied = true;
     }
   }
