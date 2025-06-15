@@ -39,4 +39,5 @@ Place the folders and files in your desired web-server directory. Navigate to th
 
 ## License
 
-Public Domain. There is no copyright for this work.
+- Public Domain. There is no copyright for this work.
+- EverQuest is a trademark or registered trademark of ©2025 Daybreak Game Company LLC.
