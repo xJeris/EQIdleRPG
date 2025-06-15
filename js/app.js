@@ -719,7 +719,7 @@ async function simulateBossBattle() {
 
       if (player.pet.currentHP <= 0) {
         appendLog("<span style='color: red;'>Your pet " + player.pet.name + " has fallen!</span>");
-        petDied = true;
+        player.petDied = true;
       }
     }
   }
