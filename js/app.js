@@ -488,7 +488,7 @@ function updateStatsUI() {
   if (player.pet) {
     const petStats = {
       "Pet": player.pet.name + " (L" + player.pet.level + ")",
-      "Pet HP": player.pet.HP + " / " + player.pet.HP,  // Show HP dynamically
+      "Pet HP": player.pet.currentHP + " / " + player.pet.HP,  // Show HP dynamically
       "Pet ATK": player.pet.ATK,
       "Pet DEF": player.pet.DEF,
       "Pet MAG": player.pet.MAG
@@ -675,6 +675,9 @@ async function simulateBossBattle() {
   appendLog("<span style='color: #da0000;'><strong>A Boss Encounter!</strong> A fearsome " + currentBoss.name + " (Level " + currentBoss.level + ") appears!</span>");
 
   let petDied = false;
+  // define pets current hp as a subset of total hp.
+  player.pet.currentHP = player.pet.HP;
+
   const petAllowed = classesWithPets.includes(player.class);
   if (petAllowed && !player.pet) {
     // Attempt to assign a pet before combat begins.
@@ -682,7 +685,7 @@ async function simulateBossBattle() {
   }
 
   let activeCombatant;
-  if (petAllowed && player.pet && player.pet.HP > 0) {
+  if (petAllowed && player.pet && player.pet.currentHP > 0) {
     activeCombatant = player.pet;
   } else {
     activeCombatant = player;
@@ -698,7 +701,7 @@ async function simulateBossBattle() {
 
   // **Phase 1: Pet Combat (if a pet is available)**
   if (petAllowed) {
-    while (currentBoss.HP > 0 && player.pet && player.pet.HP > 0) {;
+    while (currentBoss.HP > 0 && player.pet && player.pet.currentHP > 0) {;
       let damageDealt = Math.max(Math.floor(player.pet.ATK * (playerDRFactor / (playerDRFactor + currentBoss.DEF))), 1);
 
       currentBoss.HP -= damageDealt;
@@ -708,13 +711,13 @@ async function simulateBossBattle() {
       if (currentBoss.HP <= 0) break;
 
       let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossDRFactor / (bossDRFactor + player.pet.DEF))), 1);
-      player.pet.HP -= damageReceived;
-      appendLog("Round: " + currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.HP);
+      player.pet.currentHP -= damageReceived;
+      appendLog("Round: " + currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.currentHP);
       await delay(1000);
 
       updateStatsUI();
 
-      if (player.pet.HP <= 0) {
+      if (player.pet.currentHP <= 0) {
         appendLog("<span style='color: red;'>Your pet " + player.pet.name + " has fallen!</span>");
         petDied = true;
       }
@@ -910,6 +913,9 @@ async function simulateCombat() {
   // Determine active combatant.
   // If a pet exists and is alive, let it fight; otherwise, use the player.
   let petDied = false;
+  // define pets current hp as a subset of total hp.
+  player.pet.currentHP = player.pet.HP;
+  
   const petAllowed = classesWithPets.includes(player.class);
   if (petAllowed && !player.pet) {
     // Attempt to assign a pet before combat begins.
@@ -917,7 +923,7 @@ async function simulateCombat() {
   }
 
   let activeCombatant;
-  if (petAllowed && player.pet && player.pet.HP > 0) {
+  if (petAllowed && player.pet && player.pet.currentHP > 0) {
     activeCombatant = player.pet;
   } else {
     activeCombatant = player;
@@ -988,8 +994,8 @@ async function simulateCombat() {
       player.currentHP -= damageReceived;
       currentHealth = player.currentHP;
     } else {
-      player.pet.HP -= damageReceived;
-      currentHealth = player.pet.HP;
+      player.pet.currentHP -= damageReceived;
+      currentHealth = player.pet.currentHP;
     }
     
     appendLog(currentEnemy.name + " attacks for " + damageReceived + " damage. " + attackerName + " HP: " + currentHealth);
@@ -998,7 +1004,7 @@ async function simulateCombat() {
     updateStatsUI();
     
     // Switch from pet to player if needed.
-    if (activeCombatant !== player && player.pet.HP <= 0 && !petDied) {
+    if (activeCombatant !== player && player.pet.currentHP <= 0 && !petDied) {
       appendLog("<span style='color: red;'>Your pet " + player.pet.name + " has fallen!</span>");
       petDied = true;
       activeCombatant = player;
