@@ -849,7 +849,7 @@ async function simulateCombat() {
     name: enemy.name,
     level: enemyLevel,
     HP: enemy.HP + (enemyLevel - enemy.minLevel) * 25,  // Adds 25 HP per level over mobs base
-    ATK: enemy.ATK + (enemyLevel - enemy.minLevel) * 4, // Adds 4 ATK per level over mobs base
+    ATK: enemy.ATK + (enemyLevel - enemy.minLevel) * 5, // Adds 4 ATK per level over mobs base
     DEF: enemy.DEF + (enemyLevel - enemy.minLevel) * 2, // Adds 2 DEF per level over mobs base
     xp: enemy.xp + (enemyLevel - enemy.minLevel) * 50  // Adds 50 xp per level over mobs base
   };
@@ -857,7 +857,7 @@ async function simulateCombat() {
   // Customize enemy appearance message based on level difference with player.
   let enemyMessage = "";
   if (currentEnemy.level < player.level) {
-    enemyMessage = "<span style='color: #b5b5b5;'>A wild" + currentEnemy.name + " (Level " + currentEnemy.level + ") appears!</span>";
+    enemyMessage = "<span style='color: #b5b5b5;'>A wild " + currentEnemy.name + " (Level " + currentEnemy.level + ") appears!</span>";
   } else if (currentEnemy.level === player.level) {
     enemyMessage = "A threatening " + currentEnemy.name + " (Level " + currentEnemy.level + ") appears!";
   } else if (currentEnemy.level === player.level + 1) {
@@ -974,7 +974,7 @@ async function simulateCombat() {
     appendLog("<span style='color: green;'>You feel rejuvenated and fully healed!</span>");
   
     // If a pet died during combat, grant a new pet before next battle.
-    if (petDied) {
+    if (petAllowed && petDied) {
       appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
       assignPetToPlayer();
     }
