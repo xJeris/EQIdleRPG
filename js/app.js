@@ -447,7 +447,7 @@ function updateEquipmentUI() {
   Object.entries(player.equipment).forEach(([slot, item]) => {
     const li = document.createElement("li");
     li.textContent = item 
-      ? `${slot}: ${item.name} (L${item.level}, ATK +${item.ATK}, DEF +${item.DEF}), MAG +${item.MAG})`
+      ? `${slot}: ${item.name} (L${item.level}, ATK +${item.ATK}, DEF +${item.DEF}, MAG +${item.MAG})`
       : `${slot}: None`;
     equipmentList.appendChild(li);
   });
@@ -526,17 +526,17 @@ function appendLog(message) {
 
 // Saving & Loading player progress using localStorage
 function saveProgress() {
-  console.log("DEV: I am saving progress");
+  //console.log("DEV: I am saving progress");
   localStorage.setItem("idleRPGPlayer", JSON.stringify(player));
 }
 
 function loadProgress() {
-  console.log("DEV: I am loading existing progress");
+  //console.log("DEV: I am loading existing progress");
   let savedPlayer = localStorage.getItem("idleRPGPlayer");
   
   // If saved is falsy, equals "null", or is an empty string, treat it as no saved progress.
   if (!savedPlayer || savedPlayer === "null" || savedPlayer.trim() === "") {
-    console.log("DEV: I didn't find any saved progress");
+    //console.log("DEV: I didn't find any saved progress");
     return false;
   }
   
@@ -547,7 +547,7 @@ function loadProgress() {
     return false;
   }
 
-  console.log("DEV: I found saved progress");
+  //console.log("DEV: I found saved progress");
   
   // Ensure equipment is defined as an object with the expected keys.
   if (!player.equipment) {
@@ -656,7 +656,7 @@ async function simulateBossBattle() {
   
   // If no boss is defined for the current area, fallback to normal combat.
   if (validBosses.length === 0) {
-    appendLog("No boss is available in this area. Switching to normal combat.");
+    //appendLog("No boss is available in this area. Switching to normal combat.");
     await simulateCombat();
     return;
   }
@@ -672,7 +672,7 @@ async function simulateBossBattle() {
     xp: randomBoss.xp
   };
 
-  appendLog("<strong>A Boss Encounter!</strong> A fearsome " + currentBoss.name + " (Level " + currentBoss.level + ") appears!");
+  appendLog("<span style='color: #da0000;'><strong>A Boss Encounter!</strong> A fearsome " + currentBoss.name + " (Level " + currentBoss.level + ") appears!</span>");
 
   let petDied = false;
   const petAllowed = classesWithPets.includes(player.class);
@@ -808,26 +808,37 @@ async function simulateBossBattle() {
 
 // Automated Combat Simulation (async version) with pet mechanics
 async function simulateCombat() {
-  // Pick an enemy valid for the player's level and current area.
-  let validEnemies = enemies.filter(enemy =>
-    player.level >= enemy.minLevel &&
-    player.level <= Math.min(enemy.maxLevel, player.level + 2) &&
-    enemy.allowedAreas.includes(player.currentArea.id)
-  );
+  // Filter enemies based on a desired range: [player.level - 1, player.level + 2]
+  let validEnemies = enemies.filter(enemy => {
+    const desiredMin = player.level - 1;
+    const desiredMax = player.level + 2;
+    // Effective range is the overlap between enemy's range and our desired range.
+    const effectiveMin = Math.max(enemy.minLevel, desiredMin);
+    const effectiveMax = Math.min(enemy.maxLevel, desiredMax, player.currentArea.maxLevel);
+    return (effectiveMin <= effectiveMax) && enemy.allowedAreas.includes(player.currentArea.id);
+  });
 
+  // Fallback: If no enemy passes the area + level filter, fallback to level-only check.
   if (validEnemies.length === 0) {
-    // If no enemies match by area, fall back to level criteria.
-    validEnemies = enemies.filter(enemy =>
-      player.level >= enemy.minLevel && player.level <= enemy.maxLevel
-    );
+    validEnemies = enemies.filter(enemy => {
+      const desiredMin = player.level - 1;
+      const desiredMax = player.level + 2;
+      const effectiveMin = Math.max(enemy.minLevel, desiredMin);
+      const effectiveMax = Math.min(enemy.maxLevel, desiredMax);
+      return effectiveMin <= effectiveMax;
+    });
   }
 
   let enemy = validEnemies[Math.floor(Math.random() * validEnemies.length)];
 
-  // Determine a random enemy level within the allowed range.
-  let maxEnemyLevel = Math.min(Math.min(enemy.maxLevel, player.level + 2), player.currentArea.maxLevel);
-  let enemyLevel =
-    Math.floor(Math.random() * (maxEnemyLevel - enemy.minLevel + 1)) + enemy.minLevel;
+  // Determine effective min and max enemy levels.
+  const desiredMin = player.level - 1;
+  const desiredMax = player.level + 2;
+  let effectiveMin = Math.max(enemy.minLevel, desiredMin);
+  let effectiveMax = Math.min(enemy.maxLevel, desiredMax, player.currentArea.maxLevel);
+
+  // Generate a random level between effectiveMin and effectiveMax (inclusive).
+  let enemyLevel = Math.floor(Math.random() * (effectiveMax - effectiveMin + 1)) + effectiveMin;
 
   // Create a scaled copy of the enemy.
   let currentEnemy = {
@@ -839,7 +850,19 @@ async function simulateCombat() {
     xp: enemy.xp + (enemyLevel - enemy.minLevel) * 50  // Adds 50 xp per level over mobs base
   };
 
-  appendLog("A wild " + currentEnemy.name + " (Level " + currentEnemy.level + ") appears!");
+  // Customize enemy appearance message based on level difference with player.
+  let enemyMessage = "";
+  if (currentEnemy.level < player.level) {
+    enemyMessage = "<span style='color: #b5b5b5;'>A wild" + currentEnemy.name + " (Level " + currentEnemy.level + ") appears!</span>";
+  } else if (currentEnemy.level === player.level) {
+    enemyMessage = "A threatening " + currentEnemy.name + " (Level " + currentEnemy.level + ") appears!";
+  } else if (currentEnemy.level === player.level + 1) {
+    enemyMessage = "<span style='color: #ffcd33;'>A formidable " + currentEnemy.name + " (Level " + currentEnemy.level + ") appears!</span>";
+  } else if (currentEnemy.level > player.level + 1) {
+    enemyMessage = "<span style='color: #da0000;'>A fearsome " + currentEnemy.name + " (Level " + currentEnemy.level + ") looms ahead!</span>";
+  }
+
+  appendLog(enemyMessage);
 
   // Determine active combatant.
   // If a pet exists and is alive, let it fight; otherwise, use the player.
@@ -1006,7 +1029,7 @@ function stopGameLoop() {
 
 // Handle character creation.
 function handleCharacterCreation(e) {
-  console.log("DEV:  I have entered character creation.");
+  //console.log("DEV:  I have entered character creation.");
   e.preventDefault();
   player.name = document.getElementById("playerName").value;
   player.race = document.getElementById("playerRace").value;
@@ -1059,7 +1082,7 @@ window.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("idleRPGPlayer");
         window.location.reload(true);
         stopGameLoop();
-        console.log("DEV:  I have reset the game");
+        //console.log("DEV:  I have reset the game");
       }
     });
   }
