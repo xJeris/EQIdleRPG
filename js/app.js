@@ -304,6 +304,9 @@ function getEquipmentBonuses() {
   return { bonusATK, bonusDEF, bonusMAG };
 }
 
+// Classes allowed to have pets.
+const classesWithPets = ["Magician", "Necromancer", "Beastlord"];
+
 // Check if class has a pet
 function getAvailablePets(playerClass, playerLevel) {
   return pets.filter(pet =>
@@ -672,11 +675,17 @@ async function simulateBossBattle() {
   appendLog("<strong>A Boss Encounter!</strong> A fearsome " + currentBoss.name + " (Level " + currentBoss.level + ") appears!");
 
   let petDied = false;
-  
-  // If no pet exists even though the class usually has one,
-  // treat it as if the pet is not available so that the player fights.
-  if (!player.pet) {
-    petDied = true;
+  const petAllowed = classesWithPets.includes(player.class);
+  let activeCombatant;
+  if (petAllowed && player.pet && player.pet.HP > 0) {
+    activeCombatant = player.pet;
+  } else {
+    activeCombatant = player;
+    // For classes that are allowed to have pets but the pet is missing (or dead),
+    // you might want to set petDied to true so you know it lost an active pet.
+    if (petAllowed && !player.pet) {
+      petDied = true;
+    }
   }
   
   const playerDRFactor = 50;  // Used to reduce damage taken by boss from player/pet gradually. 50 is about half.
@@ -833,7 +842,17 @@ async function simulateCombat() {
   // Determine active combatant.
   // If a pet exists and is alive, let it fight; otherwise, use the player.
   let petDied = false;
-  let activeCombatant = (player.pet && player.pet.HP > 0) ? player.pet : player;
+  const petAllowed = classesWithPets.includes(player.class);
+  let activeCombatant;
+  if (petAllowed && player.pet && player.pet.HP > 0) {
+    activeCombatant = player.pet;
+  } else {
+    activeCombatant = player;
+    // If the class can have a pet but there's none, you might set petDied to true if you want to trigger pet summon messages.
+    if (petAllowed && !player.pet) {
+      petDied = true;
+    }
+  }
 
   const playerDRFactor = 50;  // Used to reduce damage taken by enemy from player/pet gradually. 50 is about half.
   const enemyDRFactor = 50;  // Used to reduce damage taken by player/pet from enemy gradually. 50 is about half.
