@@ -61,6 +61,7 @@ function loadXMLData() {
         HP: parseInt(enemy.getAttribute("HP")),
         ATK: parseInt(enemy.getAttribute("ATK")),
         DEF: parseInt(enemy.getAttribute("DEF")),
+        MR: parseInt(enemy.getAttribute("MR")),
         xp: parseInt(enemy.getAttribute("xp")),
         // Extract allowed area IDs from the <areas> section.
         allowedAreas: Array.from(enemy.getElementsByTagName("area")).map(area => area.getAttribute("id"))
@@ -85,6 +86,7 @@ function loadXMLData() {
         level: parseInt(boss.getAttribute("level")),     // The boss's fixed level.
         ATK: parseInt(boss.getAttribute("ATK")),
         DEF: parseInt(boss.getAttribute("DEF")),
+        MR: parseInt(boss.getAttribute("MR")),
         HP: parseInt(boss.getAttribute("HP")),
         xp: parseInt(boss.getAttribute("xp")),
         drop1: boss.getAttribute("drop1"),
@@ -111,7 +113,8 @@ function loadXMLData() {
         hp: parseInt(pet.getAttribute("hp")),
         atk: parseInt(pet.getAttribute("atk")),
         def: parseInt(pet.getAttribute("def")),
-        mag: parseInt(pet.getAttribute("mag"))
+        mag: parseInt(pet.getAttribute("mag")),
+        mr: parseInt(pet.getAttribute("mr"))
   }));
 
     })
@@ -138,6 +141,7 @@ let player = {
   ATK: 0,         // attack, set by character selection
   DEF: 0,         // defense, set by character selection
   MAG: 0,         // magic, set by character selection
+  MR: 0,          // magic resistance, set by character selection
   currentHP: 0,
   // Each slot starts out empty (set to null)
   equipment: {
@@ -157,22 +161,22 @@ let player = {
 
 // Classes
 const classBaseStats = {
-  Bard:         { HP: 100, ATK: 13, DEF: 10, MAG: 5 },
-  Beastlord:    { HP: 100, ATK: 12, DEF: 12, MAG: 0 },
-  Berserker:    { HP: 110, ATK: 20, DEF: 12, MAG: 0 },
-  Cleric:       { HP: 105, ATK: 7,  DEF: 10, MAG: 10 },
-  Druid:        { HP: 90,  ATK: 7,  DEF: 7,  MAG: 15 },
-  Enchanter:    { HP: 80,  ATK: 13, DEF: 5,  MAG: 10 },
-  Magician:     { HP: 80,  ATK: 5,  DEF: 5,  MAG: 20 },
-  Monk:         { HP: 120, ATK: 15, DEF: 12, MAG: 0 },
-  Necromancer:  { HP: 90,  ATK: 7,  DEF: 10, MAG: 15 },
-  Paladin:      { HP: 140, ATK: 15, DEF: 15, MAG: 5 },
-  Ranger:       { HP: 130, ATK: 15, DEF: 12, MAG: 0 },
-  Rogue:        { HP: 130, ATK: 15, DEF: 12, MAG: 0 },
-  Shadowknight: { HP: 140, ATK: 20, DEF: 15, MAG: 5 },
-  Shaman:       { HP: 130, ATK: 13, DEF: 15, MAG: 15 },
-  Warrior:      { HP: 150, ATK: 15, DEF: 20, MAG: 0 },
-  Wizard:       { HP: 80,  ATK: 5,  DEF: 15, MAG: 20 },
+  Bard:         { HP: 100, ATK: 13, DEF: 10, MAG: 5,  MR: 0 },
+  Beastlord:    { HP: 100, ATK: 12, DEF: 12, MAG: 0,  MR: 0 },
+  Berserker:    { HP: 110, ATK: 20, DEF: 12, MAG: 0,  MR: 0 },
+  Cleric:       { HP: 105, ATK: 7,  DEF: 10, MAG: 10, MR: 0 },
+  Druid:        { HP: 90,  ATK: 7,  DEF: 7,  MAG: 15, MR: 0 },
+  Enchanter:    { HP: 80,  ATK: 13, DEF: 5,  MAG: 10, MR: 0 },
+  Magician:     { HP: 80,  ATK: 5,  DEF: 5,  MAG: 20, MR: 0 },
+  Monk:         { HP: 120, ATK: 15, DEF: 12, MAG: 0,  MR: 0 },
+  Necromancer:  { HP: 90,  ATK: 7,  DEF: 10, MAG: 15, MR: 0 },
+  Paladin:      { HP: 140, ATK: 15, DEF: 15, MAG: 5,  MR: 0 },
+  Ranger:       { HP: 130, ATK: 15, DEF: 12, MAG: 0,  MR: 0 },
+  Rogue:        { HP: 130, ATK: 15, DEF: 12, MAG: 0,  MR: 0 },
+  Shadowknight: { HP: 140, ATK: 20, DEF: 15, MAG: 5,  MR: 0 },
+  Shaman:       { HP: 130, ATK: 13, DEF: 15, MAG: 15, MR: 0 },
+  Warrior:      { HP: 150, ATK: 15, DEF: 20, MAG: 0,  MR: 0 },
+  Wizard:       { HP: 80,  ATK: 5,  DEF: 15, MAG: 20, MR: 0 }
 };
 
 const raceClassRestrictions = {
@@ -296,14 +300,16 @@ function getEquipmentBonuses() {
   let bonusATK = 0;
   let bonusDEF = 0;
   let bonusMAG = 0;
+  let bonusMR = 0;
   for (let slot in player.equipment) {
     if (player.equipment[slot]) {
-      bonusATK += player.equipment[slot].ATK;
-      bonusDEF += player.equipment[slot].DEF;
-      bonusMAG += player.equipment[slot].MAG;
+      bonusATK += player.equipment[slot].ATK || 0;
+      bonusDEF += player.equipment[slot].DEF || 0;
+      bonusMAG += player.equipment[slot].MAG || 0;
+      bonusMR += player.equipment[slot].MR || 0;
     }
   }
-  return { bonusATK, bonusDEF, bonusMAG };
+  return { bonusATK, bonusDEF, bonusMAG, bonusMR };
 }
 
 // Classes allowed to have pets.
@@ -330,11 +336,12 @@ function assignPetToPlayer() {
         name: newPet.name,
         class: newPet.class,
         level: newPet.level,
-        currentHP: newPet.hp, // define pets current hp as a subset of max hp.
-        HP: newPet.hp,         // HP is used as the max health value
+        currentHP: newPet.hp,   // define pets current hp as a subset of max hp.
+        HP: newPet.hp,          // HP is used as the max health value
         ATK: newPet.atk,
         DEF: newPet.def,
-        MAG: newPet.mag
+        MAG: newPet.mag,
+        MR: newPet.mr
       };
 
       appendLog("Your pet " + player.pet.name + " (Level " + player.pet.level + ") joins you!");
@@ -370,11 +377,16 @@ function getAvailableSpellsForClass(cls, level) {
 }
 
 // Calculate spell damage based on MAG stat for each class
-function calculateSpellDamage(spell, player) {
-  // Example formula: effectiveDamage = baseDamage + (player.MAG * scalingFactor)
-  // You could choose a scalingFactor of 0.5 (or adjust as appropriate)
+function calculateSpellDamage(spell, player, target) {
   const scalingFactor = 0.4;
-  return spell.baseDamage + Math.floor(getPlayerMAG(player) * scalingFactor);
+  const mrFactor = target.MR || 0;
+  // Each point of MR reduces spell damage by 1%, capped at 75%
+  const maxReduction = Math.min(mrFactor, 75);
+  // Combine spell base damage and MAG scaling
+  const baseDamage = spell.baseDamage + Math.floor(getPlayerMAG(player) * scalingFactor);
+  // Apply MR reduction to the total baseDamage
+  const finalDamage = Math.floor(baseDamage * (1 - maxReduction / 100));
+  return Math.max(finalDamage, 1);
 }
 
 // Check if class can use spells.
@@ -465,6 +477,7 @@ function updateStatsUI() {
   const effectiveATK = player.ATK + bonuses.bonusATK;
   const effectiveDEF = player.DEF + bonuses.bonusDEF;
   const effectiveMAG = player.MAG + bonuses.bonusMAG;
+  const effectiveMR = player.MR + bonuses.bonusMR;
 
   // Define the stats to display.
   // Feel free to add, remove or reformat any stats as needed.
@@ -474,7 +487,8 @@ function updateStatsUI() {
     "HP": player.currentHP + " / " + player.HP,
     "ATK": player.ATK + " (+" + bonuses.bonusATK + ") = " + effectiveATK,
     "DEF": player.DEF + " (+" + bonuses.bonusDEF + ") = " + effectiveDEF,
-    "MAG": player.MAG + " (+" + bonuses.bonusMAG + ") = " + effectiveMAG
+    "MAG": player.MAG + " (+" + bonuses.bonusMAG + ") = " + effectiveMAG,
+    "MR": player.MR + " (+" + bonuses.bonusMR + ") = " + effectiveMR
   };
 
   // Iterate over the stats object, creating an <li> for each stat.
@@ -494,7 +508,8 @@ function updateStatsUI() {
       "Pet HP": player.pet.currentHP + " / " + player.pet.HP,  // Show HP dynamically
       "Pet ATK": player.pet.ATK,
       "Pet DEF": player.pet.DEF,
-      "Pet MAG": player.pet.MAG
+      "Pet MAG": player.pet.MAG,
+      "Pet MR": player.pet.mr
     };
 
     for (const key in petStats) {
@@ -604,10 +619,12 @@ function addXP(amount) {
     const AtkIncreaseFactor = 0.045;  // 0.045 gives about 1500 ATK at level 100 for a char starting with 20 ATK.
     const DefIncreaseFactor = 0.045;  // 0.045 gives about 1500 DEF at level 100 for a char starting with 20 DEF.
     const MagIncreaseFactor = 0.045;  // 0.045 gives about 1500 MAG at level 100 for a char starting with 20 MAG.
+    const MrIncreaseFactor = 0.00;  // MR scaling
     player.HP = Math.floor(player.HP * (1 + hpIncreaseFactor));
     player.ATK = Math.ceil(player.ATK * (1 + AtkIncreaseFactor));
     player.DEF = Math.ceil(player.DEF * (1 + DefIncreaseFactor));
     player.MAG = Math.ceil(player.MAG * (1 + MagIncreaseFactor));
+    player.MR = Math.ceil(player.MR * (1 + MrIncreaseFactor));
     player.currentHP = player.HP;
 
     // If the class normally has a pet and there is currently no pet, summon one.
@@ -740,7 +757,7 @@ async function simulateBossBattle() {
       if (availableSpells.length > 0 && Math.random() < chance / 100) {
         // Cast a spell instead of a physical attack.
         let chosenSpell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
-        let damageDealt = calculateSpellDamage(chosenSpell, player);
+        let damageDealt = calculateSpellDamage(chosenSpell, player, currentBoss);
         currentBoss.HP -= damageDealt;
         appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Boss HP: " + currentBoss.HP);
         await delay(1000);
@@ -893,6 +910,7 @@ async function simulateCombat() {
     HP: selectedEnemy.HP + (enemyLevel - selectedEnemy.minLevel) * 25,  // Adds 25 HP per level over mob's base
     ATK: selectedEnemy.ATK + (enemyLevel - selectedEnemy.minLevel) * 5, // Adds 4 ATK per level over mob's base
     DEF: selectedEnemy.DEF + (enemyLevel - selectedEnemy.minLevel) * 2, // Adds 2 DEF per level over mob's base
+    MR: selectedEnemy.MR + (enemyLevel - selectedEnemy.minLevel) * 0, // Adds 0 MR per level over mob's base
     xp: selectedEnemy.xp + (enemyLevel - selectedEnemy.minLevel) * 50  // Adds 50 xp per level over mob's base
   };
 
@@ -949,7 +967,7 @@ async function simulateCombat() {
       if (availableSpells.length > 0 && Math.random() < chance / 100) {
         // Cast a spell instead of a physical attack.
         let chosenSpell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
-        let damageDealt = calculateSpellDamage(chosenSpell, player);
+        let damageDealt = calculateSpellDamage(chosenSpell, player, currentEnemy);
         currentEnemy.HP -= damageDealt;
         appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Enemy HP: " + currentEnemy.HP);
         await delay(1000);
@@ -1102,6 +1120,7 @@ function handleCharacterCreation(e) {
   player.ATK = base.ATK;
   player.DEF = base.DEF;
   player.MAG = base.MAG;
+  player.MR = base.MR;
   player.currentHP = player.HP;
 
   // Assign pet if applicable

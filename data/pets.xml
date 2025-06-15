@@ -8,105 +8,105 @@ levels are made to attempt to make pets viable in most situations.
 -->
 <pets>
 <!-- Magician Pets-->
-  <pet id="1" name="Air Elementalkin" class="Magician" level="2" hp="75" atk="4" def="5" mag="20" />
-  <pet id="2" name="Earth Elementalkin" class="Magician" level="3" hp="78" atk="5" def="6" mag="21" />
-  <pet id="3" name="Fire Elementalkin" class="Magician" level="4" hp="81" atk="6" def="7" mag="22" />
-  <pet id="4" name="Water Elementalkin" class="Magician" level="5" hp="85" atk="7" def="8" mag="23" />
-  <pet id="5" name="Air Elementaling" class="Magician" level="6" hp="89" atk="8" def="9" mag="25" />
-  <pet id="6" name="Earth Elementaling" class="Magician" level="7" hp="93" atk="9" def="10" mag="27" />
-  <pet id="7" name="Fire Elementaling" class="Magician" level="8" hp="97" atk="10" def="11" mag="29" />
-  <pet id="8" name="Water Elementaling" class="Magician" level="9" hp="101" atk="11" def="12" mag="31" />
-  <pet id="9" name="Air Elemental" class="Magician" level="10" hp="106" atk="12" def="13" mag="33" />
-  <pet id="10" name="Earth Elemental" class="Magician" level="11" hp="111" atk="13" def="14" mag="35" />
-  <pet id="11" name="Fire Elemental" class="Magician" level="12" hp="116" atk="14" def="15" mag="37" />
-  <pet id="12" name="Water Elemental" class="Magician" level="13" hp="121" atk="15" def="16" mag="39" />
-  <pet id="13" name="Air Minor Summoning" class="Magician" level="14" hp="127" atk="16" def="17" mag="41" />
-  <pet id="14" name="Earth Minor Summoning" class="Magician" level="15" hp="133" atk="17" def="18" mag="43" />
-  <pet id="15" name="Fire Minor Summoning" class="Magician" level="16" hp="139" atk="18" def="19" mag="45" />
-  <pet id="16" name="Water Minor Summoning" class="Magician" level="17" hp="145" atk="19" def="20" mag="48" />
-  <pet id="17" name="Air Lesser Summoning" class="Magician" level="18" hp="152" atk="20" def="21" mag="51" />
-  <pet id="18" name="Earth Lesser Summoning" class="Magician" level="19" hp="159" atk="21" def="22" mag="54" />
-  <pet id="19" name="Fire Lesser Summoning" class="Magician" level="20" hp="166" atk="22" def="23" mag="57" />
-  <pet id="20" name="Water Lesser Summoning" class="Magician" level="21" hp="174" atk="23" def="25" mag="60" />
-  <pet id="21" name="Air Summoning" class="Magician" level="22" hp="182" atk="25" def="27" mag="63" />
-  <pet id="22" name="Earth Summoning" class="Magician" level="23" hp="191" atk="27" def="29" mag="66" />
-  <pet id="23" name="Fire Summoning" class="Magician" level="24" hp="200" atk="29" def="31" mag="69" />
-  <pet id="24" name="Water Summoning" class="Magician" level="25" hp="210" atk="31" def="33" mag="73" />
-  <pet id="25" name="Air Greater Summoning" class="Magician" level="26" hp="220" atk="33" def="35" mag="77" />
-  <pet id="26" name="Earth Greater Summoning" class="Magician" level="27" hp="231" atk="35" def="37" mag="81" />
-  <pet id="27" name="Fire Greater Summoning" class="Magician" level="28" hp="242" atk="37" def="39" mag="85" />
-  <pet id="28" name="Water Greater Summoning" class="Magician" level="29" hp="254" atk="39" def="41" mag="89" />
-  <pet id="29" name="Air Minor Conjuration" class="Magician" level="31" hp="279" atk="43" def="45" mag="99" />
-  <pet id="30" name="Earth Minor Conjuration" class="Magician" level="32" hp="293" atk="45" def="48" mag="104" />
-  <pet id="31" name="Fire Minor Conjuration" class="Magician" level="33" hp="307" atk="48" def="51" mag="109" />
-  <pet id="32" name="Water Minor Conjuration" class="Magician" level="34" hp="322" atk="51" def="54" mag="114" />
-  <pet id="33" name="Air Lesser Conjuration" class="Magician" level="36" hp="354" atk="57" def="60" mag="126" />
-  <pet id="34" name="Earth Lesser Conjuration" class="Magician" level="37" hp="371" atk="60" def="63" mag="132" />
-  <pet id="35" name="Fire Lesser Conjuration" class="Magician" level="38" hp="389" atk="63" def="66" mag="138" />
-  <pet id="36" name="Water Lesser Conjuration" class="Magician" level="39" hp="408" atk="66" def="69" mag="145" />
-  <pet id="37" name="Air Conjuration" class="Magician" level="41" hp="449" atk="73" def="77" mag="159" />
-  <pet id="38" name="Earth Conjuration" class="Magician" level="42" hp="471" atk="77" def="81" mag="167" />
-  <pet id="39" name="Fire Conjuration" class="Magician" level="43" hp="494" atk="81" def="85" mag="175" />
-  <pet id="40" name="Water Conjuration" class="Magician" level="44" hp="518" atk="85" def="89" mag="183" />
-  <pet id="41" name="Air Greater Conjuration" class="Magician" level="46" hp="571" atk="94" def="99" mag="201" />
-  <pet id="42" name="Earth Greater Conjuration" class="Magician" level="47" hp="599" atk="99" def="104" mag="211" />
-  <pet id="43" name="Fire Greater Conjuration" class="Magician" level="48" hp="629" atk="104" def="109" mag="221" />
-  <pet id="44" name="Water Greater Conjuration" class="Magician" level="49" hp="660" atk="109" def="114" mag="231" />
-  <pet id="45" name="Air Vocarate" class="Magician" level="51" hp="727" atk="120" def="126" mag="253" />
-  <pet id="46" name="Earth Vocarate" class="Magician" level="52" hp="763" atk="126" def="132" mag="265" />
-  <pet id="47" name="Fire Vocarate" class="Magician" level="53" hp="801" atk="132" def="138" mag="277" />
-  <pet id="48" name="Water Vocarate" class="Magician" level="54" hp="841" atk="138" def="145" mag="290" />
-  <pet id="49" name="Air Greater Vocarate" class="Magician" level="57" hp="973" atk="159" def="167" mag="333" />
-  <pet id="50" name="Earth Greater Vocarate" class="Magician" level="58" hp="1021" atk="167" def="175" mag="348" />
-  <pet id="51" name="Fire Greater Vocarate" class="Magician" level="59" hp="1072" atk="175" def="183" mag="364" />
-  <pet id="52" name="Water Greater Vocarate" class="Magician" level="60" hp="1125" atk="183" def="192" mag="381" />
-  <pet id="53" name="Air Minion of Darkness" class="Magician" level="62" hp="1240" atk="201" def="211" mag="417" />
-  <pet id="54" name="Earth Minion of Eternity" class="Magician" level="63" hp="1302" atk="211" def="221" mag="436" />
-  <pet id="55" name="Fire Ritual Summoning" class="Magician" level="64" hp="1367" atk="221" def="231" mag="456" />
-  <pet id="56" name="Water Minion of Discord" class="Magician" level="65" hp="1435" atk="231" def="242" mag="477" />
-  <pet id="57" name="Air Minion of Darkness" class="Magician" level="66" hp="1507" atk="242" def="253" mag="499" />
-  <pet id="58" name="Earth Minion of Eternity" class="Magician" level="67" hp="1582" atk="253" def="265" mag="522" />
-  <pet id="59" name="Fire Ritual Summoning" class="Magician" level="68" hp="1661" atk="265" def="277" mag="546" />
-  <pet id="60" name="Water Ritual of Discord" class="Magician" level="69" hp="1744" atk="277" def="290" mag="571" />
-  <pet id="61" name="Air Minion of Darkness" class="Magician" level="71" hp="1922" atk="304" def="318" mag="624" />
-  <pet id="62" name="Earth Minion of Eternity" class="Magician" level="72" hp="2018" atk="318" def="333" mag="653" />
-  <pet id="63" name="Fire Ritual Summoning" class="Magician" level="73" hp="2119" atk="333" def="348" mag="683" />
-  <pet id="64" name="Water Ritual of Discord" class="Magician" level="74" hp="2225" atk="348" def="364" mag="714" />
+  <pet id="1" name="Air Elementalkin" class="Magician" level="2" hp="75" atk="4" def="5" mag="20" mr="0" />
+  <pet id="2" name="Earth Elementalkin" class="Magician" level="3" hp="78" atk="5" def="6" mag="21" mr="0" />
+  <pet id="3" name="Fire Elementalkin" class="Magician" level="4" hp="81" atk="6" def="7" mag="22" mr="0" />
+  <pet id="4" name="Water Elementalkin" class="Magician" level="5" hp="85" atk="7" def="8" mag="23" mr="0" />
+  <pet id="5" name="Air Elementaling" class="Magician" level="6" hp="89" atk="8" def="9" mag="25" mr="0" />
+  <pet id="6" name="Earth Elementaling" class="Magician" level="7" hp="93" atk="9" def="10" mag="27" mr="0" />
+  <pet id="7" name="Fire Elementaling" class="Magician" level="8" hp="97" atk="10" def="11" mag="29" mr="0" />
+  <pet id="8" name="Water Elementaling" class="Magician" level="9" hp="101" atk="11" def="12" mag="31" mr="0" />
+  <pet id="9" name="Air Elemental" class="Magician" level="10" hp="106" atk="12" def="13" mag="33" mr="0" />
+  <pet id="10" name="Earth Elemental" class="Magician" level="11" hp="111" atk="13" def="14" mag="35" mr="0" />
+  <pet id="11" name="Fire Elemental" class="Magician" level="12" hp="116" atk="14" def="15" mag="37" mr="0" />
+  <pet id="12" name="Water Elemental" class="Magician" level="13" hp="121" atk="15" def="16" mag="39" mr="0" />
+  <pet id="13" name="Air Minor Summoning" class="Magician" level="14" hp="127" atk="16" def="17" mag="41" mr="0" />
+  <pet id="14" name="Earth Minor Summoning" class="Magician" level="15" hp="133" atk="17" def="18" mag="43" mr="0" />
+  <pet id="15" name="Fire Minor Summoning" class="Magician" level="16" hp="139" atk="18" def="19" mag="45" mr="0" />
+  <pet id="16" name="Water Minor Summoning" class="Magician" level="17" hp="145" atk="19" def="20" mag="48" mr="0" />
+  <pet id="17" name="Air Lesser Summoning" class="Magician" level="18" hp="152" atk="20" def="21" mag="51" mr="0" />
+  <pet id="18" name="Earth Lesser Summoning" class="Magician" level="19" hp="159" atk="21" def="22" mag="54" mr="0" />
+  <pet id="19" name="Fire Lesser Summoning" class="Magician" level="20" hp="166" atk="22" def="23" mag="57" mr="0" />
+  <pet id="20" name="Water Lesser Summoning" class="Magician" level="21" hp="174" atk="23" def="25" mag="60" mr="0" />
+  <pet id="21" name="Air Summoning" class="Magician" level="22" hp="182" atk="25" def="27" mag="63" mr="0" />
+  <pet id="22" name="Earth Summoning" class="Magician" level="23" hp="191" atk="27" def="29" mag="66" mr="0" />
+  <pet id="23" name="Fire Summoning" class="Magician" level="24" hp="200" atk="29" def="31" mag="69" mr="0" />
+  <pet id="24" name="Water Summoning" class="Magician" level="25" hp="210" atk="31" def="33" mag="73" mr="0" />
+  <pet id="25" name="Air Greater Summoning" class="Magician" level="26" hp="220" atk="33" def="35" mag="77" mr="0" />
+  <pet id="26" name="Earth Greater Summoning" class="Magician" level="27" hp="231" atk="35" def="37" mag="81" mr="0" />
+  <pet id="27" name="Fire Greater Summoning" class="Magician" level="28" hp="242" atk="37" def="39" mag="85" mr="0" />
+  <pet id="28" name="Water Greater Summoning" class="Magician" level="29" hp="254" atk="39" def="41" mag="89" mr="0" />
+  <pet id="29" name="Air Minor Conjuration" class="Magician" level="31" hp="279" atk="43" def="45" mag="99" mr="0" />
+  <pet id="30" name="Earth Minor Conjuration" class="Magician" level="32" hp="293" atk="45" def="48" mag="104" mr="0" />
+  <pet id="31" name="Fire Minor Conjuration" class="Magician" level="33" hp="307" atk="48" def="51" mag="109" mr="0" />
+  <pet id="32" name="Water Minor Conjuration" class="Magician" level="34" hp="322" atk="51" def="54" mag="114" mr="0" />
+  <pet id="33" name="Air Lesser Conjuration" class="Magician" level="36" hp="354" atk="57" def="60" mag="126" mr="0" />
+  <pet id="34" name="Earth Lesser Conjuration" class="Magician" level="37" hp="371" atk="60" def="63" mag="132" mr="0" />
+  <pet id="35" name="Fire Lesser Conjuration" class="Magician" level="38" hp="389" atk="63" def="66" mag="138" mr="0" />
+  <pet id="36" name="Water Lesser Conjuration" class="Magician" level="39" hp="408" atk="66" def="69" mag="145" mr="0" />
+  <pet id="37" name="Air Conjuration" class="Magician" level="41" hp="449" atk="73" def="77" mag="159" mr="0" />
+  <pet id="38" name="Earth Conjuration" class="Magician" level="42" hp="471" atk="77" def="81" mag="167" mr="0" />
+  <pet id="39" name="Fire Conjuration" class="Magician" level="43" hp="494" atk="81" def="85" mag="175" mr="0" />
+  <pet id="40" name="Water Conjuration" class="Magician" level="44" hp="518" atk="85" def="89" mag="183" mr="0" />
+  <pet id="41" name="Air Greater Conjuration" class="Magician" level="46" hp="571" atk="94" def="99" mag="201" mr="0" />
+  <pet id="42" name="Earth Greater Conjuration" class="Magician" level="47" hp="599" atk="99" def="104" mag="211" mr="0" />
+  <pet id="43" name="Fire Greater Conjuration" class="Magician" level="48" hp="629" atk="104" def="109" mag="221" mr="0" />
+  <pet id="44" name="Water Greater Conjuration" class="Magician" level="49" hp="660" atk="109" def="114" mag="231" mr="0" />
+  <pet id="45" name="Air Vocarate" class="Magician" level="51" hp="727" atk="120" def="126" mag="253" mr="0" />
+  <pet id="46" name="Earth Vocarate" class="Magician" level="52" hp="763" atk="126" def="132" mag="265" mr="0" />
+  <pet id="47" name="Fire Vocarate" class="Magician" level="53" hp="801" atk="132" def="138" mag="277" mr="0" />
+  <pet id="48" name="Water Vocarate" class="Magician" level="54" hp="841" atk="138" def="145" mag="290" mr="0" />
+  <pet id="49" name="Air Greater Vocarate" class="Magician" level="57" hp="973" atk="159" def="167" mag="333" mr="0" />
+  <pet id="50" name="Earth Greater Vocarate" class="Magician" level="58" hp="1021" atk="167" def="175" mag="348" mr="0" />
+  <pet id="51" name="Fire Greater Vocarate" class="Magician" level="59" hp="1072" atk="175" def="183" mag="364" mr="0" />
+  <pet id="52" name="Water Greater Vocarate" class="Magician" level="60" hp="1125" atk="183" def="192" mag="381" mr="0" />
+  <pet id="53" name="Air Minion of Darkness" class="Magician" level="62" hp="1240" atk="201" def="211" mag="417" mr="0" />
+  <pet id="54" name="Earth Minion of Eternity" class="Magician" level="63" hp="1302" atk="211" def="221" mag="436" mr="0" />
+  <pet id="55" name="Fire Ritual Summoning" class="Magician" level="64" hp="1367" atk="221" def="231" mag="456" mr="0" />
+  <pet id="56" name="Water Minion of Discord" class="Magician" level="65" hp="1435" atk="231" def="242" mag="477" mr="0" />
+  <pet id="57" name="Air Minion of Darkness" class="Magician" level="66" hp="1507" atk="242" def="253" mag="499" mr="0" />
+  <pet id="58" name="Earth Minion of Eternity" class="Magician" level="67" hp="1582" atk="253" def="265" mag="522" mr="0" />
+  <pet id="59" name="Fire Ritual Summoning" class="Magician" level="68" hp="1661" atk="265" def="277" mag="546" mr="0" />
+  <pet id="60" name="Water Ritual of Discord" class="Magician" level="69" hp="1744" atk="277" def="290" mag="571" mr="0" />
+  <pet id="61" name="Air Minion of Darkness" class="Magician" level="71" hp="1922" atk="304" def="318" mag="624" mr="0" />
+  <pet id="62" name="Earth Minion of Eternity" class="Magician" level="72" hp="2018" atk="318" def="333" mag="653" mr="0" />
+  <pet id="63" name="Fire Ritual Summoning" class="Magician" level="73" hp="2119" atk="333" def="348" mag="683" mr="0" />
+  <pet id="64" name="Water Ritual of Discord" class="Magician" level="74" hp="2225" atk="348" def="364" mag="714" mr="0" />
 <!-- Beastlord Pets-->
-  <pet id="65" name="Spirit of Sharik" class="Beastlord" level="8" hp="115" atk="14" def="14" mag="14" />
-  <pet id="66" name="Spirit of Khaliz" class="Beastlord" level="15" hp="154" atk="20" def="22" mag="22" />
-  <pet id="67" name="Spirit of Keshuval" class="Beastlord" level="21" hp="220" atk="32" def="34" mag="34" />
-  <pet id="68" name="Spirit of Herikol" class="Beastlord" level="30" hp="337" atk="54" def="56" mag="56" />
-  <pet id="69" name="Spirit of Yekan" class="Beastlord" level="39" hp="89" atk="80" def="84" mag="84" />
-  <pet id="70" name="Spirit of Hashek" class="Beastlord" level="46" hp="93" atk="116" def="122" mag="122" />
-  <pet id="71" name="Spirit of Omakin" class="Beastlord" level="54" hp="97" atk="145" def="152" mag="152" />
-  <pet id="72" name="Spirit of Zehkes" class="Beastlord" level="56" hp="101" atk="160" def="167" mag="167" />
-  <pet id="73" name="Spirit of Khurenz" class="Beastlord" level="58" hp="106" atk="175" def="184" mag="184" />
-  <pet id="74" name="Spirit of Khati Sha" class="Beastlord" level="60" hp="111" atk="192" def="202" mag="202" />
-  <pet id="75" name="Spirit of Arag" class="Beastlord" level="62" hp="116" atk="211" def="221" mag="221" />
-  <pet id="76" name="Spirit of Sorsha" class="Beastlord" level="64" hp="121" atk="243" def="254" mag="254" />
-  <pet id="77" name="Spirit of Alladnu" class="Beastlord" level="68" hp="127" atk="278" def="291" mag="291" />
-  <pet id="78" name="Spirit of Rashara" class="Beastlord" level="70" hp="133" atk="312" def="326" mag="326" />
-  <pet id="79" name="Spirit of Uluanes" class="Beastlord" level="73" hp="139" atk="395" def="413" mag="413" />
+  <pet id="65" name="Spirit of Sharik" class="Beastlord" level="8" hp="115" atk="14" def="14" mag="14" mr="0" />
+  <pet id="66" name="Spirit of Khaliz" class="Beastlord" level="15" hp="154" atk="20" def="22" mag="22" mr="0" />
+  <pet id="67" name="Spirit of Keshuval" class="Beastlord" level="21" hp="220" atk="32" def="34" mag="34" mr="0" />
+  <pet id="68" name="Spirit of Herikol" class="Beastlord" level="30" hp="337" atk="54" def="56" mag="56" mr="0" />
+  <pet id="69" name="Spirit of Yekan" class="Beastlord" level="39" hp="89" atk="80" def="84" mag="84" mr="0" />
+  <pet id="70" name="Spirit of Hashek" class="Beastlord" level="46" hp="93" atk="116" def="122" mag="122" mr="0" />
+  <pet id="71" name="Spirit of Omakin" class="Beastlord" level="54" hp="97" atk="145" def="152" mag="152" mr="0" />
+  <pet id="72" name="Spirit of Zehkes" class="Beastlord" level="56" hp="101" atk="160" def="167" mag="167" mr="0" />
+  <pet id="73" name="Spirit of Khurenz" class="Beastlord" level="58" hp="106" atk="175" def="184" mag="184" mr="0" />
+  <pet id="74" name="Spirit of Khati Sha" class="Beastlord" level="60" hp="111" atk="192" def="202" mag="202" mr="0" />
+  <pet id="75" name="Spirit of Arag" class="Beastlord" level="62" hp="116" atk="211" def="221" mag="221" mr="0" />
+  <pet id="76" name="Spirit of Sorsha" class="Beastlord" level="64" hp="121" atk="243" def="254" mag="254" mr="0" />
+  <pet id="77" name="Spirit of Alladnu" class="Beastlord" level="68" hp="127" atk="278" def="291" mag="291" mr="0" />
+  <pet id="78" name="Spirit of Rashara" class="Beastlord" level="70" hp="133" atk="312" def="326" mag="326" mr="0" />
+  <pet id="79" name="Spirit of Uluanes" class="Beastlord" level="73" hp="139" atk="395" def="413" mag="413" mr="0" />
 <!-- Necromancer Pets-->
-  <pet id="80" name="Cavorting Bones" class="Necromancer" level="1" hp="70" atk="6" def="3" mag="20" />
-  <pet id="81" name="Learing Corpse" class="Necromancer" level="4" hp="105" atk="10" def="8" mag="23" />
-  <pet id="82" name="Bone Walk" class="Necromancer" level="8" hp="121" atk="14" def="12" mag="31" />
-  <pet id="83" name="Convoke Shadow" class="Necromancer" level="12" hp="131" atk="16" def="14" mag="35" />
-  <pet id="84" name="Restless Bones" class="Necromancer" level="16" hp="159" atk="21" def="19" mag="45" />
-  <pet id="85" name="Animate Dead" class="Necromancer" level="20" hp="179" atk="24" def="22" mag="54" />
-  <pet id="86" name="Haunting Corpse" class="Necromancer" level="24" hp="202" atk="28" def="27" mag="63" />
-  <pet id="87" name="Summon Dead" class="Necromancer" level="29" hp="230" atk="34" def="33" mag="73" />
-  <pet id="88" name="Invoke Shadow" class="Necromancer" level="34" hp="264" atk="42" def="41" mag="89" />
-  <pet id="89" name="Malignant Dead" class="Necromancer" level="39" hp="327" atk="51" def="51" mag="109" />
-  <pet id="90" name="Cackling Bones" class="Necromancer" level="44" hp="391" atk="63" def="63" mag="132" />
-  <pet id="91" name="Invoke Death" class="Necromancer" level="49" hp="469" atk="76" def="77" mag="159" />
-  <pet id="92" name="Minion of Shadow" class="Necromancer" level="53" hp="514" atk="84" def="85" mag="175" />
-  <pet id="93" name="Servant of Bones" class="Necromancer" level="56" hp="538" atk="88" def="89" mag="183" />
-  <pet id="94" name="Emissary of Thule" class="Necromancer" level="59" hp="619" atk="102" def="104" mag="211" />
-  <pet id="95" name="Legacy of Zek" class="Necromancer" level="61" hp="1145" atk="186" def="192" mag="381" />
-  <pet id="96" name="Saryn's Companion" class="Necromancer" level="63" hp="1245" atk="196" def="202" mag="391" />
-  <pet id="97" name="Child of Bertoxxulous" class="Necromancer" level="65" hp="1345" atk="206" def="212" mag="401" />
-  <pet id="98" name="Lost Soul" class="Necromancer" level="67" hp="1455" atk="232" def="242" mag="477" />
-  <pet id="99" name="Dark Assassin" class="Necromancer" level="70" hp="1555" atk="242" def="252" mag="487" />
+  <pet id="80" name="Cavorting Bones" class="Necromancer" level="1" hp="70" atk="6" def="3" mag="20" mr="0" />
+  <pet id="81" name="Learing Corpse" class="Necromancer" level="4" hp="105" atk="10" def="8" mag="23" mr="0" />
+  <pet id="82" name="Bone Walk" class="Necromancer" level="8" hp="121" atk="14" def="12" mag="31" mr="0" />
+  <pet id="83" name="Convoke Shadow" class="Necromancer" level="12" hp="131" atk="16" def="14" mag="35" mr="0" />
+  <pet id="84" name="Restless Bones" class="Necromancer" level="16" hp="159" atk="21" def="19" mag="45" mr="0" />
+  <pet id="85" name="Animate Dead" class="Necromancer" level="20" hp="179" atk="24" def="22" mag="54" mr="0" />
+  <pet id="86" name="Haunting Corpse" class="Necromancer" level="24" hp="202" atk="28" def="27" mag="63" mr="0" />
+  <pet id="87" name="Summon Dead" class="Necromancer" level="29" hp="230" atk="34" def="33" mag="73" mr="0" />
+  <pet id="88" name="Invoke Shadow" class="Necromancer" level="34" hp="264" atk="42" def="41" mag="89" mr="0" />
+  <pet id="89" name="Malignant Dead" class="Necromancer" level="39" hp="327" atk="51" def="51" mag="109" mr="0" />
+  <pet id="90" name="Cackling Bones" class="Necromancer" level="44" hp="391" atk="63" def="63" mag="132" mr="0" />
+  <pet id="91" name="Invoke Death" class="Necromancer" level="49" hp="469" atk="76" def="77" mag="159" mr="0" />
+  <pet id="92" name="Minion of Shadow" class="Necromancer" level="53" hp="514" atk="84" def="85" mag="175" mr="0" />
+  <pet id="93" name="Servant of Bones" class="Necromancer" level="56" hp="538" atk="88" def="89" mag="183" mr="0" />
+  <pet id="94" name="Emissary of Thule" class="Necromancer" level="59" hp="619" atk="102" def="104" mag="211" mr="0" />
+  <pet id="95" name="Legacy of Zek" class="Necromancer" level="61" hp="1145" atk="186" def="192" mag="381" mr="0" />
+  <pet id="96" name="Saryn's Companion" class="Necromancer" level="63" hp="1245" atk="196" def="202" mag="391" mr="0" />
+  <pet id="97" name="Child of Bertoxxulous" class="Necromancer" level="65" hp="1345" atk="206" def="212" mag="401" mr="0" />
+  <pet id="98" name="Lost Soul" class="Necromancer" level="67" hp="1455" atk="232" def="242" mag="477" mr="0" />
+  <pet id="99" name="Dark Assassin" class="Necromancer" level="70" hp="1555" atk="242" def="252" mag="487" mr="0" />
 </pets>

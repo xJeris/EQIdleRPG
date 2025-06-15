@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Not all areas have bosses -->
 <bosses>
-  <boss id="1" name="Brokenclaw" area="1" level="10" ATK="47" DEF="10" HP="400" xp="400" drop1="5000" drop2="5001" drop3="5002" />
-  <boss id="2" name="Lord Elgnub" area="3" level="18" ATK="85" DEF="19" HP="700" xp="700" drop1="5003" drop2="5004" drop3="5005" />
+  <boss id="1" name="Brokenclaw" area="1" level="10" ATK="47" DEF="10" MR="0" HP="400" xp="400" drop1="5000" drop2="5001" drop3="5002" />
+  <boss id="2" name="Lord Elgnub" area="3" level="18" ATK="85" DEF="19" MR="0" HP="700" xp="700" drop1="5003" drop2="5004" drop3="5005" />
 
 
 
