@@ -43,8 +43,8 @@ Place the folders and files in your desired web-server directory. Navigate to th
 
 Major Updates:
 - 06/15/25 <br/>
-&emsp; Added Magic Resistance stat and capped resist at 75%.
-&emsp; Added Crit chance for players, pets, bosses, and regular enemies.
+&emsp; Added Magic Resistance stat and capped resist at 75%. <br/>
+&emsp; Added Crit chance for players, pets, bosses, and regular enemies. <br/>
 
 ## License
 
