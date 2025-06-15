@@ -22,14 +22,14 @@ body {
     height: 100vh;
   }
   #playerStats {
-    width: 30%;
+    width: 35%;
     padding: 20px;
     background-color: #3a3f47;
     box-shadow: inset -2px 0 5px rgba(0,0,0,0.5);
     font-size: 14px;
   }
   #gameText {
-    width: 70%;
+    width: 65%;
     padding: 20px;
     background-color: #20252b;
     overflow-y: auto;
