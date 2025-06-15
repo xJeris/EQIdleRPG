@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- minLevel -> Lowest level encounter for that mob. -->
 <!-- maxLevel -> Highest level encounter for that mob. -->
-<!-- area -> area by id found in areas.xml where that mob can appear. -->
+<!-- area -> area by id found in areas.xml where that mob can appear. To add additional areas to
+     a mob, simply add another <area id=""></area> tag below the existing ones for the mob. -->
 
 <!-- Enemy HP scaling changes at levels 21, and 61 to make sure we are keeping fights competitive
      for both classes with and without pets.
