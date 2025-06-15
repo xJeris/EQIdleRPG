@@ -717,8 +717,12 @@ async function simulateBossBattle() {
   }
 
   // **Phase 2: Player Combat (if pet died or there was no pet)**
-  if (petDied && player.currentHP > 0) {
-    appendLog("<span style='color: blue;'>You step forward to fight in place of your pet!</span>");
+  if (((petAllowed && petDied) || !petAllowed) && player.currentHP > 0) {
+    if (petAllowed) {
+      appendLog("<span style='color: blue;'>You step forward to fight in place of your pet!</span>");
+    } else {
+      appendLog("<span style='color: blue;'>You step forward to fight!</span>");
+    }
     await delay(1000);
 
     while (currentBoss.HP > 0 && player.currentHP > 0) {
