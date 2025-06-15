@@ -510,7 +510,7 @@ function updateStatsUI() {
       "Pet ATK": player.pet.ATK,
       "Pet DEF": player.pet.DEF,
       "Pet MAG": player.pet.MAG,
-      "Pet MR": player.pet.mr
+      "Pet MR": player.pet.MR
     };
 
     for (const key in petStats) {
