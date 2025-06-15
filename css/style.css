@@ -34,6 +34,15 @@ body {
     background-color: #20252b;
     overflow-y: auto;
   }
+  #banner {
+    height: 100px;
+    background-color: #333; 
+    color: #fff; 
+    font-size: 20pt;
+    text-align: left;
+    padding: 10px;
+    overflow: hidden;
+  }
   
   /* Combat log styling */
   #combatLog {
