@@ -3,7 +3,8 @@
 HP Scaling (FLOOR 0.0502) is set so that at level 100 the pet has about 8000 HP. We don't want to give them too 
 much HP, as the player will fight as well if the pet dies.
 
-ATK, DEF, and MAG scaling (CEILING 0.045) are all matching the players scale.
+ATK, DEF, and MAG scaling (CEILING 0.045) are all matching the players scale. Slight adjustments at some
+levels are made to attempt to make pets viable in most situations.
 -->
 <pets>
 <!-- Magician Pets-->
@@ -88,24 +89,24 @@ ATK, DEF, and MAG scaling (CEILING 0.045) are all matching the players scale.
   <pet id="78" name="Spirit of Rashara" class="Beastlord" level="70" hp="133" atk="312" def="326" mag="326" />
   <pet id="79" name="Spirit of Uluanes" class="Beastlord" level="73" hp="139" atk="395" def="413" mag="413" />
 <!-- Necromancer Pets-->
-  <pet id="80" name="Cavorting Bones" class="Necromancer" level="1" hp="50" atk="3" def="3" mag="20" />
-  <pet id="81" name="Learing Corpse" class="Necromancer" level="4" hp="85" atk="7" def="8" mag="23" />
-  <pet id="82" name="Bone Walk" class="Necromancer" level="8" hp="101" atk="11" def="12" mag="31" />
-  <pet id="83" name="Convoke Shadow" class="Necromancer" level="12" hp="111" atk="13" def="14" mag="35" />
-  <pet id="84" name="Restless Bones" class="Necromancer" level="16" hp="139" atk="18" def="19" mag="45" />
-  <pet id="85" name="Animate Dead" class="Necromancer" level="20" hp="159" atk="21" def="22" mag="54" />
-  <pet id="86" name="Haunting Corpse" class="Necromancer" level="24" hp="182" atk="25" def="27" mag="63" />
-  <pet id="87" name="Summon Dead" class="Necromancer" level="29" hp="210" atk="31" def="33" mag="73" />
-  <pet id="88" name="Invoke Shadow" class="Necromancer" level="34" hp="254" atk="39" def="41" mag="89" />
-  <pet id="89" name="Malignant Dead" class="Necromancer" level="39" hp="307" atk="48" def="51" mag="109" />
-  <pet id="90" name="Cackling Bones" class="Necromancer" level="44" hp="371" atk="60" def="63" mag="132" />
-  <pet id="91" name="Invoke Death" class="Necromancer" level="49" hp="449" atk="73" def="77" mag="159" />
-  <pet id="92" name="Minion of Shadow" class="Necromancer" level="53" hp="494" atk="81" def="85" mag="175" />
-  <pet id="93" name="Servant of Bones" class="Necromancer" level="56" hp="518" atk="85" def="89" mag="183" />
-  <pet id="94" name="Emissary of Thule" class="Necromancer" level="59" hp="599" atk="99" def="104" mag="211" />
-  <pet id="95" name="Legacy of Zek" class="Necromancer" level="61" hp="1125" atk="183" def="192" mag="381" />
-  <pet id="96" name="Saryn's Companion" class="Necromancer" level="63" hp="1225" atk="193" def="202" mag="391" />
-  <pet id="97" name="Child of Bertoxxulous" class="Necromancer" level="65" hp="1325" atk="203" def="212" mag="401" />
-  <pet id="98" name="Lost Soul" class="Necromancer" level="67" hp="1435" atk="231" def="242" mag="477" />
-  <pet id="99" name="Dark Assassin" class="Necromancer" level="70" hp="1535" atk="241" def="252" mag="487" />
+  <pet id="80" name="Cavorting Bones" class="Necromancer" level="1" hp="50" atk="6" def="3" mag="20" />
+  <pet id="81" name="Learing Corpse" class="Necromancer" level="4" hp="85" atk="10" def="8" mag="23" />
+  <pet id="82" name="Bone Walk" class="Necromancer" level="8" hp="101" atk="14" def="12" mag="31" />
+  <pet id="83" name="Convoke Shadow" class="Necromancer" level="12" hp="111" atk="16" def="14" mag="35" />
+  <pet id="84" name="Restless Bones" class="Necromancer" level="16" hp="139" atk="21" def="19" mag="45" />
+  <pet id="85" name="Animate Dead" class="Necromancer" level="20" hp="159" atk="24" def="22" mag="54" />
+  <pet id="86" name="Haunting Corpse" class="Necromancer" level="24" hp="182" atk="28" def="27" mag="63" />
+  <pet id="87" name="Summon Dead" class="Necromancer" level="29" hp="210" atk="34" def="33" mag="73" />
+  <pet id="88" name="Invoke Shadow" class="Necromancer" level="34" hp="254" atk="42" def="41" mag="89" />
+  <pet id="89" name="Malignant Dead" class="Necromancer" level="39" hp="307" atk="51" def="51" mag="109" />
+  <pet id="90" name="Cackling Bones" class="Necromancer" level="44" hp="371" atk="63" def="63" mag="132" />
+  <pet id="91" name="Invoke Death" class="Necromancer" level="49" hp="449" atk="76" def="77" mag="159" />
+  <pet id="92" name="Minion of Shadow" class="Necromancer" level="53" hp="494" atk="84" def="85" mag="175" />
+  <pet id="93" name="Servant of Bones" class="Necromancer" level="56" hp="518" atk="88" def="89" mag="183" />
+  <pet id="94" name="Emissary of Thule" class="Necromancer" level="59" hp="599" atk="102" def="104" mag="211" />
+  <pet id="95" name="Legacy of Zek" class="Necromancer" level="61" hp="1125" atk="186" def="192" mag="381" />
+  <pet id="96" name="Saryn's Companion" class="Necromancer" level="63" hp="1225" atk="196" def="202" mag="391" />
+  <pet id="97" name="Child of Bertoxxulous" class="Necromancer" level="65" hp="1325" atk="206" def="212" mag="401" />
+  <pet id="98" name="Lost Soul" class="Necromancer" level="67" hp="1435" atk="232" def="242" mag="477" />
+  <pet id="99" name="Dark Assassin" class="Necromancer" level="70" hp="1535" atk="242" def="252" mag="487" />
 </pets>

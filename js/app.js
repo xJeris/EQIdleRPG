@@ -334,7 +334,7 @@ function assignPetToPlayer() {
         MAG: newPet.mag
       };
 
-      appendLog("Your pet " + player.pet.name + " (Level " + player.pet.level + ") joins you, fully restored!");
+      appendLog("Your pet " + player.pet.name + " (Level " + player.pet.level + ") joins you!");
     }
   }
 }
@@ -676,6 +676,11 @@ async function simulateBossBattle() {
 
   let petDied = false;
   const petAllowed = classesWithPets.includes(player.class);
+  if (petAllowed && !player.pet) {
+    // Attempt to assign a pet before combat begins.
+    assignPetToPlayer();
+  }
+
   let activeCombatant;
   if (petAllowed && player.pet && player.pet.HP > 0) {
     activeCombatant = player.pet;
@@ -856,11 +861,11 @@ async function simulateCombat() {
     if (d <= 0) {
       weight = 1.0;  // Full weight for same level or lower.
     } else if (d === 1) {
-      weight = 0.75; // Slightly lower chance for 1 level above.
+      weight = 0.5; // Slightly lower chance for 1 level above.
     } else if (d === 2) {
-      weight = 0.5;  // Even lower chance for 2 levels above.
+      weight = 0.15;  // Even lower chance for 2 levels above.
     } else {
-      weight = 0.5 / d; // Fallback.
+      weight = 0.25 / d; // Fallback.
     }
     totalWeight += weight;
     weights.push(weight);
@@ -906,6 +911,11 @@ async function simulateCombat() {
   // If a pet exists and is alive, let it fight; otherwise, use the player.
   let petDied = false;
   const petAllowed = classesWithPets.includes(player.class);
+  if (petAllowed && !player.pet) {
+    // Attempt to assign a pet before combat begins.
+    assignPetToPlayer();
+  }
+
   let activeCombatant;
   if (petAllowed && player.pet && player.pet.HP > 0) {
     activeCombatant = player.pet;
