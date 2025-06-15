@@ -150,7 +150,9 @@ let player = {
     "Ring 1": null,
     "Ring 2": null
   },
-  currentArea: null
+  currentArea: null,
+  pet: null,
+  petDied: false
 };
 
 // Classes
@@ -675,7 +677,7 @@ async function simulateBossBattle() {
 
   appendLog("<span style='color: #da0000;'><strong>A Boss Encounter!</strong> A fearsome " + currentBoss.name + " (Level " + currentBoss.level + ") appears!</span>");
 
-  let petDied = false;
+  player.petDied = false;
   const petAllowed = classesWithPets.includes(player.class);
   if (petAllowed && !player.pet) {
     // Attempt to assign a pet before combat begins.
@@ -690,7 +692,7 @@ async function simulateBossBattle() {
     // For classes that are allowed to have pets but the pet is missing (or dead),
     // you might want to set petDied to true so you know it lost an active pet.
     if (petAllowed && (!player.pet || player.pet.currentHP <= 0)) {
-      petDied = true;
+      player.petDied = true;
     }
   }
   
@@ -723,7 +725,7 @@ async function simulateBossBattle() {
   }
 
   // **Phase 2: Player Combat (if pet died or there was no pet)**
-  if (((petAllowed && petDied) || !petAllowed) && player.currentHP > 0) {
+  if (((petAllowed && player.petDied) || !petAllowed) && player.currentHP > 0) {
     if (petAllowed) {
       appendLog("<span style='color: blue;'>You step forward to fight in place of your pet!</span>");
     } else {
@@ -782,7 +784,7 @@ async function simulateBossBattle() {
     appendLog("<span class='winOutcome'>You have defeated " + currentBoss.name + "!</span>");
     addXP(currentBoss.xp);
 
-    if (petDied) {
+    if (player.petDied) {
       appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
       assignPetToPlayer();
     }
@@ -910,7 +912,7 @@ async function simulateCombat() {
 
   // Determine active combatant.
   // If a pet exists and is alive, let it fight; otherwise, use the player.
-  let petDied = false;
+  player.petDied = false;
   const petAllowed = classesWithPets.includes(player.class);
   if (petAllowed && !player.pet) {
     // Attempt to assign a pet before combat begins.
@@ -924,7 +926,7 @@ async function simulateCombat() {
     activeCombatant = player;
     // If the class can have a pet but there's none, you might set petDied to true if you want to trigger pet summon messages.
     if (petAllowed && (!player.pet || player.pet.currentHP <= 0)) {
-      petDied = true;
+      player.petDied = true;
     }
   }
 
@@ -999,9 +1001,9 @@ async function simulateCombat() {
     updateStatsUI();
     
     // Switch from pet to player if needed.
-    if (activeCombatant !== player && player.pet.currentHP <= 0 && !petDied) {
+    if (activeCombatant !== player && player.pet.currentHP <= 0 && !player.petDied) {
       appendLog("<span style='color: red;'>Your pet " + player.pet.name + " has fallen!</span>");
-      petDied = true;
+      player.petDied = true;
       activeCombatant = player;
       if (player.currentHP > 0) {
         appendLog("<span style='color: blue;'>You step forward to fight in place of your pet!</span>");
@@ -1019,7 +1021,7 @@ async function simulateCombat() {
     appendLog("<span style='color: green;'>You feel rejuvenated and fully healed!</span>");
   
     // If a pet died during combat, grant a new pet before next battle.
-    if (petAllowed && petDied) {
+    if (petAllowed && player.petDied) {
       appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
       assignPetToPlayer();
     }
