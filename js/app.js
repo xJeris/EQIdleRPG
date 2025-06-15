@@ -818,14 +818,16 @@ async function simulateBossBattle() {
   // Post-Battle Recovery
   if (player.currentHP <= 0) {
     appendLog("<span style='color: red;'>You were defeated!</span>");
-    await delay(2000);
+    await delay(1000);
 
+    if (petAllowed && player.petDied) {
     appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
     assignPetToPlayer();
-    player.currentHP = Math.floor(player.HP * 0.75);
+    await delay(1000);
+    }
 
+    player.currentHP = Math.floor(player.HP * 0.9);
     updateStatsUI();
-    await delay(2000);
 
     appendLog("<span style='color: blue;'>You prepare for the next battle.</span>");
     updateUI();
