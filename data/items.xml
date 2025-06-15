@@ -28,4 +28,8 @@ Item slots
   <item id="5000" name="Gloomsteel Axe" slot="Main Hand" ATK="5" DEF="0" MAG="0" level="2" />
   <item id="5001" name="Gloomiron Greaves" slot="Legs" ATK="0" DEF="5" MAG="0" level="2" />
   <item id="5002" name="Gloomsteel Staff" slot="Main Hand" ATK="0" DEF="0" MAG="5" level="2" />
+
+  <item id="5003" name="Gnoll Slayer" slot="Main Hand" ATK="8" DEF="0" MAG="0" level="2" />
+  <item id="5004" name="Ringmail Cape" slot="Back" ATK="0" DEF="6" MAG="0" level="2" />
+  <item id="5005" name="Onyx Earring" slot="Ring 2" ATK="0" DEF="0" MAG="4" level="2" />
 </items>

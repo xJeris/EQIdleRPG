@@ -2,191 +2,288 @@
 <!-- minLevel -> Lowest level encounter for that mob. -->
 <!-- maxLevel -> Highest level encounter for that mob. -->
 <!-- area -> area by id found in areas.xml where that mob can appear. -->
+
+<!-- Enemy HP scaling changes at levels 21, and 61 to make sure we are keeping fights competitive
+     for both classes with and without pets.
+     Mob level 1: 50 HP
+     Scaling from 1-20 is HP*0.107
+     Scaling from 21-60 is HP*0.047
+     Scaling from 61-100 is HP*0.063
+-->
 <enemies>
- <!-- Mines of Glooming Deep -->
-  <enemy id="1" name="a cave bat" minLevel="1" maxLevel="1" HP="30" ATK="6" DEF="1" xp="50">
+ <!-- Mines of Glooming Deep (1-9) -->
+  <enemy id="1" name="a cave bat" minLevel="1" maxLevel="1" HP="50" ATK="6" DEF="1" xp="50">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="2" name="a cave rat" minLevel="2" maxLevel="2" HP="50" ATK="12" DEF="1" xp="75">
+  <enemy id="2" name="a cave rat" minLevel="2" maxLevel="2" HP="56" ATK="12" DEF="1" xp="75">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="3" name="a dark elf slave" minLevel="3" maxLevel="3" HP="70" ATK="12" DEF="2" xp="100">
+  <enemy id="3" name="a dark elf slave" minLevel="3" maxLevel="3" HP="62" ATK="12" DEF="2" xp="100">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="4" name="a gloomfang lurker" minLevel="4" maxLevel="4" HP="90" ATK="18" DEF="2" xp="125">
+  <enemy id="4" name="a gloomfang lurker" minLevel="4" maxLevel="4" HP="69" ATK="18" DEF="2" xp="125">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="5" name="a goblin slave" minLevel="5" maxLevel="5" HP="110" ATK="24" DEF="3" xp="175">
+  <enemy id="5" name="a goblin slave" minLevel="5" maxLevel="5" HP="77" ATK="24" DEF="3" xp="175">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="6" name="a garroted kobold" minLevel="6" maxLevel="8" HP="125" ATK="30" DEF="4" xp="200">
+  <enemy id="6" name="a garroted kobold" minLevel="6" maxLevel="8" HP="86" ATK="30" DEF="4" xp="200">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="7" name="a Gloomingdeep captain" minLevel="7" maxLevel="7" HP="150" ATK="36" DEF="6" xp="250">
+  <enemy id="7" name="a Gloomingdeep captain" minLevel="7" maxLevel="7" HP="96" ATK="36" DEF="6" xp="250">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="8" name="a trampled kobold" minLevel="7" maxLevel="7" HP="150" ATK="36" DEF="5" xp="225">
+  <enemy id="8" name="a trampled kobold" minLevel="7" maxLevel="7" HP="96" ATK="36" DEF="5" xp="225">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="9" name="Slavemaster Ruga" minLevel="8" maxLevel="8" HP="200" ATK="42" DEF="6" xp="300">
+  <enemy id="9" name="Slavemaster Ruga" minLevel="8" maxLevel="8" HP="107" ATK="42" DEF="6" xp="300">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="10" name="Gloomingdeep Spiritweaver" minLevel="8" maxLevel="8" HP="185" ATK="42" DEF="5" xp="275">
+  <enemy id="10" name="Gloomingdeep Spiritweaver" minLevel="8" maxLevel="8" HP="107" ATK="42" DEF="5" xp="275">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
   </enemy>
-  <enemy id="11" name="Pox" minLevel="9" maxLevel="9" HP="300" ATK="48" DEF="6" xp="350">
+  <enemy id="11" name="Pox" minLevel="9" maxLevel="9" HP="119" ATK="48" DEF="6" xp="350">
     <areas>
       <area id="1"/>
     </areas>
   </enemy>
-  <!-- Innothule Swamp -->
-  <enemy id="12" name="a froglok" minLevel="2" maxLevel="4" HP="50" ATK="12" DEF="1" xp="75">
+  <!-- Innothule Swamp (2-12) -->
+  <enemy id="12" name="a froglok" minLevel="2" maxLevel="4" HP="56" ATK="12" DEF="1" xp="75">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="13" name="a giant rat" minLevel="2" maxLevel="4" HP="50" ATK="12" DEF="1" xp="75">
+  <enemy id="13" name="a giant rat" minLevel="2" maxLevel="4" HP="56" ATK="12" DEF="1" xp="75">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="14" name="a kobold" minLevel="3" maxLevel="5" HP="70" ATK="18" DEF="2" xp="100">
+  <enemy id="14" name="a kobold" minLevel="3" maxLevel="5" HP="62" ATK="18" DEF="2" xp="100">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="15" name="a swamp alligator" minLevel="3" maxLevel="5" HP="70" ATK="18" DEF="2" xp="100">
+  <enemy id="15" name="a swamp alligator" minLevel="3" maxLevel="5" HP="62" ATK="18" DEF="2" xp="100">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="16" name="a water moccasin" minLevel="4" maxLevel="6" HP="90" ATK="24" DEF="2" xp="125">
+  <enemy id="16" name="a water moccasin" minLevel="4" maxLevel="6" HP="69" ATK="24" DEF="2" xp="125">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="17" name="an alligator" minLevel="4" maxLevel="6" HP="90" ATK="24" DEF="2" xp="125">
+  <enemy id="17" name="an alligator" minLevel="4" maxLevel="6" HP="69" ATK="24" DEF="2" xp="125">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="18" name="a fungal watcher" minLevel="5" maxLevel="5" HP="110" ATK="30" DEF="3" xp="175">
+  <enemy id="18" name="a fungal watcher" minLevel="5" maxLevel="5" HP="77" ATK="30" DEF="3" xp="175">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="19" name="a fetid froglok ghoul" minLevel="5" maxLevel="7" HP="110" ATK="30" DEF="3" xp="175">
+  <enemy id="19" name="a fetid froglok ghoul" minLevel="5" maxLevel="7" HP="77" ATK="30" DEF="3" xp="175">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="20" name="a froglok forager" minLevel="5" maxLevel="7" HP="110" ATK="30" DEF="3" xp="175">
+  <enemy id="20" name="a froglok forager" minLevel="5" maxLevel="7" HP="77" ATK="30" DEF="3" xp="175">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="21" name="a kobold hunter" minLevel="6" maxLevel="8" HP="125" ATK="36" DEF="4" xp="200">
+  <enemy id="21" name="a kobold hunter" minLevel="6" maxLevel="8" HP="86" ATK="36" DEF="4" xp="200">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="22" name="a froglok ghoul" minLevel="8" maxLevel="10" HP="200" ATK="48" DEF="6" xp="300">
+  <enemy id="22" name="a froglok ghoul" minLevel="8" maxLevel="10" HP="107" ATK="48" DEF="6" xp="300">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="23" name="a fat alligator" minLevel="9" maxLevel="10" HP="300" ATK="54" DEF="6" xp="350">
+  <enemy id="23" name="a fat alligator" minLevel="9" maxLevel="10" HP="119" ATK="54" DEF="6" xp="350">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="24" name="a Large Forest Crawler" minLevel="10" maxLevel="12" HP="350" ATK="60" DEF="6" xp="400">
+  <enemy id="24" name="a Large Forest Crawler" minLevel="10" maxLevel="12" HP="132" ATK="60" DEF="6" xp="400">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="25" name="a lesser mummy" minLevel="10" maxLevel="12" HP="350" ATK="60" DEF="7" xp="400">
+  <enemy id="25" name="a lesser mummy" minLevel="10" maxLevel="12" HP="132" ATK="60" DEF="7" xp="400">
     <areas>
       <area id="2"/>
     </areas>
   </enemy>
-  <!-- Blackburrow -->
-  <enemy id="26" name="a gnoll scout" minLevel="2" maxLevel="2" HP="50" ATK="12" DEF="1" xp="75">
+  <!-- Blackburrow (2-15) -->
+  <enemy id="26" name="a gnoll scout" minLevel="2" maxLevel="2" HP="56" ATK="12" DEF="1" xp="75">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="27" name="a brown bear" minLevel="3" maxLevel="3" HP="70" ATK="18" DEF="2" xp="100">
+  <enemy id="27" name="a brown bear" minLevel="3" maxLevel="3" HP="62" ATK="18" DEF="2" xp="100">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="28" name="a scrawny gnoll" minLevel="3" maxLevel="5" HP="70" ATK="18" DEF="2" xp="100">
+  <enemy id="28" name="a scrawny gnoll" minLevel="3" maxLevel="5" HP="62" ATK="18" DEF="2" xp="100">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="29" name="a razorgill" minLevel="4" maxLevel="8" HP="90" ATK="24" DEF="2" xp="125">
+  <enemy id="29" name="a razorgill" minLevel="4" maxLevel="8" HP="69" ATK="24" DEF="2" xp="125">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="30" name="a gnoll" minLevel="5" maxLevel="7" HP="110" ATK="30" DEF="3" xp="175">
+  <enemy id="30" name="a gnoll" minLevel="5" maxLevel="7" HP="77" ATK="30" DEF="3" xp="175">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="31" name="a gnoll guardsman" minLevel="5" maxLevel="15" HP="110" ATK="30" DEF="3" xp="175">
+  <enemy id="31" name="a gnoll guardsman" minLevel="5" maxLevel="15" HP="77" ATK="30" DEF="3" xp="175">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="32" name="a burly gnoll" minLevel="7" maxLevel="9" HP="150" ATK="42" DEF="5" xp="225">
+  <enemy id="32" name="a burly gnoll" minLevel="7" maxLevel="9" HP="96" ATK="42" DEF="5" xp="225">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="33" name="a giant snake" minLevel="7" maxLevel="11" HP="150" ATK="42" DEF="5" xp="225">
+  <enemy id="33" name="a giant snake" minLevel="7" maxLevel="11" HP="96" ATK="42" DEF="5" xp="225">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="34" name="a grizzly bear" minLevel="9" maxLevel="11" HP="300" ATK="54" DEF="6" xp="350">
+  <enemy id="34" name="a grizzly bear" minLevel="9" maxLevel="11" HP="119" ATK="54" DEF="6" xp="350">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="35" name="an elite gnoll guard" minLevel="11" maxLevel="15" HP="450" ATK="66" DEF="9" xp="500">
+  <enemy id="35" name="an elite gnoll guard" minLevel="11" maxLevel="15" HP="147" ATK="66" DEF="9" xp="500">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="36" name="a gnoll commander" minLevel="14" maxLevel="15" HP="600" ATK="84" DEF="12" xp="700">
+  <enemy id="36" name="a gnoll commander" minLevel="14" maxLevel="15" HP="201" ATK="84" DEF="12" xp="700">
     <areas>
       <area id="3"/>
     </areas>
   </enemy>
-  <!-- Field of Bone -->
-  
+  <!-- Field of Bone (2-20) -->
+  <enemy id="37" name="a carrion beetle hatchling" minLevel="2" maxLevel="3" HP="56" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="38" name="a scaled wolf cub" minLevel="2" maxLevel="4" HP="56" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="39" name="a scaled wolf" minLevel="5" maxLevel="5" HP="77" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="40" name="a large scorpion" minLevel="4" maxLevel="6" HP="69" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="41" name="a militia skeleton" minLevel="5" maxLevel="6" HP="77" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="42" name="a scalebone skeleton" minLevel="7" maxLevel="9" HP="96" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="43" name="a giant scorpion" minLevel="8" maxLevel="10" HP="107" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="44" name="a scaled wolf hunter" minLevel="9" maxLevel="11" HP="119" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="45" name="a burynai burrower" minLevel="10" maxLevel="12" HP="132" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="46" name="a bonebinder" minLevel="12" maxLevel="14" HP="163" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="47" name="a burynai excavator" minLevel="13" maxLevel="15" HP="181" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="48" name="a heartsting scorpion" minLevel="12" maxLevel="14" HP="163" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="49" name="a large heartsting scorpion" minLevel="15" maxLevel="17" HP="223" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="50" name="a burynai sapper" minLevel="16" maxLevel="17" HP="247" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="51" name="a lesser icebone skeleton" minLevel="16" maxLevel="18" HP="247" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="52" name="a scaled wolf tracker" minLevel="19" maxLevel="19" HP="337" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="53" name="a burynai cutter" minLevel="20" maxLevel="20" HP="374" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
+  <enemy id="54" name="a scaled wolf prowler" minLevel="19" maxLevel="20" HP="337" ATK="84" DEF="12" xp="700">
+    <areas>
+      <area id="4"/>
+    </areas>
+  </enemy>
 </enemies>

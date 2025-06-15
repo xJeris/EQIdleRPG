@@ -6,7 +6,4 @@
 
 
 
-  <!-- Examples Only -->
-  <boss id="2" name="Dragon Lord" area="99" level="50" ATK="20" DEF="15" HP="300" xp="1000" drop1="101" drop2="102" drop3="103" />
-  <boss id="3" name="Shadow Queen" area="99" level="40" ATK="18" DEF="12" HP="250" xp="900" drop1="104" drop2="105" drop3="106" />
 </bosses>
