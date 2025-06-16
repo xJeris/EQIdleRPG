@@ -30,7 +30,6 @@ Possible future enhancements that could be made.
 - **Pets Casting:** Allow pets to cast spells. They already have the MAG stat in their XML to support this.
 - **Songs:** Allow bards to play songs.
 - **Updated Combat:** Allow pet classes to attack while their pet is alive instead of only if it dies.
-- **Better Equipment Handling:** Equipment handling is very basic currently. It is determined soley by the items level. In the future it could be based on a classes needed stats.
 - **Images:** Add Character and Enemy Images to the interface.
 - **Improved UI:** Update the UI to look better.
 - **Flavor Text:** Add to or update the games flavor text.
@@ -45,6 +44,7 @@ Major Updates:
 - 06/15/25 <br/>
 &emsp; Added Magic Resistance stat and capped resist at 75%. <br/>
 &emsp; Added Crit chance for players, pets, bosses, and regular enemies. <br/>
+&emsp; Changed equipment to use rarity and item modifiers along with item level to create item score to help determine if an item should be replaced.
 
 ## License
 

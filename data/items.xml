@@ -5,31 +5,31 @@ Item slots
 -->
 <items>
   <!-- Enemy Item drops -->
-  <item id="1" name="Leather Cap" slot="Head" ATK="0" DEF="1" MAG="0" MR="0" level="1" />
-  <item id="2" name="Leather Tunic" slot="Torso" ATK="0" DEF="4" MAG="0" MR="0" level="1" />
-  <item id="3" name="Leather Leggings" slot="Legs" ATK="0" DEF="3" MAG="0" MR="0" level="1" />
-  <item id="4" name="Leather Cloak" slot="Back" ATK="0" DEF="2" MAG="0" MR="0" level="1" />
-  <item id="5" name="Banded Helm" slot="Head" ATK="0" DEF="4" MAG="0" MR="0" level="1" />
-  <item id="6" name="Banded Mail" slot="Torso" ATK="0" DEF="5" MAG="0" MR="0" level="1" />
-  <item id="7" name="Banded Leggings" slot="Legs" ATK="0" DEF="4" MAG="0" MR="0" level="1" />
-  <item id="8" name="Banded Cloak" slot="Back" ATK="0" DEF="3" MAG="0" MR="0" level="1" />
-  <item id="9" name="Bronze Rapier" slot="Main Hand" ATK="2" DEF="0" MAG="0" MR="0" level="1" />
-  <item id="10" name="Cast Iron Rapier" slot="Main Hand" ATK="2" DEF="0" MAG="0" MR="0" level="1" />
-  <item id="11" name="Staff" slot="Main Hand" ATK="0" DEF="0" MAG="2" MR="0" level="1" />
-  <item id="12" name="Wooden Shield" slot="Offhand" ATK="0" DEF="2" MAG="0" MR="0" level="1" />
-  <item id="13" name="Bronze Ring" slot="Ring 1" ATK="0" DEF="1" MAG="0" MR="0" level="1" />
-  <item id="14" name="Silver Ring" slot="Ring 1" ATK="0" DEF="0" MAG="1" MR="0" level="1" />
-  <item id="15" name="Gold Ring" slot="Ring 1" ATK="1" DEF="1" MAG="0" MR="0" level="1" />
-  <item id="16" name="Bronze Ring" slot="Ring 2" ATK="0" DEF="1" MAG="0" MR="0" level="1" />
-  <item id="17" name="Silver Ring" slot="Ring 2" ATK="0" DEF="0" MAG="1" MR="0" level="1" />
-  <item id="18" name="Gold Ring" slot="Ring 2" ATK="1" DEF="1" MAG="0" MR="0" level="1" />
+  <item id="1" name="Leather Cap" slot="Head" level="1" rarity="Common" modifiers="DEF:+1" />
+  <item id="2" name="Leather Tunic" slot="Torso" level="1" rarity="Common" modifiers="DEF:+4" />
+  <item id="3" name="Leather Leggings" slot="Legs" level="1" rarity="Common" modifiers="DEF:+3" />
+  <item id="4" name="Leather Cloak" slot="Back" level="1" rarity="Common" modifiers="DEF:+2" />
+  <item id="5" name="Banded Helm" slot="Head" level="1" rarity="Common" modifiers="DEF:+4" />
+  <item id="6" name="Banded Mail" slot="Torso" level="1" rarity="Common" modifiers="DEF:+5" />
+  <item id="7" name="Banded Leggings" slot="Legs" level="1" rarity="Common" modifiers="DEF:+4" />
+  <item id="8" name="Banded Cloak" slot="Back" level="1" rarity="Common" modifiers="DEF:+3" />
+  <item id="9" name="Bronze Rapier" slot="Main Hand" level="1" rarity="Common" modifiers="ATK:+2" />
+  <item id="10" name="Cast Iron Rapier" slot="Main Hand" level="1" rarity="Common" modifiers="ATK:+2" />
+  <item id="11" name="Staff" slot="Main Hand" level="1" rarity="Common" modifiers="MAG:+2" />
+  <item id="12" name="Wooden Shield" slot="Offhand" level="1" rarity="Common" modifiers="DEF:+2" />
+  <item id="13" name="Bronze Ring" slot="Ring 1" level="1" rarity="Common" modifiers="DEF:+1" />
+  <item id="14" name="Silver Ring" slot="Ring 1" level="1" rarity="Common" modifiers="MAG:+1" />
+  <item id="15" name="Gold Ring" slot="Ring 1" level="1" rarity="Common" modifiers="ATK:+1,DEF:+1" />
+  <item id="16" name="Bronze Ring" slot="Ring 2" level="1" rarity="Common" modifiers="DEF:+1" />
+  <item id="17" name="Silver Ring" slot="Ring 2" level="1" rarity="Common" modifiers="MAG:+1" />
+  <item id="18" name="Gold Ring" slot="Ring 2" level="1" rarity="Common" modifiers="ATK:+1,DEF:+1" />
 
   <!-- Boss Item drops -->
-  <item id="5000" name="Gloomsteel Axe" slot="Main Hand" ATK="5" DEF="0" MAG="0" MR="0" level="2" />
-  <item id="5001" name="Gloomiron Greaves" slot="Legs" ATK="0" DEF="5" MAG="0" MR="0" level="2" />
-  <item id="5002" name="Gloomsteel Staff" slot="Main Hand" ATK="0" DEF="0" MAG="5" MR="0" level="2" />
+  <item id="5000" name="Gloomsteel Axe" slot="Main Hand" level="2" rarity="Common" modifiers="ATK:+5" />
+  <item id="5001" name="Gloomiron Greaves" slot="Legs" level="2" rarity="Common" modifiers="DEF:+5" />
+  <item id="5002" name="Gloomsteel Staff" slot="Main Hand" level="2" rarity="Common" modifiers="MAG:+5" />
 
-  <item id="5003" name="Gnoll Slayer" slot="Main Hand" ATK="8" DEF="0" MAG="0" MR="0" level="2" />
-  <item id="5004" name="Ringmail Cape" slot="Back" ATK="0" DEF="6" MAG="0" MR="0" level="2" />
-  <item id="5005" name="Onyx Earring" slot="Ring 2" ATK="0" DEF="0" MAG="4" MR="0" level="2" />
+  <item id="5003" name="Gnoll Slayer" slot="Main Hand" level="2" rarity="Common" modifiers="ATK:+8" />
+  <item id="5004" name="Ringmail Cape" slot="Back" level="2" rarity="Common" modifiers="DEF:+6" />
+  <item id="5005" name="Onyx Earring" slot="Ring 2" level="2" rarity="Common" modifiers="MAG:+4" />
 </items>

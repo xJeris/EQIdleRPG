@@ -16,6 +16,18 @@ let bosses = [];
 let spells = [];
 let pets = [];
 
+// Helper function to parse a comma-separated modifier string (e.g., "ATK:+1,DEF:-1")
+function parseModifiers(str) {
+  if (!str) return {};
+  let mods = {};
+  let parts = str.split(',');
+  parts.forEach(pair => {
+    let [stat, value] = pair.split(':');
+    mods[stat.trim()] = parseInt(value.trim());
+  });
+  return mods;
+}
+
 // Utility for loading external XML files.
 function fetchXML(url) {
   return fetch(url)
@@ -67,16 +79,14 @@ function loadXMLData() {
         allowedAreas: Array.from(enemy.getElementsByTagName("area")).map(area => area.getAttribute("id"))
       }));
       
-      // Process items.xml including slot, ATK, DEF, MAG, and level.
+      // Process items.xml with the new format.
       items = Array.from(itemsDoc.getElementsByTagName("item")).map(item => ({
         id: item.getAttribute("id"),
         name: item.getAttribute("name"),
-        slot: item.getAttribute("slot"),    // e.g., "Main Hand", "Offhand", etc.
-        ATK: parseInt(item.getAttribute("ATK")),
-        DEF: parseInt(item.getAttribute("DEF")),
-        MAG: parseInt(item.getAttribute("MAG")),
-        MR: parseInt(item.getAttribute("MR")),
-        level: parseInt(item.getAttribute("level"))
+        slot: item.getAttribute("slot"),
+        level: parseInt(item.getAttribute("level")),
+        rarity: item.getAttribute("rarity"),
+        modifiers: parseModifiers(item.getAttribute("modifiers"))
       }));
 
       // Process boss.xml
@@ -296,6 +306,37 @@ function resetCharacterCreation() {
 
 document.getElementById("resetCharacter").addEventListener("click", resetCharacterCreation);
 
+// Items rarity data.
+const rarityData = {
+  "Common":    { multiplier: 1.0, color: "white" },
+  "Uncommon":  { multiplier: 1.1, color: "green" },
+  "Rare":      { multiplier: 1.25, color: "blue" },
+  "Epic":      { multiplier: 1.5, color: "purple" },
+  "Legendary": { multiplier: 2.0, color: "orange" }
+};
+
+// Calcuate item score to help determine item value.
+function calculateEquipmentScore(item) {
+  // Define a baseline that scales with item level.
+  let baseline = item.level * 10; // e.g., each level grants 10 baseline points
+
+  // Define weights for quantifying stat impacts
+  const weights = { ATK: 1.0, DEF: 0.8, MAG: 0.9 };
+
+  // Sum all weighted modifier effects.
+  let modifierSum = 0;
+  for (let stat in item.modifiers) {
+    if (weights[stat] !== undefined) {
+      modifierSum += item.modifiers[stat] * weights[stat];
+    }
+  }
+
+  // Use the rarity multiplier from the rarityData mapping.
+  let rarityMultiplier = rarityData[item.rarity] ? rarityData[item.rarity].multiplier : 1.0;
+
+  return (baseline + modifierSum) * rarityMultiplier;
+}
+
 // function to add equipment stats to the player stats.
 function getEquipmentBonuses() {
   let bonusATK = 0;
@@ -303,11 +344,12 @@ function getEquipmentBonuses() {
   let bonusMAG = 0;
   let bonusMR = 0;
   for (let slot in player.equipment) {
-    if (player.equipment[slot]) {
-      bonusATK += player.equipment[slot].ATK || 0;
-      bonusDEF += player.equipment[slot].DEF || 0;
-      bonusMAG += player.equipment[slot].MAG || 0;
-      bonusMR += player.equipment[slot].MR || 0;
+    const item = player.equipment[slot];
+    if (item && item.modifiers) {
+      bonusATK += item.modifiers.ATK || 0;
+      bonusDEF += item.modifiers.DEF || 0;
+      bonusMAG += item.modifiers.MAG || 0;
+      bonusMR += item.modifiers.MR || 0;
     }
   }
   return { bonusATK, bonusDEF, bonusMAG, bonusMR };
@@ -456,18 +498,48 @@ function getPlayerMAG(player) {
     }
   }
 
-function updateEquipmentUI() {
-  const equipmentList = document.getElementById("equipmentList");
-  equipmentList.innerHTML = ""; // clear old content
+  // Helper function to get an item's display name with the associated rarity color.
+  function getItemDisplayName(item) {
+    let rarityInfo = rarityData[item.rarity] || { color: "white" };
+    return "<span style='color: " + rarityInfo.color + ";'>" + item.name + "</span>";
+  }
 
-  Object.entries(player.equipment).forEach(([slot, item]) => {
-    const li = document.createElement("li");
-    li.textContent = item 
-      ? `${slot}: ${item.name} (L${item.level}, A +${item.ATK}, D +${item.DEF}, MG +${item.MAG}, MR +${item.MR})`
-      : `${slot}: None`;
-    equipmentList.appendChild(li);
-  });
-}
+  function equipIfBetter(newItem, slot) {
+    const currentItem = player.equipment[slot];
+    const newScore = calculateEquipmentScore(newItem);
+    const currentScore = currentItem ? calculateEquipmentScore(currentItem) : 0;
+
+    if (!currentItem || newScore > currentScore) {
+      player.equipment[slot] = newItem;
+      appendLog("You found " + getItemDisplayName(newItem) + " (Level " + newItem.level +
+                ") for your " + slot + " and equipped it!");
+    } else {
+      appendLog("You found " + getItemDisplayName(newItem) +
+                ", but your current " + slot + " is preferable. Item discarded.");
+    }
+  }
+
+  // Update the equipment UI to reflect the player's current equipment.
+  function updateEquipmentUI() {
+    const equipmentList = document.getElementById("equipmentList");
+    equipmentList.innerHTML = ""; // clear old content
+
+    Object.entries(player.equipment).forEach(([slot, item]) => {
+      const li = document.createElement("li");
+      if (item) {
+        // Get the item display name in its rarity color.
+        const displayName = getItemDisplayName(item);
+        // Build a string for the modifiers.
+        const modifierText = Object.entries(item.modifiers)
+          .map(([stat, value]) => `${stat} ${value >= 0 ? '+' : ''}${value}`)
+          .join(", ");
+        li.innerHTML = `${slot}: ${displayName} (L${item.level}${modifierText ? ", " + modifierText : ""})`;
+      } else {
+        li.textContent = `${slot}: None`;
+      }
+      equipmentList.appendChild(li);
+    });
+  }
 
 function updateStatsUI() {
   const statsList = document.getElementById("statsList");
@@ -848,7 +920,27 @@ async function simulateBossBattle() {
     appendLog("<span class='winOutcome'>You have defeated " + currentBoss.name + "!</span>");
     addXP(currentBoss.xp);
 
-    if (player.petDied) {
+    // Process boss drop:
+    // Retrieve drop IDs from the original boss object (randomBoss)
+    const dropIds = [randomBoss.drop1, randomBoss.drop2, randomBoss.drop3];
+    const selectedDropId = dropIds[Math.floor(Math.random() * dropIds.length)];
+
+    let bossDropItems = items.filter(item => parseInt(item.id) === parseInt(selectedDropId));
+    if (bossDropItems.length > 0) {
+      let bossDrop = bossDropItems[0];
+      // Option 1: Equip the drop if it's better.
+      equipIfBetter(bossDrop, bossDrop.slot);
+      // Option 2: Alternatively, you might notify the player that they've received this item.
+      appendLog("The boss dropped " + getItemDisplayName(bossDrop) + "!");
+    } else {
+      appendLog("The boss did not drop any recognizable items.");
+    }
+
+    // Heal the player fully between fights.
+    player.currentHP = player.HP;
+    appendLog("<span style='color: green;'>You feel rejuvenated and fully healed!</span>");
+  
+    if (petAllowed && player.petDied) {
       appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
       assignPetToPlayer();
     }
@@ -878,7 +970,7 @@ async function simulateBossBattle() {
     updateUI();
     saveProgress();
   }
-}
+} // END BOSS BATTLE SIMULATION
 
 /*****************************
  ********** ENEMIES **********
@@ -1142,22 +1234,14 @@ async function simulateCombat() {
       parseInt(item.id) <= 4999   // Items above 5000 are reserved for boss loot
     );
 
-    if (validItems.length > 0) {
-      let randomItem = validItems[Math.floor(Math.random() * validItems.length)];
-      let currentItem = player.equipment[randomItem.slot];
-
-      if (!currentItem || randomItem.level > currentItem.level) {
-        player.equipment[randomItem.slot] = randomItem;
-        appendLog("You found a " + randomItem.name + " (Level " + randomItem.level +
-                  ") for your " + randomItem.slot + " and equipped it!");
-      } else {
-        appendLog("You found a " + randomItem.name + ", but your current item is equal or better. Item discarded.");
-      }
-      
-      updateUI();
-      saveProgress();
+  if (validItems.length > 0) {
+    let randomItem = validItems[Math.floor(Math.random() * validItems.length)];
+    equipIfBetter(randomItem, randomItem.slot);
     }
-  } else {
+      
+    updateUI();
+    saveProgress();
+    } else {
     updateUI();
     saveProgress();
   }
