@@ -89,7 +89,7 @@ levels are made to attempt to make pets viable in most situations.
   <pet id="78" name="Spirit of Rashara" class="Beastlord" level="70" hp="133" atk="312" def="326" mag="326" mr="0" />
   <pet id="79" name="Spirit of Uluanes" class="Beastlord" level="73" hp="139" atk="395" def="413" mag="413" mr="0" />
 <!-- Necromancer Pets-->
-  <pet id="80" name="Cavorting Bones" class="Necromancer" level="1" hp="70" atk="6" def="3" mag="20" mr="0" />
+  <pet id="80" name="Cavorting Bones" class="Necromancer" level="1" hp="80" atk="8" def="5" mag="20" mr="0" />
   <pet id="81" name="Learing Corpse" class="Necromancer" level="4" hp="105" atk="10" def="8" mag="23" mr="0" />
   <pet id="82" name="Bone Walk" class="Necromancer" level="8" hp="121" atk="14" def="12" mag="31" mr="0" />
   <pet id="83" name="Convoke Shadow" class="Necromancer" level="12" hp="131" atk="16" def="14" mag="35" mr="0" />

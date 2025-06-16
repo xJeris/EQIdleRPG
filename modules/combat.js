@@ -104,12 +104,13 @@ export function getAvailableSpellsForClass(cls, level) {
 
 // Calculate spell damage based on player.MAG and target's MR.
 export function calculateSpellDamage(spell, player, target, effectiveMAG) {
-  const scalingFactor = 0.4;
+  const scalingFactor = 1.3; // Base scaling factor for spell damage. default is 0.4.
   const mrFactor = getEffectiveMR(target);
   // Each point of MR reduces spell damage by 1%, capped at 75%
   const maxReduction = Math.min(mrFactor, 75);
   const baseDamage = spell.baseDamage + Math.floor(effectiveMAG * scalingFactor);
   const finalDamage = Math.floor(baseDamage * (1 - maxReduction / 100));
+    console.log("Spell:", spell.name, "baseDamage:", spell.baseDamage, "effectiveMAG:", effectiveMAG, "mrFactor:", mrFactor, "final:", finalDamage);
   return Math.max(finalDamage, 1);
 }
 
@@ -123,11 +124,11 @@ export function addXP(amount) {
     player.level++;
     appendLog("<span style='color: blue;'>Level Up! You are now level " + player.level + ".</span>");
     player.xpNeeded = Math.floor(1000 * Math.pow(player.level, 2.482));
-    const hpIncreaseFactor = 0.06;
-    const AtkIncreaseFactor = 0.045;
-    const DefIncreaseFactor = 0.045;
-    const MagIncreaseFactor = 0.045;
-    const MrIncreaseFactor = 0.00;
+    const hpIncreaseFactor = 0.06;  // 0.06 is the default
+    const AtkIncreaseFactor = 0.3;  // 0.045 is the default
+    const DefIncreaseFactor = 0.3;  // 0.045 is the default
+    const MagIncreaseFactor = 0.3;  // 0.045 is the default
+    const MrIncreaseFactor = 0.00;  // 0.00 is the default
     player.HP = Math.floor(player.HP * (1 + hpIncreaseFactor));
     player.ATK = Math.ceil(player.ATK * (1 + AtkIncreaseFactor));
     player.DEF = Math.ceil(player.DEF * (1 + DefIncreaseFactor));
