@@ -196,6 +196,13 @@ async function simulateBossBattle() {
 
   appendLog("<span style='color: #da0000;'><strong>A Boss Encounter!</strong> A fearsome " + currentBoss.name + " (Level " + currentBoss.level + ") appears!</span>");
 
+  // Get equipment bonuses for the player.
+  const equipmentBonuses = getEquipmentBonuses(player.equipment);
+  const effectiveATK = player.ATK + equipmentBonuses.bonusATK;
+  const effectiveDEF = player.DEF + equipmentBonuses.bonusDEF;
+  const effectiveMAG = player.MAG + equipmentBonuses.bonusMAG;
+  const effectiveMR = player.MR + equipmentBonuses.bonusMR;
+
   player.petDied = false;
   const petAllowed = classesWithPets.includes(player.class);
   if (petAllowed && !player.pet) {
