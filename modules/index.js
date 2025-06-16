@@ -6,7 +6,7 @@
 import { loadXMLData } from "./dataLoader.js";
 import { appendLog } from "./ui.js";
 import { handleCharacterCreation } from "./character.js";
-import { loadProgress } from "./combat.js";
+import { loadProgress, startGameLoop } from "./combat.js";
 import { player } from "./character.js";
 
 // When the DOM is loaded, initialize the game.
@@ -30,6 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
           if (confirm("Are you sure you want to clear your save and start over?")) {
             localStorage.removeItem("idleRPGPlayer");
             window.location.reload(true);
+            stopGameLoop();
           }
         });
       }
@@ -39,6 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("characterCreation").style.display = "none";
         document.getElementById("gameUI").style.display = "flex";
         appendLog("Welcome back, " + player.name + "!");
+        startGameLoop();
       }
     })
     .catch((error) => console.error("Error loading XML:", error));

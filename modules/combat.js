@@ -408,18 +408,15 @@ async function simulateCombat() {
     const desiredMax = player.level + 2;
     const effectiveMin = Math.max(enemy.minLevel, desiredMin);
     const effectiveMax = Math.min(enemy.maxLevel, desiredMax, player.currentArea.maxLevel);
-    return (effectiveMin <= effectiveMax) && enemy.allowedAreas.includes(player.currentArea.id);
+    return (effectiveMin <= effectiveMax) && enemy.allowedAreas.map(String).includes(String(player.currentArea.id));
+    //return (effectiveMin <= effectiveMax) && enemy.allowedAreas.includes(player.currentArea.id);
   });
 
-  // Fallback: If no enemy passes the area+level filter, fallback to level-only check.
+  // Fallback: If no enemy passes the area+level filter, fallback to area-only check (not level-only)
   if (validEnemies.length === 0) {
-    validEnemies = window.gameData.enemies.filter(enemy => {
-      const desiredMin = player.level - 1;
-      const desiredMax = player.level + 2;
-      const effectiveMin = Math.max(enemy.minLevel, desiredMin);
-      const effectiveMax = Math.min(enemy.maxLevel, desiredMax);
-      return effectiveMin <= effectiveMax;
-    });
+    validEnemies = window.gameData.enemies.filter(enemy =>
+    enemy.allowedAreas.map(String).includes(String(player.currentArea.id))
+    );
   }
 
   // Make sure to declare a variable for the selected enemy.
