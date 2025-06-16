@@ -42,9 +42,10 @@ Place the folders and files in your desired web-server directory. Navigate to th
 
 Major Updates:
 - 06/15/25 <br/>
-&emsp; Added Magic Resistance stat and capped resist at 75%. <br/>
-&emsp; Added Crit chance for players, pets, bosses, and regular enemies. <br/>
-&emsp; Changed equipment to use rarity and item modifiers along with item level to create item score to help determine if an item should be replaced.
+&emsp; - Added Magic Resistance stat and capped resist at 75%. <br/>
+&emsp; - Added Crit chance for players, pets, bosses, and regular enemies. <br/>
+&emsp; - Changed equipment to use rarity and item modifiers along with item level <br/> 
+&emsp; &nbsp;&nbsp;to create item score to help determine if an item should be replaced.
 
 ## License
 
