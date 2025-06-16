@@ -77,6 +77,7 @@ export const enemyCombatConstants = {
 };
 
 export const bossCombatConstants = {
+  playerXPLoss: 0.9, // Player loses 10% of their XP after dying to a boss - player.xp = Math.floor(player.xp * 0.9).
   playerHPRecovery: 0.9, // Player recovers 90% of their health after dying to boss.
   bossEncChance: 0.02 , // 2% chance for a boss encounter to occur.
   bossDRChance: 0.1, // 10% chance for a boss to reduce damage taken.

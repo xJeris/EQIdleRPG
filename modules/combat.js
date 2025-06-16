@@ -369,6 +369,7 @@ async function simulateBossBattle() {
   } else {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentBoss.name + ".</span>");
     player.currentHP = 0;
+    player.xp = Math.floor(player.xp * bossCombatConstants.playerXPLoss);
   }
 
   updateUI(player, player.equipment, getEquipmentBonuses());
