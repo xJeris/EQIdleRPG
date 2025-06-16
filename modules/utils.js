@@ -25,3 +25,11 @@ export function randomizeDamage(baseDamage, range = dmgModifiers.dmgRange) {
   const max = baseDamage + range;
   return Math.max(1, Math.floor(Math.random() * (max - min + 1)) + min);
 }
+
+export function getEffectiveMR(target) {
+  if (target === player) {
+    const bonuses = getEquipmentBonuses(player.equipment);
+    return player.MR + bonuses.bonusMR;
+  }
+  return target.MR || 0;
+}

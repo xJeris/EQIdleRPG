@@ -97,6 +97,5 @@ export function updateUI(player, equipment, equipmentBonuses) {
     "Name: " + player.name + " | Race: " + player.race + " | Class: " + player.class;
   document.getElementById("currentArea").textContent =
     "Area: " + (player.currentArea ? player.currentArea.name : "Unknown");
-  updateStatsUI(player, equipmentBonuses);
   updateEquipmentUI(equipment);
 }

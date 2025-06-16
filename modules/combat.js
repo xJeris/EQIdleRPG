@@ -3,7 +3,7 @@
  * Contains combat simulation functions, XP/level mechanics, and save/load progress.
  **********************************************************************************/
 
-import { delay, randomizeDamage } from "./utils.js";
+import { delay, randomizeDamage, getEffectiveMR } from "./utils.js";
 import { appendLog, updateUI, updateStatsUI } from "./ui.js";
 import { equipIfBetter, getEquipmentBonuses, assignPetToPlayer } from "./equipment.js";
 import { player } from "./character.js";
@@ -103,12 +103,12 @@ export function getAvailableSpellsForClass(cls, level) {
 }
 
 // Calculate spell damage based on player.MAG and target's MR.
-export function calculateSpellDamage(spell, player, target) {
+export function calculateSpellDamage(spell, player, target, effectiveMAG) {
   const scalingFactor = 0.4;
-  const mrFactor = target.MR || 0;
+  const mrFactor = getEffectiveMR(target);
   // Each point of MR reduces spell damage by 1%, capped at 75%
   const maxReduction = Math.min(mrFactor, 75);
-  const baseDamage = spell.baseDamage + Math.floor(player.MAG * scalingFactor);
+  const baseDamage = spell.baseDamage + Math.floor(effectiveMAG * scalingFactor);
   const finalDamage = Math.floor(baseDamage * (1 - maxReduction / 100));
   return Math.max(finalDamage, 1);
 }
@@ -271,7 +271,7 @@ async function simulateBossBattle() {
       if (availableSpells.length > 0 && Math.random() < chance / 100) {
         // Cast a spell instead of a physical attack.
         let chosenSpell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
-        let damageDealt = calculateSpellDamage(chosenSpell, player, currentBoss);
+        let damageDealt = calculateSpellDamage(chosenSpell, player, currentBoss, effectiveMAG);
 
         // Check for a crit on player's spell attack.
         if (Math.random() < bossCombatConstants.playerSpellCritChance) {
@@ -287,7 +287,7 @@ async function simulateBossBattle() {
         if (currentBoss.HP <= 0) break;
       
         // Enemy counterattack remains physical.
-        let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossCombatConstants.bossDRFactor / (bossCombatConstants.bossDRFactor + player.DEF))), 1);
+        let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossCombatConstants.bossDRFactor / (bossCombatConstants.bossDRFactor + effectiveDEF))), 1);
     
         // Check for a crit on bosses physical attack.
         if (Math.random() < bossCombatConstants.bossPhysicalCritChance) {
@@ -308,7 +308,7 @@ async function simulateBossBattle() {
       // ---- End Spell Casting Branch ----
     
       // Otherwise, use physical attack.
-      let playerDamage = Math.max(Math.floor(player.ATK * (bossCombatConstants.playerDRFactor / (bossCombatConstants.playerDRFactor + currentBoss.DEF))), 1);
+      let playerDamage = Math.max(Math.floor(effectiveATK * (bossCombatConstants.playerDRFactor / (bossCombatConstants.playerDRFactor + currentBoss.DEF))), 1);
 
       // Check for a crit on player's physical attack.
       if (Math.random() < bossCombatConstants.playerPhysicalCritChance) {
@@ -323,7 +323,7 @@ async function simulateBossBattle() {
 
       if (currentBoss.HP <= 0) break;
 
-      let bossDamage = Math.max(Math.floor(currentBoss.ATK * (bossCombatConstants.bossDRFactor / (bossCombatConstants.bossDRFactor + player.DEF))), 1);
+      let bossDamage = Math.max(Math.floor(currentBoss.ATK * (bossCombatConstants.bossDRFactor / (bossCombatConstants.bossDRFactor + effectiveDEF))), 1);
       
       // Check for a crit on bosses physical attack.
       if (Math.random() < bossCombatConstants.bossPhysicalCritChance) {
@@ -501,6 +501,13 @@ async function simulateCombat() {
     assignPetToPlayer();
   }
 
+  // Get equipment bonuses for the player.
+  const equipmentBonuses = getEquipmentBonuses(player.equipment);
+  const effectiveATK = player.ATK + equipmentBonuses.bonusATK;
+  const effectiveDEF = player.DEF + equipmentBonuses.bonusDEF;
+  const effectiveMAG = player.MAG + equipmentBonuses.bonusMAG;
+  const effectiveMR = player.MR + equipmentBonuses.bonusMR;
+
   let activeCombatant;
   if (petAllowed && player.pet && player.pet.currentHP > 0) {
     activeCombatant = player.pet;
@@ -528,7 +535,7 @@ async function simulateCombat() {
       if (availableSpells.length > 0 && Math.random() < chance / 100) {
         // Cast a spell instead of a physical attack.
         let chosenSpell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
-        let damageDealt = calculateSpellDamage(chosenSpell, player, currentEnemy);
+        let damageDealt = calculateSpellDamage(chosenSpell, player, currentEnemy, effectiveMAG);
 
         // Check for a crit on player's spell attack.
         if (Math.random() < enemyCombatConstants.playerSpellCritChance) {
@@ -543,7 +550,7 @@ async function simulateCombat() {
         if (currentEnemy.HP <= 0) break;
         
         // Enemy counterattack remains physical.
-        let damageReceived = Math.max(Math.floor(currentEnemy.ATK * (enemyCombatConstants.enemyDRFactor / (enemyCombatConstants.enemyDRFactor + player.DEF))), 1);
+        let damageReceived = Math.max(Math.floor(currentEnemy.ATK * (enemyCombatConstants.enemyDRFactor / (enemyCombatConstants.enemyDRFactor + effectiveDEF))), 1);
 
         // Check for a crit on enemy's physical attack.
         if (Math.random() < enemyCombatConstants.enemyPhysicalCritChance) {
@@ -561,7 +568,7 @@ async function simulateCombat() {
         continue; // Proceed to the next loop iteration.
       } else {
         // Otherwise, use physical attack.
-        attackerATK = player.ATK;
+        attackerATK = effectiveATK;
       }
     } else {
       // Pet's turn (we already assume pet uses physical attacks).
@@ -586,7 +593,7 @@ async function simulateCombat() {
     if (currentEnemy.HP <= 0) break;
     
     // Enemy counterattack.
-    let defenderDEF = (activeCombatant === player) ? player.DEF : player.pet.DEF;
+    let defenderDEF = (activeCombatant === player) ? effectiveDEF : player.pet.DEF;
     let damageReceived = Math.max(Math.floor(currentEnemy.ATK * (enemyCombatConstants.enemyDRFactor / (enemyCombatConstants.enemyDRFactor + defenderDEF))), 1);
 
     // Check for a crit on enemy's physical attack.
