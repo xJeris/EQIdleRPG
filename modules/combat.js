@@ -226,6 +226,7 @@ async function simulateBossBattle() {
       // Check for a crit on player's pet physical attack.
       if (Math.random() < bossCombatConstants.playerPhysicalCritChance) {
         damageDealt = Math.floor(damageDealt * bossCombatConstants.playerPhysicalCritMultiplier);
+        console.log("crit dmg before randomization was: " + damageDealt);
         appendLog("<span style='color: orange;'>Your pet land a <strong>Critical Hit</strong>!</span>");
       }
 
@@ -414,14 +415,14 @@ async function simulateCombat() {
     const desiredMax = player.level + 2;
     const effectiveMin = Math.max(enemy.minLevel, desiredMin);
     const effectiveMax = Math.min(enemy.maxLevel, desiredMax, player.currentArea.maxLevel);
-    return (effectiveMin <= effectiveMax) && enemy.allowedAreas.map(String).includes(String(player.currentArea.id));
-    //return (effectiveMin <= effectiveMax) && enemy.allowedAreas.includes(player.currentArea.id);
+    return (effectiveMin <= effectiveMax) && enemy.allowedAreas.some(areaId => areaId == player.currentArea.id); 
   });
 
   // Fallback: If no enemy passes the area+level filter, fallback to area-only check (not level-only)
   if (validEnemies.length === 0) {
+    console.warn("No valid enemies for this area!");
     validEnemies = window.gameData.enemies.filter(enemy =>
-    enemy.allowedAreas.map(String).includes(String(player.currentArea.id))
+    enemy.allowedAreas.some(areaId => areaId == player.currentArea.id)
     );
   }
 
@@ -429,8 +430,10 @@ async function simulateCombat() {
   let selectedEnemy = validEnemies[Math.floor(Math.random() * validEnemies.length)];
 
   // Determine effective min and max enemy levels.
-  const desiredMin = player.level - 1;
-  const desiredMax = player.level + 2;
+  console.log("Selected enemy:", selectedEnemy, "minLevel:", selectedEnemy.minLevel, "maxLevel:", selectedEnemy.maxLevel);
+
+  const desiredMin = Number(player.level - 1);
+  const desiredMax = Number(player.level + 2);
   let effectiveMin = Math.max(selectedEnemy.minLevel, desiredMin);
   let effectiveMax = Math.min(selectedEnemy.maxLevel, desiredMax, player.currentArea.maxLevel);
 
@@ -580,6 +583,7 @@ async function simulateCombat() {
     // Check for a crit in player's physical attack.
     if (Math.random() < enemyCombatConstants.playerPhysicalCritChance) {
       damageDealt = Math.floor(damageDealt * enemyCombatConstants.playerPhysicalCritMultiplier);
+      console.log("crit dmg before randomization was: " + damageDealt);
       appendLog("<span style='color: orange;'>You land a <strong>Critical Hit</strong>!</span>");
     }
     
@@ -597,6 +601,7 @@ async function simulateCombat() {
     // Check for a crit on enemy's physical attack.
     if (Math.random() < enemyCombatConstants.enemyPhysicalCritChance) {
       damageReceived = Math.floor(damageReceived * enemyCombatConstants.enemyPhysicalCritMultiplier);
+      console.log("crit dmg before randomization was: " + damageReceived);
       appendLog("<span style='color: orange;'>The Enemy lands a <strong>Critical Hit</strong>!</span>");
     }
 

@@ -63,7 +63,6 @@
       <area id="1"/>
     </areas>
   </enemy>
-  </enemy>
   <enemy id="11" name="Pox" minLevel="9" maxLevel="9" HP="119" ATK="48" DEF="6" MR="0" xp="350">
     <areas>
       <area id="1"/>
