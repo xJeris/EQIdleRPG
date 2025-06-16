@@ -25,7 +25,6 @@ An idle RPG based on the EverQuest universe. Written in Javascript, CSS and HTML
 
 Possible future enhancements that could be made.
 
-- **Split JS file:** Split up the JS code into multiple files for easier reading and updating.
 - **Offline Progress:** Allow for progress to be made offline.
 - **Pets Casting:** Allow pets to cast spells. They already have the MAG stat in their XML to support this.
 - **Songs:** Allow bards to play songs.

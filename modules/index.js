@@ -3,11 +3,11 @@
  * Entry point for the Idle RPG application.
  **********************************************************************************/
 
-import { loadXMLData } from "./modules/dataLoader.js";
-import { appendLog } from "./modules/ui.js";
-import { handleCharacterCreation } from "./modules/character.js";
-import { loadProgress } from "./modules/combat.js";
-import { player } from "./modules/character.js";
+import { loadXMLData } from "./dataLoader.js";
+import { appendLog } from "./ui.js";
+import { handleCharacterCreation } from "./character.js";
+import { loadProgress } from "./combat.js";
+import { player } from "./character.js";
 
 // When the DOM is loaded, initialize the game.
 window.addEventListener("DOMContentLoaded", () => {
