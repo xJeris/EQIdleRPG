@@ -64,6 +64,8 @@ export const raceClassRestrictions = {
 export const classesWithPets = ["Magician", "Necromancer", "Beastlord"];
 
 export const enemyCombatConstants = {
+  playerXPLoss: 0.9, // Player loses 10% of their XP after dying in combat - player.xp = Math.floor(player.xp * 0.9).
+  equipDropChance: 0.1, // 10% chance for an enemy to drop equipment.
   playerDRFactor: 50,  // Used to reduce damage taken by enemy from player/pet gradually. 50 is about half.
   enemyDRFactor: 50,  // Used to reduce damage taken by player/pet from enemy gradually. 50 is about half.
   playerPhysicalCritChance: 0.05, // 5% chance for player to deal crit damage on physical attacks.
@@ -75,6 +77,7 @@ export const enemyCombatConstants = {
 };
 
 export const bossCombatConstants = {
+  playerHPRecovery: 0.9, // Player recovers 90% of their health after dying to boss.
   bossEncChance: 0.02 , // 2% chance for a boss encounter to occur.
   bossDRChance: 0.1, // 10% chance for a boss to reduce damage taken.
   playerDRFactor: 50,  // Used to reduce damage taken by boss from player/pet gradually. 50 is about half.

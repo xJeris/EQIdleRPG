@@ -385,7 +385,7 @@ async function simulateBossBattle() {
     await delay(1000);
     }
 
-    player.currentHP = Math.floor(player.HP * 0.9);
+    player.currentHP = Math.floor(player.HP * bossCombatConstants.playerHPRecovery);
     updateStatsUI(player, getEquipmentBonuses(player.equipment));
 
     appendLog("<span style='color: blue;'>You prepare for the next battle.</span>");
@@ -635,16 +635,16 @@ async function simulateCombat() {
   } else if (petAllowed && player.petDied && player.currentHP <= 0) {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
     player.currentHP = player.HP;
-    player.xp = Math.floor(player.xp * 0.9);
+    player.xp = Math.floor(player.xp * enemyCombatConstants.playerXPLoss);
     assignPetToPlayer();
   } else {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
     player.currentHP = player.HP;
-    player.xp = Math.floor(player.xp * 0.9);
+    player.xp = Math.floor(player.xp * enemyCombatConstants.playerXPLoss);
   }
 
   // Equipment drop chance.
-  if (Math.random() < 0.1) { // 10% chance for an item drop
+  if (Math.random() < enemyCombatConstants.equipDropChance) { // 10% chance for an item drop
     let validItems = window.gameData.items.filter(item =>
       item.level <= player.currentArea.maxItemLevel &&
       parseInt(item.id) <= 4999   // Items above 5000 are reserved for boss loot
