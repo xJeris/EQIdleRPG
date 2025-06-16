@@ -375,6 +375,7 @@ async function simulateBossBattle() {
     if (petAllowed && player.petDied) {
       appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
       assignPetToPlayer();
+      updateStatsUI(player, getEquipmentBonuses(player.equipment)); // Update pet stat display
     }
   } else {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentBoss.name + ".</span>");
@@ -648,6 +649,7 @@ async function simulateCombat() {
     if (petAllowed && player.petDied) {
       appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
       assignPetToPlayer();
+      updateStatsUI(player, getEquipmentBonuses(player.equipment)); // Update pet stat display
     }
   } else if (petAllowed && player.petDied && player.currentHP <= 0) {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
