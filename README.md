@@ -45,7 +45,7 @@ Major Updates:
 &emsp; - Added Magic Resistance stat and capped resist at 75%. <br/>
 &emsp; - Added Crit chance for players, pets, bosses, and regular enemies. <br/>
 &emsp; - Changed equipment to use rarity and item modifiers along with item level <br/> 
-&emsp; &nbsp;&nbsp;to create item score to help determine if an item should be replaced.
+&emsp; &nbsp;&nbsp;&nbsp;to create item score to help determine if an item should be replaced.
 
 ## License
 
