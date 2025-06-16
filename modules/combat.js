@@ -82,7 +82,6 @@ export function loadProgress() {
 
 // Determine which area is appropriate based on the player's level.
 export function findAreaForLevel(level) {
-  console.log("Finding area for level:", level);
   if (window.gameData && window.gameData.areas) {
     for (let area of window.gameData.areas) {
       if (level >= area.recommendedLevel && level <= area.maxLevel) {
@@ -173,7 +172,6 @@ export function addXP(amount) {
 
 // Simulate a boss battle
 async function simulateBossBattle() {
-  console.log("Starting boss battle simulation...");
   // Filter bosses available in the player's current area.
   let validBosses = window.gameData.bosses.filter(boss => boss.area === player.currentArea.id);
   
@@ -203,7 +201,6 @@ async function simulateBossBattle() {
   if (petAllowed && !player.pet) {
     // Attempt to assign a pet before combat begins.
     assignPetToPlayer();
-    console.log("Pet at start of boss combat:", player.pet);
   }
 
   let activeCombatant;
@@ -226,7 +223,6 @@ async function simulateBossBattle() {
       // Check for a crit on player's pet physical attack.
       if (Math.random() < bossCombatConstants.playerPhysicalCritChance) {
         damageDealt = Math.floor(damageDealt * bossCombatConstants.playerPhysicalCritMultiplier);
-        console.log("crit dmg before randomization was: " + damageDealt);
         appendLog("<span style='color: orange;'>Your pet land a <strong>Critical Hit</strong>!</span>");
       }
 
@@ -408,7 +404,6 @@ async function simulateBossBattle() {
 
 // Automated Combat Simulation (async version) with pet mechanics
 async function simulateCombat() {
-  console.log("Starting combat simulation...");
   // Filter enemies based on the desired range: [player.level - 1, player.level + 2]
   let validEnemies = window.gameData.enemies.filter(enemy => {
     const desiredMin = player.level - 1;
@@ -430,8 +425,6 @@ async function simulateCombat() {
   let selectedEnemy = validEnemies[Math.floor(Math.random() * validEnemies.length)];
 
   // Determine effective min and max enemy levels.
-  console.log("Selected enemy:", selectedEnemy, "minLevel:", selectedEnemy.minLevel, "maxLevel:", selectedEnemy.maxLevel);
-
   const desiredMin = Number(player.level - 1);
   const desiredMax = Number(player.level + 2);
   let effectiveMin = Math.max(selectedEnemy.minLevel, desiredMin);
@@ -506,7 +499,6 @@ async function simulateCombat() {
   if (petAllowed && !player.pet) {
     // Attempt to assign a pet before combat begins.
     assignPetToPlayer();
-    console.log("Pet at start of combat:", player.pet);
   }
 
   let activeCombatant;
@@ -583,7 +575,6 @@ async function simulateCombat() {
     // Check for a crit in player's physical attack.
     if (Math.random() < enemyCombatConstants.playerPhysicalCritChance) {
       damageDealt = Math.floor(damageDealt * enemyCombatConstants.playerPhysicalCritMultiplier);
-      console.log("crit dmg before randomization was: " + damageDealt);
       appendLog("<span style='color: orange;'>You land a <strong>Critical Hit</strong>!</span>");
     }
     
@@ -601,7 +592,6 @@ async function simulateCombat() {
     // Check for a crit on enemy's physical attack.
     if (Math.random() < enemyCombatConstants.enemyPhysicalCritChance) {
       damageReceived = Math.floor(damageReceived * enemyCombatConstants.enemyPhysicalCritMultiplier);
-      console.log("crit dmg before randomization was: " + damageReceived);
       appendLog("<span style='color: orange;'>The Enemy lands a <strong>Critical Hit</strong>!</span>");
     }
 
@@ -635,7 +625,6 @@ async function simulateCombat() {
   if (currentEnemy.HP <= 0) {
     appendLog("<span class='winOutcome'>You defeated " + currentEnemy.name + "!</span>");
     addXP(currentEnemy.xp);
-    console.log("Player stats after combat:", player);
 
     // Heal the player fully between fights.
     player.currentHP = player.HP;
@@ -680,7 +669,6 @@ async function simulateCombat() {
 // Game Loop
 export async function startGameLoop() {
   gameRunning = true;
-  console.log("Game loop started!");
   while (gameRunning) {
     // 2% chance to encounter a boss (0.02 probability)
     if (Math.random() < bossCombatConstants.bossEncChance) {

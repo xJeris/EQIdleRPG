@@ -180,12 +180,10 @@ export function handleCharacterCreation(e) {
   
   // Set initial area.
   player.currentArea = findAreaForLevel(player.level);
-  console.log("Initial area set to:", player.currentArea.name);
   updateUI(player, player.equipment, {});
   saveProgress();
   document.getElementById("characterCreation").style.display = "none";
   document.getElementById("gameUI").style.display = "flex";
   appendLog("Welcome, " + player.name + "! Your adventure begins in " + player.currentArea.name + ".");
   startGameLoop();
-  console.log("Game loop started.");
 }

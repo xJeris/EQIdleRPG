@@ -95,8 +95,6 @@ export function loadXMLData() {
         mag: parseInt(pet.getAttribute("mag")),
         mr: parseInt(pet.getAttribute("mr"))
       }));
-      
-      //console.log("All enemies and their allowedAreas:", enemies.map(e => ({ name: e.name, allowedAreas: e.allowedAreas })));
 
       return { areas, enemies, items, bosses, spells, pets };
     })

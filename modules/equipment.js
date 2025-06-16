@@ -39,9 +39,6 @@ export function getEquipmentBonuses(equipment) {
 }
 
 export function equipIfBetter(newItem, slot, equipment) {
-  console.log("Trying to equip:", newItem.name, "in slot:", slot);
-  console.log("Available equipment slots:", Object.keys(player.equipment));
-
   const currentItem = equipment[slot];
   const newScore = calculateEquipmentScore(newItem);
   const currentScore = currentItem ? calculateEquipmentScore(currentItem) : 0;
@@ -53,18 +50,11 @@ export function equipIfBetter(newItem, slot, equipment) {
 }
 
 export function assignPetToPlayer() {
-  console.log("starting assignPetToPlayer function");
-  console.log("player.class:", player.class, "player.level:", player.level);
-
   if (["Magician", "Necromancer", "Beastlord"].includes(player.class)) {
-    console.log("player class is eligible for a pet.");
-
     if (window.gameData && window.gameData.pets) {
-      console.log("window.gameData.pets loaded:", window.gameData.pets.length);
 
       // Show all pets for this class. for DEBUGGING
       const allClassPets = window.gameData.pets.filter(pet => pet.class === player.class);
-      console.log("All pets for this class:", allClassPets);
 
       // Now filter pets by level
       let possiblePets = window.gameData.pets.filter(pet =>
@@ -72,7 +62,6 @@ export function assignPetToPlayer() {
         pet.class && pet.class === player.class &&
         player.level >= pet.level
       );
-      console.log("Possible pets for player:", possiblePets);
 
       if (possiblePets.length > 0) {
         // Assign the highest-level available pet
@@ -90,7 +79,7 @@ export function assignPetToPlayer() {
           MAG: newPet.mag,
           MR: newPet.mr
         };
-        console.log("Assigned pet:", player.pet);
+
         appendLog("Your pet " + player.pet.name + " (Level " + player.pet.level + ") joins you!");
       } else {
         player.pet = null;
@@ -101,7 +90,6 @@ export function assignPetToPlayer() {
       player.pet = null;
     }
   } else {
-    console.log("player class is not eligible for a pet.");
     player.pet = null;
   }
 }
