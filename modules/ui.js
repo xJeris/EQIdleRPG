@@ -55,11 +55,11 @@ export function updateStatsUI(player, equipmentBonuses = { bonusATK: 0, bonusDEF
   const stats = {
     "Level": player.level,
     "XP": player.xp + " / " + player.xpNeeded,
-    "HP": player.currentHP + " / " + player.HP,
-    "ATK": player.ATK + " (+" + equipmentBonuses.bonusATK + ") = " + effectiveATK,
-    "DEF": player.DEF + " (+" + equipmentBonuses.bonusDEF + ") = " + effectiveDEF,
-    "MAG": player.MAG + " (+" + equipmentBonuses.bonusMAG + ") = " + effectiveMAG,
-    "MR": player.MR + " (+" + equipmentBonuses.bonusMR + ") = " + effectiveMR
+    "HP": (player.currentHP || 0) + " / " + (player.HP || 0),
+    "ATK": (player.ATK || 0) + " (+" + (equipmentBonuses.bonusATK || 0) + ") = " + (effectiveATK || 0),
+    "DEF": (player.DEF || 0) + " (+" + (equipmentBonuses.bonusDEF || 0) + ") = " + (effectiveDEF || 0),
+    "MAG": (player.MAG || 0) + " (+" + (equipmentBonuses.bonusMAG || 0) + ") = " + (effectiveMAG || 0),
+    "MR": (player.MR || 0) + " (+" + (equipmentBonuses.bonusMR || 0) + ") = " + (effectiveMR || 0)
   };
 
   // Iterate over the stats object, creating an <li> for each stat.
