@@ -75,7 +75,7 @@ export const enemyCombatConstants = {
 };
 
 export const bossCombatConstants = {
-  bossEncChance: 0.99 , // 2% chance for a boss encounter to occur.
+  bossEncChance: 0.02 , // 2% chance for a boss encounter to occur.
   bossDRChance: 0.1, // 10% chance for a boss to reduce damage taken.
   playerDRFactor: 50,  // Used to reduce damage taken by boss from player/pet gradually. 50 is about half.
   bossDRFactor: 50,  // Used to reduce damage taken by player/pet from boss gradually. 50 is about half.
