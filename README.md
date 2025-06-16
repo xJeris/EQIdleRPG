@@ -41,6 +41,10 @@ Place the folders and files in your desired web-server directory. Navigate to th
 ## Changelog
 
 Major Updates:
+- 06/16/25 <br/>
+&emsp; - Modularized the Javascript code. Moving code blocks into separate files based on function. <br/>
+
+<br/>
 - 06/15/25 <br/>
 &emsp; - Added Magic Resistance stat and capped resist at 75%. <br/>
 &emsp; - Added Crit chance for players, pets, bosses, and regular enemies. <br/>
