@@ -50,6 +50,7 @@ Major Updates:
 &emsp; - Added Crit chance for players, pets, bosses, and regular enemies. This includes spell crits! <br/>
 &emsp; - Changed equipment to use rarity and item modifiers along with item level <br/> 
 &emsp; &nbsp;&nbsp;&nbsp;to create item score to help determine if an item should be replaced.<br/>
+&emsp; - Added con (/consider) system for enemies. <br/>
 
 ## License
 
