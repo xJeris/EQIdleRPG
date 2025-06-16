@@ -90,3 +90,7 @@ export const bossCombatConstants = {
   bossPhysicalCritChance: 0.05, // 3% chance for enemy to deal crit damage on physical attacks.
   bossPhysicalCritMultiplier: 2.0 // Multiplier for enemy physical critical hits.
 };
+
+export const dmgModifiers = {
+  dmgRange: 5 // Range for randomizing damage output
+}

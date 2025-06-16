@@ -3,7 +3,7 @@
  * Contains combat simulation functions, XP/level mechanics, and save/load progress.
  **********************************************************************************/
 
-import { delay } from "./utils.js";
+import { delay, randomizeDamage } from "./utils.js";
 import { appendLog, updateUI, updateStatsUI } from "./ui.js";
 import { equipIfBetter, getEquipmentBonuses, assignPetToPlayer } from "./equipment.js";
 import { player } from "./character.js";
@@ -221,7 +221,7 @@ async function simulateBossBattle() {
   // **Phase 1: Pet Combat (if a pet is available)**
   if (petAllowed) {
     while (currentBoss.HP > 0 && player.pet && player.pet.currentHP > 0) {
-      let damageDealt = Math.max(Math.floor(player.pet.ATK * (bossCombatConstants.playerDRFactor / (bossCombatConstants.playerDRFactor + currentBoss.DEF))), 1);
+      let damageDealt = Math.max(Math.floor(player.pet.ATK * (bossCombatConstants.playerDRFactor / (bossCombatConstants.playerDRFactor + currentBoss.DEF))), 1); 
 
       // Check for a crit on player's pet physical attack.
       if (Math.random() < bossCombatConstants.playerPhysicalCritChance) {
@@ -229,6 +229,7 @@ async function simulateBossBattle() {
         appendLog("<span style='color: orange;'>Your pet land a <strong>Critical Hit</strong>!</span>");
       }
 
+      damageDealt = randomizeDamage(damageDealt);
       currentBoss.HP -= damageDealt;
       appendLog(player.pet.name + " attacks, dealing " + damageDealt + " damage! Boss HP: " + currentBoss.HP);
       await delay(1000);
@@ -243,6 +244,7 @@ async function simulateBossBattle() {
         appendLog("<span style='color: orange;'>The boss landed a <strong>Critical Spell Hit</strong>!</span>");
       }
       
+      damageReceived = randomizeDamage(damageReceived);
       player.pet.currentHP -= damageReceived;
       appendLog(currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.currentHP);
       await delay(1000);
@@ -280,6 +282,7 @@ async function simulateBossBattle() {
           appendLog("<span style='color: orange;'>You land a <strong>Critical Spell Hit</strong>!</span>");
         }
 
+        damageDealt = randomizeDamage(damageDealt);
         currentBoss.HP -= damageDealt;
         appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Boss HP: " + currentBoss.HP);
         await delay(1000);
@@ -295,6 +298,7 @@ async function simulateBossBattle() {
           appendLog("<span style='color: orange;'>The boss landed a <strong>Critical Hit</strong>!</span>");
         }
 
+        damageReceived = randomizeDamage(damageReceived);
         player.currentHP -= damageReceived;
         appendLog(currentBoss.name + " counterattacks for " + damageReceived + " damage. Your HP: " + player.currentHP);
         await delay(1000);
@@ -315,6 +319,7 @@ async function simulateBossBattle() {
         appendLog("<span style='color: orange;'>You land a <strong>Critical Hit</strong>!</span>");
       }
 
+      playerDamage = randomizeDamage(playerDamage);
       currentBoss.HP -= playerDamage;
       appendLog("You attack " + currentBoss.name + " dealing " + playerDamage + " damage! Boss HP: " + currentBoss.HP);
       await delay(1000);
@@ -329,6 +334,7 @@ async function simulateBossBattle() {
         appendLog("<span style='color: orange;'>The boss landed a <strong>Critical Hit</strong>!</span>");
       }
       
+      bossDamage = randomizeDamage(bossDamage);
       player.currentHP -= bossDamage;
       appendLog(currentBoss.name + " attacks for " + bossDamage + " damage. Your HP: " + player.currentHP);
       await delay(1000);
@@ -535,6 +541,7 @@ async function simulateCombat() {
           appendLog("<span style='color: orange;'>You land a <strong>Critical Spell Hit</strong>!</span>");
         }
 
+        damageDealt = randomizeDamage(damageDealt);
         currentEnemy.HP -= damageDealt;
         appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Enemy HP: " + currentEnemy.HP);
         await delay(1000);
@@ -549,6 +556,7 @@ async function simulateCombat() {
           appendLog("<span style='color: orange;'>The Enemy lands a <strong>Critical Hit</strong>!</span>");
         }
 
+        damageReceived = randomizeDamage(damageReceived);
         player.currentHP -= damageReceived;
         currentHealth = player.currentHP;
         appendLog(currentEnemy.name + " counterattacks for " + damageReceived + " damage. Your HP: " + currentHealth);
@@ -575,6 +583,7 @@ async function simulateCombat() {
       appendLog("<span style='color: orange;'>You land a <strong>Critical Hit</strong>!</span>");
     }
     
+    damageDealt = randomizeDamage(damageDealt);
     currentEnemy.HP -= damageDealt;
     appendLog(attackerName + " attacks, dealing " + damageDealt + " damage! Enemy HP: " + currentEnemy.HP);
     await delay(1000);
@@ -592,9 +601,11 @@ async function simulateCombat() {
     }
 
     if (activeCombatant === player) {
+      damageReceived = randomizeDamage(damageReceived);
       player.currentHP -= damageReceived;
       currentHealth = player.currentHP;
     } else {
+      damageReceived = randomizeDamage(damageReceived);
       player.pet.currentHP -= damageReceived;
       currentHealth = player.pet.currentHP;
     }

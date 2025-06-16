@@ -3,6 +3,8 @@
  * Contains helper functions.
  ***********************************************************************************/
 
+import { dmgModifiers } from "./constants.js"; 
+
 export function parseModifiers(str) {
   if (!str) return {};
   let mods = {};
@@ -16,4 +18,10 @@ export function parseModifiers(str) {
 
 export function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function randomizeDamage(baseDamage, range = dmgModifiers.dmgRange) {
+  const min = Math.max(1, baseDamage - range);
+  const max = baseDamage + range;
+  return Math.max(1, Math.floor(Math.random() * (max - min + 1)) + min);
 }
