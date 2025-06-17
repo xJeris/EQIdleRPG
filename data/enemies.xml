@@ -35,7 +35,7 @@
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="7" name="a Gloomingdeep captain" minLevel="7" maxLevel="141" HP="96" ATK="20" DEF="19" MR="0" xp="400">
+  <enemy id="7" name="a Gloomingdeep captain" minLevel="7" maxLevel="9" HP="141" ATK="20" DEF="19" MR="0" xp="400">
     <areas>
       <area id="1"/>
     </areas>
@@ -157,7 +157,7 @@
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="31" name="a gnoll guardsman" minLevel="5" maxLevel="126" HP="77" ATK="16" DEF="15" MR="0" xp="300">
+  <enemy id="31" name="a gnoll guardsman" minLevel="5" maxLevel="7" HP="126" ATK="16" DEF="15" MR="0" xp="300">
     <areas>
       <area id="3"/>
     </areas>

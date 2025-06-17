@@ -51,10 +51,11 @@ export function equipIfBetter(newItem, slot, equipment) {
 
 export function assignPetToPlayer() {
   if (["Magician", "Necromancer", "Beastlord"].includes(player.class)) {
+    console.log("Assigning pet to player:", player.name, "Class:", player.class, "Level:", player.level);
     if (window.gameData && window.gameData.pets) {
 
       // Show all pets for this class. for DEBUGGING
-      const allClassPets = window.gameData.pets.filter(pet => pet.class === player.class);
+      //const allClassPets = window.gameData.pets.filter(pet => pet.class === player.class);
 
       // Now filter pets by level
       let possiblePets = window.gameData.pets.filter(pet =>

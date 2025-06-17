@@ -110,7 +110,6 @@ export function calculateSpellDamage(spell, player, target, effectiveMAG) {
   const maxReduction = Math.min(mrFactor, 75);
   const baseDamage = spell.baseDamage + Math.floor(effectiveMAG * scalingFactor);
   const finalDamage = Math.floor(baseDamage * (1 - maxReduction / 100));
-    console.log("Spell:", spell.name, "baseDamage:", spell.baseDamage, "effectiveMAG:", effectiveMAG, "mrFactor:", mrFactor, "final:", finalDamage);
   return Math.max(finalDamage, 1);
 }
 
@@ -224,7 +223,20 @@ async function simulateBossBattle() {
 
   // **Phase 1: Pet Combat (if a pet is available)**
   if (petAllowed) {
+
+    let petIterations = 0;
+    const maxPetIterations = 150;
+
     while (currentBoss.HP > 0 && player.pet && player.pet.currentHP > 0) {
+
+      // FAILSAFE for long running combat loops.
+      iteration++;
+      if (iteration > maxIterations) {
+        appendLog("<span style='color: red;'>Combat aborted: too many rounds (possible bug or infinite loop).</span>");
+        console.error("Combat loop exceeded max iterations. Aborting to prevent infinite loop.");
+      break;
+      }
+
       let damageDealt = Math.max(Math.floor(player.pet.ATK * (bossCombatConstants.playerDRFactor / (bossCombatConstants.playerDRFactor + currentBoss.DEF))), 1); 
 
       // Check for a crit on player's pet physical attack.
@@ -271,7 +283,20 @@ async function simulateBossBattle() {
     }
     await delay(1000);
 
+    // FAILSAFE for long running combat loops.
+    let playerIterations = 0;
+    const maxPlayerIterations = 150;
+
     while (currentBoss.HP > 0 && player.currentHP > 0) {
+
+      // FAILSAFE for long running combat loops.
+      playerIterations++;
+      if (playerIterations > maxPlayerIterations) {
+        appendLog("<span style='color: red;'>Boss combat aborted: too many rounds (possible bug or infinite loop).</span>");
+        console.error("Boss combat loop exceeded max iterations. Aborting.");
+      break;
+      }
+
       // ---- Begin Spell Casting Branch ----
       if (!player.spellCooldown || player.spellCooldown <= 0) {
         let availableSpells = getAvailableSpellsForClass(player.class, player.level);
@@ -504,10 +529,6 @@ async function simulateCombat() {
     HP: Math.floor(selectedEnemy.HP * (1.055)),
     ATK: Math.floor(selectedEnemy.ATK * (1.04)),
     DEF: Math.floor(selectedEnemy.DEF * (1.04)),
-
-    //HP: selectedEnemy.HP + (enemyLevel - selectedEnemy.minLevel) * 25, 
-    //ATK: selectedEnemy.ATK + (enemyLevel - selectedEnemy.minLevel) * 5, 
-    //DEF: selectedEnemy.DEF + (enemyLevel - selectedEnemy.minLevel) * 2, 
     MR: selectedEnemy.MR + (enemyLevel - selectedEnemy.minLevel) * 0, // Adds 0 MR per level over mob's base
     xp: selectedEnemy.xp + (enemyLevel - selectedEnemy.minLevel) * 50  // Adds 50 xp per level over mob's base
   };
@@ -553,14 +574,27 @@ async function simulateCombat() {
     }
   }
 
+  // FAILSAFE for long running combat loops.
+  let iteration = 0;
+  const maxIterations = 150; // Adjust as needed
+
   // Main combat loop:
   while (
     currentEnemy.HP > 0 &&
     ((activeCombatant === player && player.currentHP > 0) ||
      (activeCombatant !== player && activeCombatant.HP > 0))
   ) {
+
+    // FAILSAFE for long running combat loops.
+    iteration++;
+    if (iteration > maxIterations) {
+      appendLog("<span style='color: red;'>Combat aborted: too many rounds (possible bug or infinite loop).</span>");
+      console.error("Combat loop exceeded max iterations. Aborting to prevent infinite loop.");
+    break;
+    }
+
     let attackerName, attackerATK, currentHealth;
-  
+
     if (activeCombatant === player) {
       attackerName = player.name;
       // Check if the player is allowed to cast spells.
@@ -607,13 +641,21 @@ async function simulateCombat() {
         
           updateStatsUI(player, getEquipmentBonuses(player.equipment));
           continue; // Proceed to the next loop iteration.
+
         } else {
           // Otherwise, use physical attack.
           attackerATK = effectiveATK;
         }
+      }
     } else {
       // Pet's turn (we already assume pet uses physical attacks).
       attackerName = player.pet.name;
+
+      // Defensive check for pet stats.
+      if (player.pet && (isNaN(player.pet.currentHP) || isNaN(player.pet.ATK))) {
+      console.error("Pet stats are invalid!", player.pet);
+      }
+
       attackerATK = player.pet.ATK;
     }
     
@@ -673,7 +715,6 @@ async function simulateCombat() {
       }
     }
   }
-}
 
   // Determine battle outcome.
   if (currentEnemy.HP <= 0) {
@@ -735,8 +776,8 @@ async function simulateCombat() {
     } else {
     updateUI(player, player.equipment, getEquipmentBonuses());
     saveProgress();
+    }
   }
-}
 
 // Game Loop
 export async function startGameLoop() {
