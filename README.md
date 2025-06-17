@@ -47,7 +47,6 @@ Major Updates:
 &emsp; - Modularized the Javascript code. Moving code blocks into separate files based on function. <br/>
 &emsp; - Added damage range. So player, pet and enemy damage is not static. <br/>
 
-<br/>
 - 06/15/25 <br/>
 &emsp; - Added Magic Resistance stat and capped resist at 75%. <br/>
 &emsp; - Added Crit chance for players, pets, bosses, and regular enemies. This includes spell crits! <br/>
