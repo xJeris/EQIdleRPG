@@ -40,6 +40,9 @@ Place the folders and files in your desired web-server directory. Navigate to th
 ## Changelog
 
 Major Updates:
+- 06/17/25 <br/>
+&emsp; - Added a spell cooldown to high base damage spells to avoid unbalancing encounters. <br/>
+
 - 06/16/25 <br/>
 &emsp; - Modularized the Javascript code. Moving code blocks into separate files based on function. <br/>
 &emsp; - Added damage range. So player, pet and enemy damage is not static. <br/>
