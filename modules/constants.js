@@ -63,6 +63,26 @@ export const raceClassRestrictions = {
 
 export const classesWithPets = ["Magician", "Necromancer", "Beastlord"];
 
+// Player scaling constants for leveling up 2-50
+export const playerScalingSet1 = {
+  hpIncreaseFactor: 1.055,
+  AtkIncreaseFactor: 1.045,
+  DefIncreaseFactor: 1.045,
+  MagIncreaseFactor: 1.045,
+  MrIncreaseFactor: 0.00
+};
+
+// Player scaling constants for leveling up 51-100
+export const playerScalingSet2 = {
+  hpIncreaseFactor: 1.065, 
+  AtkIncreaseFactor: 1.055,
+  DefIncreaseFactor: 1.055,
+  MagIncreaseFactor: 1.055,
+  MrIncreaseFactor: 0.00
+};
+
+export const playerXpScaling = 2.482; // XP scaling factor for leveling up, used to calculate xpNeeded for each level.
+
 export const enemyCombatConstants = {
   playerXPLoss: 0.9, // Player loses 10% of their XP after dying in combat - player.xp = Math.floor(player.xp * 0.9).
   equipDropChance: 0.1, // 10% chance for an enemy to drop equipment.
@@ -92,5 +112,7 @@ export const bossCombatConstants = {
 };
 
 export const dmgModifiers = {
-  dmgRange: 5 // Range for randomizing damage output
+  dmgRange: 5, // Range for randomizing damage output
+  spellCD: 5, // Cooldown for spells in turns
+  spellCDThreshold: 1001 // Spell base damage threshold for spell cooldowns
 }
