@@ -395,7 +395,6 @@ async function simulateBossBattle() {
       // At the end of the player's turn, decrement cooldown if active
       if (player.spellCooldown && player.spellCooldown > 0) {
       player.spellCooldown--;
-      console.log("Spell cooldown:", player.spellCooldown);
       }
     }
   }
@@ -745,7 +744,6 @@ async function simulateCombat() {
     // At the end of the player's turn, decrement cooldown if active
     if (player.spellCooldown && player.spellCooldown > 0) {
       player.spellCooldown--;
-      console.log("Spell cooldown:", player.spellCooldown);
     }
     
     updateStatsUI(player, getEquipmentBonuses(player.equipment));

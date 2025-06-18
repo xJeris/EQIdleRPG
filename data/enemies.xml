@@ -35,7 +35,7 @@
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="7" name="a Gloomingdeep captain" minLevel="7" maxLevel="9" HP="141" ATK="20" DEF="19" MR="0" xp="400">
+  <enemy id="7" name="a Gloomingdeep captain" minLevel="7" maxLevel="9" HP="141" ATK="20" DEF="19" MR="10" xp="400">
     <areas>
       <area id="1"/>
     </areas>
@@ -45,7 +45,7 @@
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="9" name="Slavemaster Ruga" minLevel="8" maxLevel="8" HP="149" ATK="22" DEF="21" MR="0" xp="450">
+  <enemy id="9" name="Slavemaster Ruga" minLevel="8" maxLevel="8" HP="149" ATK="22" DEF="21" MR="15" xp="450">
     <areas>
       <area id="1"/>
     </areas>
@@ -55,7 +55,7 @@
       <area id="1"/>
     </areas>
   </enemy>
-  <enemy id="11" name="Pox" minLevel="9" maxLevel="9" HP="158" ATK="25" DEF="23" MR="0" xp="500">
+  <enemy id="11" name="Pox" minLevel="9" maxLevel="9" HP="158" ATK="25" DEF="23" MR="10" xp="500">
     <areas>
       <area id="1"/>
     </areas>
@@ -111,7 +111,7 @@
       <area id="2"/>
     </areas>
   </enemy>
-  <enemy id="22" name="a froglok ghoul" minLevel="8" maxLevel="10" HP="149" ATK="22" DEF="21" MR="0" xp="450">
+  <enemy id="22" name="a froglok ghoul" minLevel="8" maxLevel="10" HP="149" ATK="22" DEF="21" MR="10" xp="450">
     <areas>
       <area id="2"/>
     </areas>
@@ -182,7 +182,7 @@
       <area id="3"/>
     </areas>
   </enemy>
-  <enemy id="36" name="a gnoll commander" minLevel="14" maxLevel="15" HP="209" ATK="35" DEF="33" MR="0" xp="750">
+  <enemy id="36" name="a gnoll commander" minLevel="14" maxLevel="15" HP="209" ATK="35" DEF="33" MR="15" xp="750">
     <areas>
       <area id="3"/>
     </areas>
@@ -258,7 +258,7 @@
       <area id="4"/>
     </areas>
   </enemy>
-  <enemy id="51" name="a lesser icebone skeleton" minLevel="16" maxLevel="18" HP="234" ATK="39" DEF="37" MR="0" xp="850">
+  <enemy id="51" name="a lesser icebone skeleton" minLevel="16" maxLevel="18" HP="234" ATK="39" DEF="37" MR="15" xp="850">
     <areas>
       <area id="4"/>
     </areas>
