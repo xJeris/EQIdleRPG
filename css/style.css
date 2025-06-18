@@ -56,7 +56,8 @@ body {
   }
   #banner {
     height: 100px;
-    background-color: #333; 
+    background-color: #20252b; 
+    border:#a7a7a7 1px solid;
     color: #fff; 
     font-size: 20pt;
     text-align: left;
