@@ -110,11 +110,10 @@ export function getAvailableSpellsForClass(cls, level) {
 
 // Calculate spell damage based on player.MAG and target's MR.
 export function calculateSpellDamage(spell, player, target, effectiveMAG) {
-  const scalingFactor = 1.3; // Base scaling factor for spell damage. default is 0.4.
   const mrFactor = getEffectiveMR(target);
   // Each point of MR reduces spell damage by 1%, capped at 75%
   const maxReduction = Math.min(mrFactor, 75);
-  const baseDamage = spell.baseDamage + Math.floor(effectiveMAG * scalingFactor);
+  const baseDamage = spell.baseDamage + Math.floor(effectiveMAG * dmgModifiers.spellScaling);
   const finalDamage = Math.floor(baseDamage * (1 - maxReduction / 100));
   return Math.max(finalDamage, 1);
 }
