@@ -522,13 +522,26 @@ async function simulateCombat() {
     }
   }
 
+  // Choose scaling factors based on enemy level
+  let hpScale, atkScale, defScale;
+  if (enemyLevel <= 50) {
+    hpScale = 1.055;
+    atkScale = 1.04;
+    defScale = 1.04;
+  } else {
+    // Higher scaling for higher levels
+    hpScale = 1.065;
+    atkScale = 1.06;
+    defScale = 1.06;
+  }
+
   // Create a scaled copy of the enemy.
   let currentEnemy = {
     name: selectedEnemy.name,
     level: enemyLevel,
-    HP: Math.floor(selectedEnemy.HP * (1.055)),
-    ATK: Math.floor(selectedEnemy.ATK * (1.04)),
-    DEF: Math.floor(selectedEnemy.DEF * (1.04)),
+    HP: Math.floor(selectedEnemy.HP * hpScale),
+    ATK: Math.floor(selectedEnemy.ATK * atkScale),
+    DEF: Math.floor(selectedEnemy.DEF * defScale),
     MR: selectedEnemy.MR + (enemyLevel - selectedEnemy.minLevel) * 0, // Adds 0 MR per level over mob's base
     xp: selectedEnemy.xp + (enemyLevel - selectedEnemy.minLevel) * 50  // Adds 50 xp per level over mob's base
   };
