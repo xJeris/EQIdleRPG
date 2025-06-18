@@ -42,6 +42,7 @@ Place the folders and files in your desired web-server directory. Navigate to th
 Major Updates:
 - 06/18/25 <br/>
 &emsp; - Moved area name below the adventure log, and allowed for optional description flavor text. <br/>
+&emsp; - Added customizable Milestones (achievements). <br/>
 
 - 06/17/25 <br/>
 &emsp; - Added a spell cooldown to high base damage spells to avoid unbalancing encounters. <br/>
