@@ -118,7 +118,7 @@ export function calculateSpellDamage(spell, player, target, effectiveMAG) {
     scaledBase = spell.baseDamage * (player.level / spell.minLevel);
   }
   if (scaledBase >= dmgModifiers.spellCDThreshold) {
-  player.spellCooldown = Math.max(1, Math.ceil(scaledBase / dmgModifiers.spellCD));
+  player.spellCooldown = dmgModifiers.spellCD;
   }
 
   // Each point of MR reduces spell damage by 1%, capped at 75%
@@ -395,6 +395,7 @@ async function simulateBossBattle() {
       // At the end of the player's turn, decrement cooldown if active
       if (player.spellCooldown && player.spellCooldown > 0) {
       player.spellCooldown--;
+      console.log("Spell cooldown:", player.spellCooldown);
       }
     }
   }
@@ -744,6 +745,7 @@ async function simulateCombat() {
     // At the end of the player's turn, decrement cooldown if active
     if (player.spellCooldown && player.spellCooldown > 0) {
       player.spellCooldown--;
+      console.log("Spell cooldown:", player.spellCooldown);
     }
     
     updateStatsUI(player, getEquipmentBonuses(player.equipment));
