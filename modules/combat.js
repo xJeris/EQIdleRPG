@@ -395,6 +395,7 @@ async function simulateBossBattle() {
   if (currentBoss.HP <= 0) {
     appendLog("<span class='winOutcome'>You have defeated " + currentBoss.name + "!</span>");
     addXP(currentBoss.xp);
+    player.bossKills++;
     checkMilestones("bossKill", player.bossKills);
 
     // At the end of fight, reset spell cooldown if it was active.
@@ -750,6 +751,7 @@ async function simulateCombat() {
   if (currentEnemy.HP <= 0) {
     appendLog("<span class='winOutcome'>You defeated " + currentEnemy.name + "!</span>");
     addXP(currentEnemy.xp);
+    player.enemyKills++;
     checkMilestones("kill", player.enemyKills);
 
     // At the end of fight, reset spell cooldown if it was active.
