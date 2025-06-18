@@ -35,7 +35,8 @@ export function loadXMLData() {
         name: area.getAttribute("name"),
         recommendedLevel: parseInt(area.getAttribute("recommendedLevel")),
         maxLevel: parseInt(area.getAttribute("maxLevel")),
-        maxItemLevel: parseInt(area.getAttribute("maxItemLevel"))
+        maxItemLevel: parseInt(area.getAttribute("maxItemLevel")),
+        description: area.getElementsByTagName("description")[0]?.textContent || ""
       }));
       
       const enemies = Array.from(enemiesDoc.getElementsByTagName("enemy")).map(enemy => ({

@@ -5,7 +5,7 @@
 
 import { assignPetToPlayer } from "./equipment.js";
 import { findAreaForLevel, startGameLoop, saveProgress } from "./combat.js";
-import { updateUI, appendLog } from "./ui.js";
+import { updateUI, appendLog, updateAreaInfo } from "./ui.js";
 import { classBaseStats, raceClassRestrictions } from "./constants.js";
 
 export let player = {
@@ -181,6 +181,7 @@ export function handleCharacterCreation(e) {
   // Set initial area.
   player.currentArea = findAreaForLevel(player.level);
   updateUI(player, player.equipment, {});
+  updateAreaInfo(player.currentArea);
   saveProgress();
   document.getElementById("characterCreation").style.display = "none";
   document.getElementById("gameUI").style.display = "flex";

@@ -3,10 +3,18 @@
 <!-- maxLevel -> Highest level encounter for that area. -->
 <!-- maxItemLevel -> Used to avoid getting high stat items at lower levels or in low level areas. -->
 <areas>
-  <area id="1" name="The Mines of Glooming Deep" recommendedLevel="1" maxLevel="9" maxItemLevel="1" />
-  <area id="2" name="Innothule Swamp" recommendedLevel="2" maxLevel="12" maxItemLevel="1" />
-  <area id="3" name="Blackburrow" recommendedLevel="2" maxLevel="15" maxItemLevel="1" />
-  <area id="4" name="Field of Bone" recommendedLevel="2" maxLevel="20" maxItemLevel="1" />
+  <area id="1" name="The Mines of Glooming Deep" recommendedLevel="1" maxLevel="9" maxItemLevel="1">
+    <description>A dark, winding mine filled with kobolds and hidden dangers.</description>
+  </area>
+  <area id="2" name="Innothule Swamp" recommendedLevel="2" maxLevel="12" maxItemLevel="1">
+    <description>A murky swamp teeming with dangerous creatures and hidden treasures.</description>
+  </area>
+  <area id="3" name="Blackburrow" recommendedLevel="2" maxLevel="15" maxItemLevel="1">
+    <description>A dark, underground burrow inhabited by gnolls and other creatures.</description>
+  </area>
+  <area id="4" name="Field of Bone" recommendedLevel="2" maxLevel="20" maxItemLevel="1">
+    <description>A desolate field filled with the bones of ancient creatures, haunted by restless spirits.</description>
+  </area>
   <area id="5" name="Nektulos Forest" recommendedLevel="5" maxLevel="20" maxItemLevel="1" />
   <area id="6" name="Crushbone" recommendedLevel="5" maxLevel="20" maxItemLevel="1" />
   <area id="7" name="Befallen" recommendedLevel="5" maxLevel="20" maxItemLevel="1" />

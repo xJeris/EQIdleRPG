@@ -4,7 +4,7 @@
  **********************************************************************************/
 
 import { delay, randomizeDamage, getEffectiveMR } from "./utils.js";
-import { appendLog, updateUI, updateStatsUI } from "./ui.js";
+import { appendLog, updateUI, updateStatsUI, updateAreaInfo } from "./ui.js";
 import { equipIfBetter, getEquipmentBonuses, assignPetToPlayer } from "./equipment.js";
 import { player } from "./character.js";
 import { spellCastChance, classesWithPets, enemyCombatConstants, bossCombatConstants, dmgModifiers, playerXpScaling, playerScalingSet1, playerScalingSet2 } from "./constants.js";
