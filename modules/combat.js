@@ -117,6 +117,9 @@ export function calculateSpellDamage(spell, player, target, effectiveMAG) {
   if (player.level > spell.minLevel) {
     scaledBase = spell.baseDamage * (player.level / spell.minLevel);
   }
+  if (scaledBase >= dmgModifiers.spellCDThreshold) {
+  player.spellCooldown = Math.max(1, Math.ceil(scaledBase / dmgModifiers.spellCD));
+  }
 
   // Each point of MR reduces spell damage by 1%, capped at 75%
   const maxReduction = Math.min(mrFactor, 75);
@@ -637,7 +640,7 @@ async function simulateCombat() {
       // Check if the player is allowed to cast spells.
       if (!player.spellCooldown || player.spellCooldown <= 0) {
         let availableSpells = getAvailableSpellsForClass(player.class, player.level);
-        let chance = spellCastChance[player.class] || 0;
+        let chance = spellCastChance[player.class] || 0; 
         if (availableSpells.length > 0 && Math.random() < chance / 100) {
           // Cast a spell instead of a physical attack.
           let chosenSpell = availableSpells[Math.floor(Math.random() * availableSpells.length)];
@@ -683,6 +686,9 @@ async function simulateCombat() {
           // Otherwise, use physical attack.
           attackerATK = effectiveATK;
         }
+      } else {
+        // On cooldown, must set attackerATK for physical attack!
+        attackerATK = effectiveATK;
       }
     } else {
       // Pet's turn (we already assume pet uses physical attacks).
