@@ -33,6 +33,9 @@ export let player = {
     "Ring 2": null
   },
   currentArea: null,
+  milestones: [], // Array to track achieved milestones
+  enemyKills:0,
+  bossKills: 0,
   pet: null,
   petDied: false
 };

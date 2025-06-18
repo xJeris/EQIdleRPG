@@ -7,6 +7,7 @@
 import { rarityData } from "./constants.js";
 import { appendLog } from "./ui.js";
 import { player } from "./character.js";
+import { checkMilestones } from "./utils.js";
 
 export function calculateEquipmentScore(item) {
   let baseline = item.level * 10;
@@ -82,6 +83,7 @@ export function assignPetToPlayer() {
         };
 
         appendLog("Your pet " + player.pet.name + " (Level " + player.pet.level + ") joins you!");
+        checkMilestones("pet", 1);
       } else {
         player.pet = null;
         console.warn("No eligible pet found for class", player.class, "and level", player.level);

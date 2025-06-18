@@ -8,6 +8,7 @@ import { appendLog } from "./ui.js";
 import { handleCharacterCreation } from "./character.js";
 import { loadProgress, startGameLoop } from "./combat.js";
 import { player } from "./character.js";
+import { showMilestonesOverlay } from "./ui.js";
 
 // When the DOM is loaded, initialize the game.
 window.addEventListener("DOMContentLoaded", () => {
@@ -44,4 +45,7 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     })
     .catch((error) => console.error("Error loading XML:", error));
+
+  // Attach the milestones button event listener.
+  document.getElementById("milestonesButton").addEventListener("click", showMilestonesOverlay);
 });

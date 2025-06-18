@@ -24,6 +24,20 @@ export function updateAreaInfo(area) {
   }
 }
 
+export function showMilestonesOverlay() {
+  const overlay = document.getElementById("milestonesOverlay");
+  const list = document.getElementById("milestonesList");
+  list.innerHTML = "";
+  window.gameData.milestones.forEach(m => {
+    const li = document.createElement("li");
+    const achieved = player.milestones && player.milestones.includes(m.id);
+    li.textContent = m.name + " - " + m.description;
+    li.style.color = achieved ? "white" : "gray";
+    list.appendChild(li);
+  });
+  overlay.style.display = "block";
+}
+
 export function getItemDisplayName(item) {
   const rarityInfo = rarityData[item.rarity] || { color: "white" };
   return `<span style="color: ${rarityInfo.color};">${item.name}</span>`;

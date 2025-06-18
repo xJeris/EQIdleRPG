@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Achievements / Milestones -->
+<milestones>
+  <milestone id="1" name="First Blood" description="Defeat your first enemy." type="kill" value="1" />
+  <milestone id="2" name="Boss Slayer" description="Defeat your first boss." type="bosskill" value="1" />
+  <milestone id="3" name="Level 10" description="Reach level 10." type="level" value="10" />
+  <milestone id="4" name="Pet Trainer" description="Summon your first pet." type="pet" value="1" />
+</milestones>

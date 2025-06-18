@@ -4,6 +4,8 @@
  ***********************************************************************************/
 
 import { dmgModifiers } from "./constants.js"; 
+import { appendLog } from "./ui.js";
+import { player } from "./character.js";
 
 export function parseModifiers(str) {
   if (!str) return {};
@@ -32,4 +34,17 @@ export function getEffectiveMR(target) {
     return player.MR + bonuses.bonusMR;
   }
   return target.MR || 0;
+}
+
+export function checkMilestones(eventType, value) {
+  window.gameData.milestones.forEach(m => {
+    if (
+      m.type === eventType &&
+      !player.milestones.includes(m.id) &&  // <-- Only if not already achieved
+      value >= m.value
+    ) {
+      player.milestones.push(m.id);
+      appendLog(`<span style="color: gold;">Milestone achieved: ${m.name}!</span>`);
+    }
+  });
 }

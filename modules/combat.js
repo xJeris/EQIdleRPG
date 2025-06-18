@@ -3,7 +3,7 @@
  * Contains combat simulation functions, XP/level mechanics, and save/load progress.
  **********************************************************************************/
 
-import { delay, randomizeDamage, getEffectiveMR } from "./utils.js";
+import { delay, randomizeDamage, getEffectiveMR, checkMilestones } from "./utils.js";
 import { appendLog, updateUI, updateStatsUI, updateAreaInfo } from "./ui.js";
 import { equipIfBetter, getEquipmentBonuses, assignPetToPlayer } from "./equipment.js";
 import { player } from "./character.js";
@@ -37,6 +37,12 @@ export function loadProgress() {
 
     // Assign parsed data into the global player object.
     Object.assign(player, parsedPlayer);
+
+    // Ensure milestones is always an array
+    player.milestones = player.milestones || [];
+    player.enemyKills = player.enemyKills || 0;
+    player.bossKills = player.bossKills || 0;
+
   } catch (err) {
     console.error("Error parsing saved player data:", err);
     return false;
@@ -122,6 +128,7 @@ export function addXP(amount) {
     player.xp -= player.xpNeeded;
     player.level++;
     appendLog("<span style='color: blue;'>Level Up! You are now level " + player.level + ".</span>");
+    checkMilestones("level", player.level);
     player.xpNeeded = Math.floor(1000 * Math.pow(player.level, playerXpScaling));
 
     // Choose scaling set based on level
@@ -388,6 +395,7 @@ async function simulateBossBattle() {
   if (currentBoss.HP <= 0) {
     appendLog("<span class='winOutcome'>You have defeated " + currentBoss.name + "!</span>");
     addXP(currentBoss.xp);
+    checkMilestones("bossKill", player.bossKills);
 
     // At the end of fight, reset spell cooldown if it was active.
     if (player.spellCooldown && player.spellCooldown > 0) {
@@ -742,6 +750,7 @@ async function simulateCombat() {
   if (currentEnemy.HP <= 0) {
     appendLog("<span class='winOutcome'>You defeated " + currentEnemy.name + "!</span>");
     addXP(currentEnemy.xp);
+    checkMilestones("kill", player.enemyKills);
 
     // At the end of fight, reset spell cooldown if it was active.
     if (player.spellCooldown && player.spellCooldown > 0) {

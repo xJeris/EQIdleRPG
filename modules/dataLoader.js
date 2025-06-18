@@ -27,9 +27,10 @@ export function loadXMLData() {
     fetchXML('data/items.xml'),
     fetchXML('data/boss.xml'),
     fetchXML('data/spells.xml'),
-    fetchXML('data/pets.xml')
+    fetchXML('data/pets.xml'),
+    fetchXML('data/milestones.xml')
   ])
-    .then(([areasDoc, enemiesDoc, itemsDoc, bossesDoc, spellsDoc, petsDoc]) => {
+    .then(([areasDoc, enemiesDoc, itemsDoc, bossesDoc, spellsDoc, petsDoc, milestonesDoc]) => {
       const areas = Array.from(areasDoc.getElementsByTagName("area")).map(area => ({
         id: area.getAttribute("id"),
         name: area.getAttribute("name"),
@@ -99,7 +100,15 @@ export function loadXMLData() {
         mr: parseInt(pet.getAttribute("mr"))
       }));
 
-      return { areas, enemies, items, bosses, spells, pets };
+      const milestones = Array.from(milestonesDoc.getElementsByTagName("milestone")).map(m => ({
+        id: m.getAttribute("id"),
+        name: m.getAttribute("name"),
+        description: m.getAttribute("description"),
+        type: m.getAttribute("type"),
+        value: parseInt(m.getAttribute("value"))
+      }));
+
+      return { areas, enemies, items, bosses, spells, pets, milestones };
     })
     .catch(error => {
       console.error("Error loading XML data:", error);
