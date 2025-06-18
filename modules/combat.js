@@ -415,18 +415,23 @@ async function simulateBossBattle() {
     appendLog("<span style='color: green;'>You feel rejuvenated and fully healed!</span>");
   
     if (petAllowed && player.petDied) {
-      appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
       assignPetToPlayer();
-      updateStatsUI(player, getEquipmentBonuses(player.equipment)); // Update pet stat display
+      if (player.pet) {
+        appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
+        updateStatsUI(player, getEquipmentBonuses(player.equipment)); // Update pet stat display
+      } else {
+        // Do nothing
+      }
     }
-  } else {
-    appendLog("<span class='loseOutcome'>You were defeated by " + currentBoss.name + ".</span>");
-    player.currentHP = 0;
-    player.xp = Math.floor(player.xp * bossCombatConstants.playerXPLoss);
-  }
 
-  updateUI(player, player.equipment, getEquipmentBonuses());
-  saveProgress();
+    } else {
+      appendLog("<span class='loseOutcome'>You were defeated by " + currentBoss.name + ".</span>");
+      player.currentHP = 0;
+      player.xp = Math.floor(player.xp * bossCombatConstants.playerXPLoss);
+    }
+
+    updateUI(player, player.equipment, getEquipmentBonuses());
+    saveProgress();
 
   // Post-Battle Recovery
   if (player.currentHP <= 0) {
@@ -439,9 +444,13 @@ async function simulateBossBattle() {
     }
 
     if (petAllowed && player.petDied) {
-    appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
-    assignPetToPlayer();
-    await delay(1000);
+      assignPetToPlayer();
+      await delay(1000);
+      if (player.pet) {
+        appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
+      } else {
+        // Do nothing
+      }
     }
 
     player.currentHP = Math.floor(player.HP * bossCombatConstants.playerHPRecovery);
@@ -746,10 +755,15 @@ async function simulateCombat() {
   
     // If a pet died during combat, grant a new pet before next battle.
     if (petAllowed && player.petDied) {
-      appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
       assignPetToPlayer();
-      updateStatsUI(player, getEquipmentBonuses(player.equipment)); // Update pet stat display
+      if (player.pet) {
+        appendLog("<span style='color: green;'>You recover and summon a new pet!</span>");
+        updateStatsUI(player, getEquipmentBonuses(player.equipment)); // Update pet stat display
+      } else {
+        // Do nothing
+      }
     }
+
   } else if (petAllowed && player.petDied && player.currentHP <= 0) {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
     player.currentHP = player.HP;
