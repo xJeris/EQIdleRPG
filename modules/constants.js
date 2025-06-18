@@ -114,6 +114,6 @@ export const bossCombatConstants = {
 export const dmgModifiers = {
   dmgRange: 5, // Range for randomizing damage output
   spellCD: 2, // Cooldown for spells in turns
-  spellCDThreshold: 40, // Spell base damage threshold for spell cooldowns
-  spellScaling: 0.5 // Scaling factor for spell damage based on player level
+  spellCDThreshold: 100, // Spell base damage threshold for spell cooldowns
+  spellScaling: 0.17 // Scaling factor for spell damage based on player level
 }
