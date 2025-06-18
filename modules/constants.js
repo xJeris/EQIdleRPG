@@ -12,12 +12,12 @@ export const rarityData = {
 };
 
 export const spellCastChance = {
-  Cleric: 30,   // percent chance to cast a spell
+  Cleric: 60,   // percent chance to cast a spell
   Druid: 60,
-  Enchanter: 30,
+  Enchanter: 70,
   Magician: 60,
   Necromancer: 60,
-  Paladin: 10,   
+  Paladin: 30,   
   Shaman: 70,
   Shadowknight: 30,
   Wizard: 90     
