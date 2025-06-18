@@ -36,7 +36,9 @@ export function loadXMLData() {
         recommendedLevel: parseInt(area.getAttribute("recommendedLevel")),
         maxLevel: parseInt(area.getAttribute("maxLevel")),
         maxItemLevel: parseInt(area.getAttribute("maxItemLevel")),
-        description: area.getElementsByTagName("description")[0]?.textContent || ""
+        description: area.getElementsByTagName("description")[0]?.textContent || "",
+        allowedItemLevels: area.getElementsByTagName("allowedItemLevels")[0]?.textContent
+          ?.split(",").map(lvl => parseInt(lvl.trim())).filter(lvl => !isNaN(lvl)) || []
       }));
       
       const enemies = Array.from(enemiesDoc.getElementsByTagName("enemy")).map(enemy => ({

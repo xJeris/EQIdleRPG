@@ -774,9 +774,19 @@ async function simulateCombat() {
 
   // Equipment drop chance.
   if (Math.random() < enemyCombatConstants.equipDropChance) { // 10% chance for an item drop
+    // 1. Randomly select an equipment slot
+    const allSlots = ["Head", "Torso", "Legs", "Back", "Main Hand", "Offhand", "Ring 1", "Ring 2"];
+    const randomSlot = allSlots[Math.floor(Math.random() * allSlots.length)];
+
+    // 2. Get allowed item levels for the current area. Default to [1] if not defined.
+    let allowedLevels = player.currentArea.allowedItemLevels;
+    if (!allowedLevels || allowedLevels.length === 0) allowedLevels = [1];
+
+    // 3. Filter items by slot and allowed levels
     let validItems = window.gameData.items.filter(item =>
-      item.level <= player.currentArea.maxItemLevel &&
-      parseInt(item.id) <= 4999   // Items above 5000 are reserved for boss loot
+      item.slot === randomSlot &&
+      allowedLevels.includes(item.level) &&
+      parseInt(item.id) <= 4999 // Items above 5000 are reserved for boss loot
     );
 
   if (validItems.length > 0) {
