@@ -115,8 +115,9 @@ export function updateStatsUI(player, equipmentBonuses = { bonusATK: 0, bonusDEF
 }
 
 export function updateUI(player, equipment, equipmentBonuses) {
-  document.getElementById("playerInfo").textContent =
-    "Name: " + player.name + " | Race: " + player.race + " | Class: " + player.class;
+  document.getElementById("playerInfo").innerHTML =
+    "Name: " + player.name + "<br>" +
+    "Race: " + player.race + " | Class: " + player.class;
   updateEquipmentUI(equipment);
   updateAreaInfo(player.currentArea);
 }
