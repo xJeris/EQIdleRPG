@@ -497,10 +497,27 @@ async function simulateCombat() {
 
   // Fallback: If no enemy passes the area+level filter, fallback to area-only check (not level-only)
   if (validEnemies.length === 0) {
-    console.warn("No valid enemies for this area!");
-    validEnemies = window.gameData.enemies.filter(enemy =>
-    enemy.allowedAreas.some(areaId => areaId == player.currentArea.id)
-    );
+    // No valid enemies for this area, spawn a generic enemy
+    const minLevel = Math.max(1, player.level - 1);
+    const maxLevel = player.level + 2;
+    const enemyLevel = Math.floor(Math.random() * (maxLevel - minLevel + 1)) + minLevel;
+
+    // Level 1 base stats for the generic enemy
+    const baseEnemy = {
+      id: "99999",
+      name: "a wandering raider",
+      minLevel: 1,
+      maxLevel: 1,
+      HP: 100,      // Level 1 HP
+      ATK: 6,     // Level 1 ATK
+      DEF: 5,     // Level 1 DEF
+      MR: 0,       // Level 1 MR
+      xp: 100,      // Level 1 XP
+      allowedAreas: [player.currentArea.id]
+    };
+
+    const genericEnemy = { ...baseEnemy };
+    validEnemies = [genericEnemy];
   }
 
   // Make sure to declare a variable for the selected enemy.
