@@ -81,7 +81,7 @@ export const playerScalingSet2 = {
   MrIncreaseFactor: 0.00
 };
 
-export const playerXpScaling = 1.0; // XP scaling factor (2.482) for leveling up, used to calculate xpNeeded for each level.
+export const playerXpScaling = 1.241; // XP scaling factor (default: 2.482) for leveling up, used to calculate xpNeeded for each level.
 
 export const enemyCombatConstants = {
   playerXPLoss: 0.9, // Player loses 10% of their XP after dying in combat - player.xp = Math.floor(player.xp * 0.9).

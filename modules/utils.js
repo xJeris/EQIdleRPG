@@ -99,9 +99,9 @@ export function calculatePhysicalDamage(attacker, target) {
       capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.9 : 0.16;
       damageCap = target.maxHP * capMultiplier;
     } else {
-    // For players level 1 to 3, use a lower cap multiplier.
-    capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.10 : 0.17;
-    damageCap = target.maxHP * capMultiplier;
+      // For players level 1 to 3, use a lower cap multiplier.
+      capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.12 : 0.17;
+      damageCap = target.maxHP * capMultiplier;
     }
   }
   
@@ -122,7 +122,7 @@ export function calculateSpellDamage(attacker, target, spell) {
   
   // Cap the damage to ensure it doesn't exceed xx% of the enemy's HP.
   // For players level 1 to 3, use a lower cap multiplier.
-  const capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.10 : 0.20;
+  const capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.12 : 0.18;
   const damageCap = target.maxHP * capMultiplier;
   
   // Calculate final damage as the lesser of rawDamage and the cap.
