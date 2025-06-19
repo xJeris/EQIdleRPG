@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Achievements / Milestones -->
 <milestones>
-  <milestone id="1" name="First Blood" description="Defeat your first enemy." type="kill" value="1" />
-  <milestone id="2" name="Boss Slayer" description="Defeat your first boss." type="bosskill" value="1" />
-  <milestone id="3" name="Level 10" description="Reach level 10." type="level" value="10" />
-  <milestone id="4" name="Pet Trainer" description="Summon your first pet." type="pet" value="1" />
+  <milestone id="1" name="Pet Trainer" description="Summon your first pet." type="pet" value="1" />
+  <milestone id="2" name="First Blood" description="Defeat your first enemy." type="kill" value="1" />
+  <milestone id="3" name="Adventurer" description="Defeat 100 enemies." type="kill" value="100" />
+  <milestone id="4" name="Gladiator" description="Defeat 1000 enemies." type="kill" value="1000" />
+  <milestone id="5" name="Warlord" description="Defeat 10000 enemies." type="kill" value="10000" />
+  <milestone id="6" name="Conqueror" description="Defeat 50000 enemies." type="kill" value="50000" />
+  <milestone id="7" name="Boss Slayer" description="Defeat your first boss." type="bosskill" value="1" />
+  <milestone id="8" name="Exemplar" description="Defeat 50 bosses." type="bosskill" value="50" />
+  <milestone id="9" name="Demigod" description="Defeat 500 bosses." type="bosskill" value="500" />
+  <milestone id="10" name="Veteran" description="Reach level 10." type="level" value="10" />
+  <milestone id="11" name="Champion" description="Reach level 50." type="level" value="50" />
+  <milestone id="12" name="Hero" description="Reach level 100." type="level" value="100" />
 </milestones>
