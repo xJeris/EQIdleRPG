@@ -115,18 +115,86 @@
   <spell id="99" name="Laudation Rk. III" class="Paladin" minLevel="96" maxLevel="99" baseDamage="1248" />
   <spell id="100" name="Glorious Expurgation Rk. III" class="Paladin" minLevel="100" maxLevel="101" baseDamage="1300" />
   <!-- Shadowknight -->
-  <spell id="140" name="Spike of Disease" class="Shadowknight" minLevel="1" maxLevel="5" baseDamage="13" />
-
-
+  <spell id="101" name="Spike of Disease" class="Shadowknight" minLevel="1" maxLevel="7" baseDamage="13" />
+  <spell id="102" name="Lifetap" class="Shadowknight" minLevel="8" maxLevel="14" baseDamage="104" />
+  <spell id="103" name="Lifespike" class="Shadowknight" minLevel="15" maxLevel="28" baseDamage="195" />
+  <spell id="104" name="Lifedraw" class="Shadowknight" minLevel="29" maxLevel="33" baseDamage="377" />
+  <spell id="105" name="Spear of Disease" class="Shadowknight" minLevel="34" maxLevel="46" baseDamage="442" />
+  <spell id="106" name="Life Leech" class="Shadowknight" minLevel="47" maxLevel="47" baseDamage="611" />
+  <spell id="107" name="Spear of Pain" class="Shadowknight" minLevel="48" maxLevel="50" baseDamage="624" />
+  <spell id="108" name="Siphon Life" class="Shadowknight" minLevel="51" maxLevel="53" baseDamage="663" />
+  <spell id="109" name="Spear of Plague" class="Shadowknight" minLevel="54" maxLevel="54" baseDamage="702" />
+  <spell id="110" name="Spirit Tap" class="Shadowknight" minLevel="55" maxLevel="56" baseDamage="715" />
+  <spell id="111" name="Drain Spirit" class="Shadowknight" minLevel="57" maxLevel="59" baseDamage="741" />
+  <spell id="112" name="Drain Soul" class="Shadowknight" minLevel="60" maxLevel="61" baseDamage="780" />
+  <spell id="113" name="Touch of Volatis" class="Shadowknight" minLevel="62" maxLevel="64" baseDamage="806" />
+  <spell id="114" name="Touch of Innoruuk" class="Shadowknight" minLevel="65" maxLevel="66" baseDamage="845" />
+  <spell id="115" name="Touch of Inruku" class="Shadowknight" minLevel="67" maxLevel="69" baseDamage="871" />
+  <spell id="116" name="Touch of the Devourer" class="Shadowknight" minLevel="70" maxLevel="72" baseDamage="910" />
+  <spell id="117" name="Drink of Decomposition Rk. II" class="Shadowknight" minLevel="73" maxLevel="73" baseDamage="949" />
+  <spell id="118" name="Rotroot Spear Rk. III" class="Shadowknight" minLevel="74" maxLevel="78" baseDamage="962" />
+  <spell id="119" name="Rotmarrow Spear Rk. III" class="Shadowknight" minLevel="79" maxLevel="79" baseDamage="1027" />
+  <spell id="120" name="Touch of Kildrukaun Rk. III" class="Shadowknight" minLevel="80" maxLevel="83" baseDamage="1040" />
+  <spell id="121" name="Malarian Spear Rk. III" class="Shadowknight" minLevel="84" maxLevel="84" baseDamage="1092" />
+  <spell id="122" name="Dire Implication Rk. III" class="Shadowknight" minLevel="85" maxLevel="88" baseDamage="1105" />
+  <spell id="123" name="Gorgon Spear Rk. III" class="Shadowknight" minLevel="89" maxLevel="93" baseDamage="1157" />
+  <spell id="124" name="Spear of Sholoth Rk. III" class="Shadowknight" minLevel="94" maxLevel="98" baseDamage="1222" />
+  <spell id="125" name="Spear of Grelleth Rk. III" class="Shadowknight" minLevel="99" maxLevel="101" baseDamage="1287" />
   <!-- Shaman -->
-  <spell id="170" name="Burst of Flame" class="Shaman" minLevel="1" maxLevel="5" baseDamage="13" />
-
-
+  <spell id="126" name="Burst of Flame" class="Shaman" minLevel="1" maxLevel="4" baseDamage="13" />
+  <spell id="127" name="Frost Rift" class="Shaman" minLevel="4" maxLevel="13" baseDamage="52" />
+  <spell id="128" name="Spirit Strike" class="Shaman" minLevel="14" maxLevel="22" baseDamage="182" />
+  <spell id="129" name="Frost Strike" class="Shaman" minLevel="23" maxLevel="32" baseDamage="299" />
+  <spell id="130" name="Winter's Roar" class="Shaman" minLevel="33" maxLevel="33" baseDamage="429" />
+  <spell id="131" name="Shock of the Tainted" class="Shaman" minLevel="34" maxLevel="36" baseDamage="442" />
+  <spell id="132" name="Venom of the Snake" class="Shaman" minLevel="37" maxLevel="41" baseDamage="481" />
+  <spell id="133" name="Blast of Poison" class="Shaman" minLevel="42" maxLevel="43" baseDamage="546" />
+  <spell id="134" name="Blizzard Blast" class="Shaman" minLevel="44" maxLevel="46" baseDamage="572" />
+  <spell id="135" name="Shock of Venom" class="Shaman" minLevel="47" maxLevel="53" baseDamage="611" />
+  <spell id="136" name="Ice Strike" class="Shaman" minLevel="54" maxLevel="60" baseDamage="702" />
+  <spell id="137" name="Spear of Torment" class="Shaman" minLevel="61" maxLevel="63" baseDamage="793" />
+  <spell id="138" name="Velium Strike" class="Shaman" minLevel="64" maxLevel="65" baseDamage="832" />
+  <spell id="139" name="Yoppa's Spear of Venom" class="Shaman" minLevel="66" maxLevel="68" baseDamage="858" />
+  <spell id="140" name="Ice Age" class="Shaman" minLevel="69" maxLevel="70" baseDamage="897" />
+  <spell id="141" name="Ahnkaul's Spear of Venom Rk. III" class="Shaman" minLevel="71" maxLevel="72" baseDamage="923" />
+  <spell id="142" name="Sting of the Queen Rk. III" class="Shaman" minLevel="73" maxLevel="73" baseDamage="949" />
+  <spell id="143" name="Glacial Avalanche Rk. III" class="Shaman" minLevel="74" maxLevel="75" baseDamage="962" />
+  <spell id="144" name="Vestax's Spear of Venom Rk. III" class="Shaman" minLevel="76" maxLevel="77" baseDamage="988" />
+  <spell id="145" name="Bite of the Brownie Rk. III" class="Shaman" minLevel="78" maxLevel="82" baseDamage="1014" />
+  <spell id="146" name="Bite of the Ukun Rk. III" class="Shaman" minLevel="83" maxLevel="87" baseDamage="1079" />
+  <spell id="147" name="Bite of the Blightwolf Rk. III" class="Shaman" minLevel="88" maxLevel="92" baseDamage="1144" />
+  <spell id="148" name="Bite of the Grendlaen Rk. III" class="Shaman" minLevel="93" maxLevel="97" baseDamage="1209" />
+  <spell id="149" name="Seedspitter's Bite Rk. III" class="Shaman" minLevel="98" maxLevel="101" baseDamage="1274" />
   <!-- Wizard -->
-  <spell id="200" name="Blast of Cold" class="Wizard" minLevel="1" maxLevel="3" baseDamage="13" />
-  <spell id="201" name="Shock of Fire" class="Wizard" minLevel="4" maxLevel="7" baseDamage="52" />
-  <spell id="202" name="Shock of Ice" class="Wizard" minLevel="8" maxLevel="9" baseDamage="104" />
-  <spell id="203" name="Shock of Lightning" class="Wizard" minLevel="10" maxLevel="14" baseDamage="130" />
-  <spell id="204" name="Flame Shock" class="Wizard" minLevel="15" maxLevel="16" baseDamage="195" />
-  <spell id="200" name="Force Snap" class="Wizard" minLevel="17" maxLevel="20" baseDamage="221" />
+  <spell id="150" name="Blast of Cold" class="Wizard" minLevel="1" maxLevel="3" baseDamage="13" />
+  <spell id="151" name="Shock of Fire" class="Wizard" minLevel="4" maxLevel="7" baseDamage="52" />
+  <spell id="152" name="Shock of Ice" class="Wizard" minLevel="8" maxLevel="9" baseDamage="104" />
+  <spell id="153" name="Shock of Lightning" class="Wizard" minLevel="10" maxLevel="14" baseDamage="130" />
+  <spell id="154" name="Flame Shock" class="Wizard" minLevel="15" maxLevel="16" baseDamage="195" />
+  <spell id="155" name="Force Snap" class="Wizard" minLevel="17" maxLevel="23" baseDamage="221" />
+  <spell id="156" name="Frost Shock" class="Wizard" minLevel="24" maxLevel="25" baseDamage="312" />
+  <spell id="157" name="Inferno Shock" class="Wizard" minLevel="26" maxLevel="27" baseDamage="338" />
+  <spell id="158" name="Thunder Strike" class="Wizard" minLevel="28" maxLevel="33" baseDamage="364" />
+  <spell id="159" name="Ice Shock" class="Wizard" minLevel="34" maxLevel="36" baseDamage="442" />
+  <spell id="160" name="Lightning Shock" class="Wizard" minLevel="37" maxLevel="40" baseDamage="481" />
+  <spell id="161" name="Force Strike" class="Wizard" minLevel="41" maxLevel="43" baseDamage="533" />
+  <spell id="162" name="Enticement of Flame" class="Wizard" minLevel="44" maxLevel="48" baseDamage="572" />
+  <spell id="163" name="Ice Comet" class="Wizard" minLevel="49" maxLevel="60" baseDamage="637" />
+  <spell id="164" name="Lure of Frost" class="Wizard" minLevel="52" maxLevel="54" baseDamage="676" />
+  <spell id="165" name="Lure of Flame" class="Wizard" minLevel="55" maxLevel="59" baseDamage="715" />
+  <spell id="166" name="Ice Spear of Solist" class="Wizard" minLevel="60" maxLevel="61" baseDamage="780" />
+  <spell id="167" name="Lure of Ro" class="Wizard" minLevel="62" maxLevel="63" baseDamage="806" />
+  <spell id="168" name="Ice Meteor" class="Wizard" minLevel="64" maxLevel="67" baseDamage="832" />
+  <spell id="169" name="Thundaka" class="Wizard" minLevel="68" maxLevel="69" baseDamage="884" />
+  <spell id="170" name="Corona Flare" class="Wizard" minLevel="70" maxLevel="71" baseDamage="910" />
+  <spell id="171" name="Cloudburst Strike Rk. II" class="Wizard" minLevel="72" maxLevel="73" baseDamage="936" />
+  <spell id="172" name="Flashfires Rk. III" class="Wizard" minLevel="74" maxLevel="75" baseDamage="962" />
+  <spell id="173" name="Concussive Burst Rk. III" class="Wizard" minLevel="76" maxLevel="78" baseDamage="988" />
+  <spell id="174" name="Ethereal Rime Rk. III" class="Wizard" minLevel="79" maxLevel="83" baseDamage="1027" />
+  <spell id="175" name="Ethereal Iceblight Rk. III" class="Wizard" minLevel="84" maxLevel="88" baseDamage="1092" />
+  <spell id="176" name="Ethereal Glaciation Rk. III" class="Wizard" minLevel="89" maxLevel="91" baseDamage="1157" />
+  <spell id="177" name="Ethereal Barrage Rk. III" class="Wizard" minLevel="92" maxLevel="93" baseDamage="1196" />
+  <spell id="178" name="Ethereal Frost Rk. III" class="Wizard" minLevel="94" maxLevel="96" baseDamage="1222" />
+  <spell id="179" name="Ethereal Salvo Rk. III" class="Wizard" minLevel="97" maxLevel="98" baseDamage="1261" />
+  <spell id="180" name="Ethereal Hoarfrost Rk. III" class="Wizard" minLevel="99" maxLevel="101" baseDamage="1287" />
 </spells>
