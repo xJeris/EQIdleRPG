@@ -36,7 +36,6 @@ export function loadXMLData() {
         name: area.getAttribute("name"),
         recommendedLevel: parseInt(area.getAttribute("recommendedLevel")),
         maxLevel: parseInt(area.getAttribute("maxLevel")),
-        maxItemLevel: parseInt(area.getAttribute("maxItemLevel")),
         description: area.getElementsByTagName("description")[0]?.textContent || "",
         allowedItemLevels: area.getElementsByTagName("allowedItemLevels")[0]?.textContent
           ?.split(",").map(lvl => parseInt(lvl.trim())).filter(lvl => !isNaN(lvl)) || []
