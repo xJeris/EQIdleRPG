@@ -91,12 +91,18 @@ export function calculatePhysicalDamage(attacker, target) {
   if (attacker.isBoss) {
     capMultiplier = 0.25;
     damageCap = target.maxHP * capMultiplier;
-      console.log(`Boss damage cap: ${damageCap}` + ` boss cap multiplier: ${capMultiplier}`);
+      //console.log(`Boss damage cap: ${damageCap}` + ` boss cap multiplier: ${capMultiplier}`);
   } else {
-    // Cap the damage to ensure it doesn't exceed 17% of the enemy's max/current HP.
+    // Cap the damage to ensure it doesn't exceed xx% of the defenders max HP.
+    if (attacker.isEnemy) {
+      // For enemies level 1 to 3, use a lower cap multiplier.
+      capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.9 : 0.16;
+      damageCap = target.maxHP * capMultiplier;
+    } else {
     // For players level 1 to 3, use a lower cap multiplier.
     capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.10 : 0.17;
     damageCap = target.maxHP * capMultiplier;
+    }
   }
   
   // Calculate final damage as the lesser of rawDamage and the cap.
@@ -114,7 +120,7 @@ export function calculateSpellDamage(attacker, target, spell) {
   // The multiplier of 1.05 gives spells a slight bonus.
   const rawDamage = (spell.baseDamage + attacker.MAG) * Math.exp(-target.MR / 100) * 1.05;
   
-  // Cap the damage to ensure it doesn't exceed 20% of the enemy's HP.
+  // Cap the damage to ensure it doesn't exceed xx% of the enemy's HP.
   // For players level 1 to 3, use a lower cap multiplier.
   const capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.10 : 0.20;
   const damageCap = target.maxHP * capMultiplier;

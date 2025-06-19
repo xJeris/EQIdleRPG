@@ -252,7 +252,6 @@ async function simulateBossBattle() {
 
       if (currentBoss.HP <= 0) break;
 
-        console.log("Boss ATK" + currentBoss.ATK + " | DEF: " + effectiveDEF + " isBoss: " + currentBoss.isBoss);
       let damageReceived = calculatePhysicalDamage(currentBoss, activeCombatant);
 
       // Check for a crit on bosses physical attack.
@@ -326,7 +325,6 @@ async function simulateBossBattle() {
         if (currentBoss.HP <= 0) break;
       
         // Enemy counterattack remains physical.
-          console.log("Boss ATK" + currentBoss.ATK + " | DEF: " + effectiveDEF + " isBoss: " + currentBoss.isBoss);
         let damageReceived = calculatePhysicalDamage(currentBoss, activeCombatant);
  
         // Check for a crit on bosses physical attack.
@@ -337,7 +335,6 @@ async function simulateBossBattle() {
 
         damageReceived = randomizeDamage(damageReceived);
         player.currentHP -= damageReceived;
-          console.log("Boss ATK: " + currentBoss.ATK + " | Player DEF: " + effectiveDEF + " | Damage Received: " + damageReceived + " isBoss: " + currentBoss.isBoss);
         appendLog(currentBoss.name + " counterattacks for " + damageReceived + " damage. Your HP: " + player.currentHP);
         await delay(1000);
       
@@ -364,7 +361,6 @@ async function simulateBossBattle() {
 
       if (currentBoss.HP <= 0) break;
 
-        console.log("Boss ATK" + currentBoss.ATK + " | DEF: " + effectiveDEF + " isBoss: " + currentBoss.isBoss);
       let bossDamage = calculatePhysicalDamage(currentBoss, activeCombatant);
 
       // Check for a crit on bosses physical attack.
@@ -498,6 +494,7 @@ async function simulateCombat() {
       DEF: 5,     // Level 1 DEF
       MR: 0,       // Level 1 MR
       xp: 100,      // Level 1 XP
+      isEnemy: true,
       allowedAreas: [player.currentArea.id]
     };
 
@@ -592,12 +589,12 @@ async function simulateCombat() {
       ATK: Math.ceil(selectedEnemy.ATK * atkScale),
       DEF: Math.ceil(selectedEnemy.DEF * defScale),
       MR: selectedEnemy.MR + (enemyLevel - selectedEnemy.minLevel) * 0, // Adds 0 MR per level over mob's base
-      xp: selectedEnemy.xp + (enemyLevel - selectedEnemy.minLevel) * 50  // Adds 50 xp per level over mob's base
+      xp: selectedEnemy.xp + (enemyLevel - selectedEnemy.minLevel) * 50,  // Adds 50 xp per level over mob's base
+      isEnemy: true
       };
 
     // Set the enemy's maxHP based on its scaled HP.
     currentEnemy.maxHP = currentEnemy.HP;
-    console.log("Selected enemy:", currentEnemy.name, "Level:", currentEnemy.level, "maxHP:", currentEnemy.maxHP, "HP:", currentEnemy.HP, "ATK:", currentEnemy.ATK, "DEF:", currentEnemy.DEF, "MR:", currentEnemy.MR, "XP:", currentEnemy.xp);
   }
 
   // Customize enemy appearance message based on level difference with player.
@@ -695,7 +692,6 @@ async function simulateCombat() {
         
           // Enemy counterattack remains physical.
           let damageReceived = calculatePhysicalDamage(currentEnemy, activeCombatant);
-            console.log(activeCombatant.name, "counterattack damage:", damageReceived); // DEV DEBUG
 
           // Check for a crit on enemy's physical attack.
           if (Math.random() < enemyCombatConstants.enemyPhysicalCritChance) {
@@ -706,7 +702,6 @@ async function simulateCombat() {
           damageReceived = randomizeDamage(damageReceived);
           player.currentHP -= damageReceived;
           currentHealth = player.currentHP;
-            console.log("Player HP after counterattack:", currentHealth); // DEV DEBUG
           appendLog(currentEnemy.name + " counterattacks for " + damageReceived + " damage. Your HP: " + currentHealth);
           await delay(1000);
         
