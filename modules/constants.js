@@ -28,9 +28,9 @@ export const classBaseStats = {
   Beastlord:    { HP: 110, ATK: 12, DEF: 12, MAG: 0,  MR: 0 },
   Berserker:    { HP: 120, ATK: 20, DEF: 12, MAG: 0,  MR: 0 },
   Cleric:       { HP: 105, ATK: 10,  DEF: 10, MAG: 12, MR: 0 },
-  Druid:        { HP: 90,  ATK: 7,  DEF: 7,  MAG: 15, MR: 0 },
-  Enchanter:    { HP: 80,  ATK: 7, DEF: 7,  MAG: 15, MR: 0 },
-  Magician:     { HP: 80,  ATK: 7,  DEF: 7,  MAG: 20, MR: 0 },
+  Druid:        { HP: 110,  ATK: 7,  DEF: 7,  MAG: 15, MR: 0 },
+  Enchanter:    { HP: 95,  ATK: 7, DEF: 7,  MAG: 15, MR: 0 },
+  Magician:     { HP: 95,  ATK: 7,  DEF: 7,  MAG: 20, MR: 0 },
   Monk:         { HP: 120, ATK: 15, DEF: 12, MAG: 0,  MR: 0 },
   Necromancer:  { HP: 90,  ATK: 10,  DEF: 10, MAG: 12, MR: 0 },
   Paladin:      { HP: 130, ATK: 15, DEF: 15, MAG: 5,  MR: 0 },
@@ -39,7 +39,7 @@ export const classBaseStats = {
   Shadowknight: { HP: 130, ATK: 18, DEF: 15, MAG: 8,  MR: 0 },
   Shaman:       { HP: 110, ATK: 13, DEF: 15, MAG: 18, MR: 0 },
   Warrior:      { HP: 140, ATK: 15, DEF: 20, MAG: 0,  MR: 0 },
-  Wizard:       { HP: 80,  ATK: 7,  DEF: 15, MAG: 20, MR: 0 }
+  Wizard:       { HP: 100,  ATK: 7,  DEF: 15, MAG: 20, MR: 0 }
 };
 
 export const raceClassRestrictions = {
@@ -81,12 +81,12 @@ export const playerScalingSet2 = {
   MrIncreaseFactor: 0.00
 };
 
-export const playerXpScaling = 2.482; // XP scaling factor for leveling up, used to calculate xpNeeded for each level.
+export const playerXpScaling = 1.0; // XP scaling factor (2.482) for leveling up, used to calculate xpNeeded for each level.
 
 export const enemyCombatConstants = {
   playerXPLoss: 0.9, // Player loses 10% of their XP after dying in combat - player.xp = Math.floor(player.xp * 0.9).
   equipDropChance: 0.1, // 10% chance for an enemy to drop equipment.
-  playerDRFactor: 50,  // Used to reduce damage taken by enemy from player/pet gradually. 50 is about half.
+  playerDRFactor: 100,  // Used to reduce damage taken by enemy from player/pet gradually. 50 is about half.
   enemyDRFactor: 50,  // Used to reduce damage taken by player/pet from enemy gradually. 50 is about half.
   playerPhysicalCritChance: 0.05, // 5% chance for player to deal crit damage on physical attacks.
   playerPhysicalCritMultiplier: 1.5, // Multiplier for player physical critical hits.
@@ -114,6 +114,6 @@ export const bossCombatConstants = {
 export const dmgModifiers = {
   dmgRange: 5, // Range for randomizing damage output
   spellCD: 2, // Cooldown for spells in turns
-  spellCDThreshold: 100, // Spell base damage threshold for spell cooldowns
-  spellScaling: 0.17 // Scaling factor for spell damage based on player level
+  spellCDThreshold: 1301, // Spell base damage threshold for spell cooldowns
+  spellScaling: 0.0017 // Scaling factor for spell damage based on player level
 }

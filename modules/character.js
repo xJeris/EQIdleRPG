@@ -22,6 +22,7 @@ export let player = {
   MAG: 0,         // magic, set by character selection
   MR: 0,          // magic resistance, set by character selection
   currentHP: 0,
+  maxHP: 0,
   equipment: {
     "Head": null,
     "Torso": null,

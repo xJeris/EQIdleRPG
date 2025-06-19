@@ -3,8 +3,8 @@
  * Contains combat simulation functions, XP/level mechanics, and save/load progress.
  **********************************************************************************/
 
-import { delay, randomizeDamage, getEffectiveMR, checkMilestones } from "./utils.js";
-import { appendLog, updateUI, updateStatsUI, updateAreaInfo } from "./ui.js";
+import { delay, randomizeDamage, getEffectiveMR, checkMilestones, scaleGenericEnemy, calculatePhysicalDamage, calculateSpellDamage } from "./utils.js";
+import { appendLog, updateUI, updateStatsUI, updateAreaInfo, getItemDisplayName } from "./ui.js";
 import { equipIfBetter, getEquipmentBonuses, assignPetToPlayer } from "./equipment.js";
 import { player } from "./character.js";
 import { spellCastChance, classesWithPets, enemyCombatConstants, bossCombatConstants, dmgModifiers, playerXpScaling, playerScalingSet1, playerScalingSet2 } from "./constants.js";
@@ -108,26 +108,6 @@ export function getAvailableSpellsForClass(cls, level) {
   );
 }
 
-// Calculate spell damage based on player.MAG and target's MR.
-export function calculateSpellDamage(spell, player, target, effectiveMAG) {
-  const mrFactor = getEffectiveMR(target);
-
-  // Scale baseDamage for spells that are lower than the player's level.
-  let scaledBase = spell.baseDamage;
-  if (player.level > spell.minLevel) {
-    scaledBase = spell.baseDamage * (player.level / spell.minLevel);
-  }
-  if (scaledBase >= dmgModifiers.spellCDThreshold) {
-  player.spellCooldown = dmgModifiers.spellCD;
-  }
-
-  // Each point of MR reduces spell damage by 1%, capped at 75%
-  const maxReduction = Math.min(mrFactor, 75);
-  const baseDamage = scaledBase + Math.floor(effectiveMAG * dmgModifiers.spellScaling);
-  const finalDamage = Math.floor(baseDamage * (1 - maxReduction / 100));
-  return Math.max(finalDamage, 1);
-}
-
 // XP & Level-Up Mechanics.
 export function addXP(amount) {
   player.xp += amount;
@@ -203,10 +183,12 @@ async function simulateBossBattle() {
     name: randomBoss.name,
     level: randomBoss.level,
     HP: randomBoss.HP,
+    maxHP: randomBoss.HP,
     ATK: randomBoss.ATK,
     DEF: randomBoss.DEF,
     MR: randomBoss.MR,
-    xp: randomBoss.xp
+    xp: randomBoss.xp,
+    isBoss: true
   };
 
   appendLog("<span style='color: #da0000;'><strong>A Boss Encounter!</strong> A fearsome " + currentBoss.name + " (Level " + currentBoss.level + ") appears!</span>");
@@ -228,8 +210,11 @@ async function simulateBossBattle() {
   let activeCombatant;
   if (petAllowed && player.pet && player.pet.currentHP > 0) {
     activeCombatant = player.pet;
+    player.pet.maxHP = player.pet.currentHP;
   } else {
     activeCombatant = player;
+    player.maxHP = player.currentHP;
+
     // For classes that are allowed to have pets but the pet is missing (or dead),
     // you might want to set petDied to true so you know it lost an active pet.
     if (petAllowed && (!player.pet || player.pet.currentHP <= 0)) {
@@ -239,21 +224,20 @@ async function simulateBossBattle() {
 
   // **Phase 1: Pet Combat (if a pet is available)**
   if (petAllowed) {
-
     let petIterations = 0;
     const maxPetIterations = 150;
 
     while (currentBoss.HP > 0 && player.pet && player.pet.currentHP > 0) {
 
       // FAILSAFE for long running combat loops.
-      iteration++;
-      if (iteration > maxIterations) {
+      petIterations++;
+      if (petIterations > maxPetIterations) {
         appendLog("<span style='color: red;'>Combat aborted: too many rounds (possible bug or infinite loop).</span>");
         console.error("Combat loop exceeded max iterations. Aborting to prevent infinite loop.");
       break;
       }
 
-      let damageDealt = Math.max(Math.floor(player.pet.ATK * (bossCombatConstants.playerDRFactor / (bossCombatConstants.playerDRFactor + currentBoss.DEF))), 1); 
+      let damageDealt = calculatePhysicalDamage(activeCombatant, currentBoss);
 
       // Check for a crit on player's pet physical attack.
       if (Math.random() < bossCombatConstants.playerPhysicalCritChance) {
@@ -268,8 +252,9 @@ async function simulateBossBattle() {
 
       if (currentBoss.HP <= 0) break;
 
-      let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossCombatConstants.bossDRFactor / (bossCombatConstants.bossDRFactor + player.pet.DEF))), 1);
-      
+        console.log("Boss ATK" + currentBoss.ATK + " | DEF: " + effectiveDEF + " isBoss: " + currentBoss.isBoss);
+      let damageReceived = calculatePhysicalDamage(currentBoss, activeCombatant);
+
       // Check for a crit on bosses physical attack.
       if (Math.random() < bossCombatConstants.bossPhysicalCritChance) {
         damageReceived = Math.floor(damageReceived * bossCombatConstants.bossPhysicalCritMultiplier);
@@ -325,7 +310,7 @@ async function simulateBossBattle() {
             player.spellCooldown = Math.max(1, Math.ceil(chosenSpell.baseDamage / dmgModifiers.spellCD));
           }
 
-          let damageDealt = calculateSpellDamage(chosenSpell, player, currentBoss, effectiveMAG);
+          let damageDealt = calculateSpellDamage(player, currentBoss, chosenSpell);
 
         // Check for a crit on player's spell attack.
         if (Math.random() < bossCombatConstants.playerSpellCritChance) {
@@ -341,8 +326,9 @@ async function simulateBossBattle() {
         if (currentBoss.HP <= 0) break;
       
         // Enemy counterattack remains physical.
-        let damageReceived = Math.max(Math.floor(currentBoss.ATK * (bossCombatConstants.bossDRFactor / (bossCombatConstants.bossDRFactor + effectiveDEF))), 1);
-    
+          console.log("Boss ATK" + currentBoss.ATK + " | DEF: " + effectiveDEF + " isBoss: " + currentBoss.isBoss);
+        let damageReceived = calculatePhysicalDamage(currentBoss, activeCombatant);
+ 
         // Check for a crit on bosses physical attack.
         if (Math.random() < bossCombatConstants.bossPhysicalCritChance) {
           damageReceived = Math.floor(damageReceived * bossCombatConstants.bossPhysicalCritMultiplier);
@@ -351,6 +337,7 @@ async function simulateBossBattle() {
 
         damageReceived = randomizeDamage(damageReceived);
         player.currentHP -= damageReceived;
+          console.log("Boss ATK: " + currentBoss.ATK + " | Player DEF: " + effectiveDEF + " | Damage Received: " + damageReceived + " isBoss: " + currentBoss.isBoss);
         appendLog(currentBoss.name + " counterattacks for " + damageReceived + " damage. Your HP: " + player.currentHP);
         await delay(1000);
       
@@ -362,7 +349,7 @@ async function simulateBossBattle() {
       // ---- End Spell Casting Branch ----
     
       // Otherwise, use physical attack.
-      let playerDamage = Math.max(Math.floor(effectiveATK * (bossCombatConstants.playerDRFactor / (bossCombatConstants.playerDRFactor + currentBoss.DEF))), 1);
+      let playerDamage = calculatePhysicalDamage(activeCombatant, currentBoss);
 
       // Check for a crit on player's physical attack.
       if (Math.random() < bossCombatConstants.playerPhysicalCritChance) {
@@ -377,8 +364,9 @@ async function simulateBossBattle() {
 
       if (currentBoss.HP <= 0) break;
 
-      let bossDamage = Math.max(Math.floor(currentBoss.ATK * (bossCombatConstants.bossDRFactor / (bossCombatConstants.bossDRFactor + effectiveDEF))), 1);
-      
+        console.log("Boss ATK" + currentBoss.ATK + " | DEF: " + effectiveDEF + " isBoss: " + currentBoss.isBoss);
+      let bossDamage = calculatePhysicalDamage(currentBoss, activeCombatant);
+
       // Check for a crit on bosses physical attack.
       if (Math.random() < bossCombatConstants.bossPhysicalCritChance) {
         bossDamage = Math.floor(bossDamage * bossCombatConstants.bossPhysicalCritMultiplier);
@@ -495,13 +483,10 @@ async function simulateCombat() {
     return (effectiveMin <= effectiveMax) && enemy.allowedAreas.some(areaId => areaId == player.currentArea.id); 
   });
 
+  let currentEnemy;
+
   // Fallback: If no enemy passes the area+level filter, fallback to area-only check (not level-only)
   if (validEnemies.length === 0) {
-    // No valid enemies for this area, spawn a generic enemy
-    const minLevel = Math.max(1, player.level - 1);
-    const maxLevel = player.level + 2;
-    const enemyLevel = Math.floor(Math.random() * (maxLevel - minLevel + 1)) + minLevel;
-
     // Level 1 base stats for the generic enemy
     const baseEnemy = {
       id: "99999",
@@ -516,79 +501,104 @@ async function simulateCombat() {
       allowedAreas: [player.currentArea.id]
     };
 
-    const genericEnemy = { ...baseEnemy };
-    validEnemies = [genericEnemy];
-  }
-
-  // Make sure to declare a variable for the selected enemy.
-  let selectedEnemy = validEnemies[Math.floor(Math.random() * validEnemies.length)];
-
-  // Determine effective min and max enemy levels.
-  const desiredMin = Number(player.level - 1);
-  const desiredMax = Number(player.level + 2);
-  let effectiveMin = Math.max(selectedEnemy.minLevel, desiredMin);
-  let effectiveMax = Math.min(selectedEnemy.maxLevel, desiredMax, player.currentArea.maxLevel);
-
-  // Build an array of candidate levels based on the effective range.
-  let candidateLevels = [];
-  for (let L = effectiveMin; L <= effectiveMax; L++) {
-    candidateLevels.push(L);
-  }
-
-  // Define weights for each candidate level.
-  let weights = [];
-  let totalWeight = 0;
-  candidateLevels.forEach(L => {
-    let d = L - player.level;
-    let weight;
-    if (d <= 0) {
-      weight = 1.0;  // Full weight for same level or lower.
-    } else if (d === 1) {
-      weight = 0.5; // Slightly lower chance for 1 level above.
-    } else if (d === 2) {
-      weight = 0.15;  // Even lower chance for 2 levels above.
+    // we determine the enemy level based on player's current level.
+    const minLevel = Math.max(1, player.level - 1);
+    const maxLevel = player.level + 2;
+    // Randomly choose an enemy level between minEnemyLevel and maxEnemyLevel.
+    const enemyLevel = Math.floor(Math.random() * (maxLevel - minLevel + 1)) + minLevel;
+  
+    // Scale the fallback enemy's base stats according to the chosen level
+    let hpScale, atkScale, defScale;
+      if (enemyLevel <= 50) {
+      hpScale = 1.055;
+      atkScale = 1.04;
+      defScale = 1.04;
     } else {
-      weight = 0.25 / d; // Fallback.
+      hpScale = 1.065;
+      atkScale = 1.06;
+      defScale = 1.06;
     }
-    totalWeight += weight;
-    weights.push(weight);
-  });
 
-  // Pick a random level based on the weights.
-  let rand = Math.random() * totalWeight;
-  let enemyLevel;
-  let cumulative = 0;
-  for (let i = 0; i < candidateLevels.length; i++) {
-    cumulative += weights[i];
-    if (rand < cumulative) {
-      enemyLevel = candidateLevels[i];
-      break;
-    }
-  }
+    // Now scale the enemy from level 1 up to enemyLevel.
+    const scaledEnemy = scaleGenericEnemy(baseEnemy, enemyLevel, hpScale, atkScale, defScale);
+    scaledEnemy.maxHP = scaledEnemy.HP; // Store maxHP for damage calculations
 
-  // Choose scaling factors based on enemy level
-  let hpScale, atkScale, defScale;
-  if (enemyLevel <= 50) {
-    hpScale = 1.055;
-    atkScale = 1.04;
-    defScale = 1.04;
+    currentEnemy = scaledEnemy;
   } else {
-    // Higher scaling for higher levels
-    hpScale = 1.065;
-    atkScale = 1.06;
-    defScale = 1.06;
-  }
 
-  // Create a scaled copy of the enemy.
-  let currentEnemy = {
-    name: selectedEnemy.name,
-    level: enemyLevel,
-    HP: Math.floor(selectedEnemy.HP * hpScale),
-    ATK: Math.floor(selectedEnemy.ATK * atkScale),
-    DEF: Math.floor(selectedEnemy.DEF * defScale),
-    MR: selectedEnemy.MR + (enemyLevel - selectedEnemy.minLevel) * 0, // Adds 0 MR per level over mob's base
-    xp: selectedEnemy.xp + (enemyLevel - selectedEnemy.minLevel) * 50  // Adds 50 xp per level over mob's base
-  };
+    // Make sure to declare a variable for the selected enemy.
+    let selectedEnemy = validEnemies[Math.floor(Math.random() * validEnemies.length)];
+
+    // Determine effective min and max enemy levels.
+    const desiredMin = Number(player.level - 1);
+    const desiredMax = Number(player.level + 2);
+    let effectiveMin = Math.max(selectedEnemy.minLevel, desiredMin);
+    let effectiveMax = Math.min(selectedEnemy.maxLevel, desiredMax, player.currentArea.maxLevel);
+
+    // Build an array of candidate levels based on the effective range.
+    let candidateLevels = [];
+    for (let L = effectiveMin; L <= effectiveMax; L++) {
+      candidateLevels.push(L);
+    }
+
+    // Define weights for each candidate level.
+    let weights = [];
+    let totalWeight = 0;
+    candidateLevels.forEach(L => {
+      let d = L - player.level;
+      let weight;
+      if (d <= 0) {
+        weight = 1.0;  // Full weight for same level or lower.
+      } else if (d === 1) {
+        weight = 0.5; // Slightly lower chance for 1 level above.
+      } else if (d === 2) {
+        weight = 0.15;  // Even lower chance for 2 levels above.
+      } else {
+        weight = 0.25 / d; // Fallback.
+      }
+      totalWeight += weight;
+      weights.push(weight);
+    });
+
+    // Pick a random level based on the weights.
+    let rand = Math.random() * totalWeight;
+    let enemyLevel;
+    let cumulative = 0;
+    for (let i = 0; i < candidateLevels.length; i++) {
+      cumulative += weights[i];
+      if (rand < cumulative) {
+        enemyLevel = candidateLevels[i];
+        break;
+      }
+    }
+
+    // Choose scaling factors based on enemy level
+    let hpScale, atkScale, defScale;
+      if (enemyLevel <= 50) {
+      hpScale = 1.055;
+      atkScale = 1.04;
+      defScale = 1.04;
+    } else {
+      hpScale = 1.065;
+      atkScale = 1.06;
+      defScale = 1.06;
+    }
+
+    // Create a scaled copy of the normal enemy.
+    currentEnemy = {
+      name: selectedEnemy.name,
+      level: enemyLevel,
+      HP: Math.ceil(selectedEnemy.HP * hpScale),
+      ATK: Math.ceil(selectedEnemy.ATK * atkScale),
+      DEF: Math.ceil(selectedEnemy.DEF * defScale),
+      MR: selectedEnemy.MR + (enemyLevel - selectedEnemy.minLevel) * 0, // Adds 0 MR per level over mob's base
+      xp: selectedEnemy.xp + (enemyLevel - selectedEnemy.minLevel) * 50  // Adds 50 xp per level over mob's base
+      };
+
+    // Set the enemy's maxHP based on its scaled HP.
+    currentEnemy.maxHP = currentEnemy.HP;
+    console.log("Selected enemy:", currentEnemy.name, "Level:", currentEnemy.level, "maxHP:", currentEnemy.maxHP, "HP:", currentEnemy.HP, "ATK:", currentEnemy.ATK, "DEF:", currentEnemy.DEF, "MR:", currentEnemy.MR, "XP:", currentEnemy.xp);
+  }
 
   // Customize enemy appearance message based on level difference with player.
   let enemyMessage = "";
@@ -623,8 +633,10 @@ async function simulateCombat() {
   let activeCombatant;
   if (petAllowed && player.pet && player.pet.currentHP > 0) {
     activeCombatant = player.pet;
+    player.pet.maxHP = player.pet.currentHP;
   } else {
     activeCombatant = player;
+    player.maxHP = player.currentHP;
     // If the class can have a pet but there's none, you might set petDied to true if you want to trigger pet summon messages.
     if (petAllowed && (!player.pet || player.pet.currentHP <= 0)) {
       player.petDied = true;
@@ -632,7 +644,7 @@ async function simulateCombat() {
   }
 
   // FAILSAFE for long running combat loops.
-  let iteration = 0;
+  let iterations = 0;
   const maxIterations = 150; // Adjust as needed
 
   // Main combat loop:
@@ -643,8 +655,8 @@ async function simulateCombat() {
   ) {
 
     // FAILSAFE for long running combat loops.
-    iteration++;
-    if (iteration > maxIterations) {
+    iterations++;
+    if (iterations > maxIterations) {
       appendLog("<span style='color: red;'>Combat aborted: too many rounds (possible bug or infinite loop).</span>");
       console.error("Combat loop exceeded max iterations. Aborting to prevent infinite loop.");
     break;
@@ -667,7 +679,7 @@ async function simulateCombat() {
             player.spellCooldown = Math.max(1, Math.ceil(chosenSpell.baseDamage / dmgModifiers.spellCD));
           }
 
-          let damageDealt = calculateSpellDamage(chosenSpell, player, currentEnemy, effectiveMAG);
+          let damageDealt = calculateSpellDamage(player, currentEnemy, chosenSpell);
 
           // Check for a crit on player's spell attack.
           if (Math.random() < enemyCombatConstants.playerSpellCritChance) {
@@ -682,7 +694,8 @@ async function simulateCombat() {
           if (currentEnemy.HP <= 0) break;
         
           // Enemy counterattack remains physical.
-          let damageReceived = Math.max(Math.floor(currentEnemy.ATK * (enemyCombatConstants.enemyDRFactor / (enemyCombatConstants.enemyDRFactor + effectiveDEF))), 1);
+          let damageReceived = calculatePhysicalDamage(currentEnemy, activeCombatant);
+            console.log(activeCombatant.name, "counterattack damage:", damageReceived); // DEV DEBUG
 
           // Check for a crit on enemy's physical attack.
           if (Math.random() < enemyCombatConstants.enemyPhysicalCritChance) {
@@ -693,6 +706,7 @@ async function simulateCombat() {
           damageReceived = randomizeDamage(damageReceived);
           player.currentHP -= damageReceived;
           currentHealth = player.currentHP;
+            console.log("Player HP after counterattack:", currentHealth); // DEV DEBUG
           appendLog(currentEnemy.name + " counterattacks for " + damageReceived + " damage. Your HP: " + currentHealth);
           await delay(1000);
         
@@ -720,8 +734,8 @@ async function simulateCombat() {
     }
     
     // If no spell was cast, do the physical attack:
-    let damageDealt = Math.max(Math.floor(attackerATK * (enemyCombatConstants.playerDRFactor / (enemyCombatConstants.playerDRFactor + currentEnemy.DEF))), 1);
-    
+    let damageDealt = calculatePhysicalDamage(activeCombatant, currentEnemy);
+
     // Check for a crit in player's physical attack.
     if (Math.random() < enemyCombatConstants.playerPhysicalCritChance) {
       damageDealt = Math.floor(damageDealt * enemyCombatConstants.playerPhysicalCritMultiplier);
@@ -736,8 +750,7 @@ async function simulateCombat() {
     if (currentEnemy.HP <= 0) break;
     
     // Enemy counterattack.
-    let defenderDEF = (activeCombatant === player) ? effectiveDEF : player.pet.DEF;
-    let damageReceived = Math.max(Math.floor(currentEnemy.ATK * (enemyCombatConstants.enemyDRFactor / (enemyCombatConstants.enemyDRFactor + defenderDEF))), 1);
+    let damageReceived = calculatePhysicalDamage(currentEnemy, activeCombatant);
 
     // Check for a crit on enemy's physical attack.
     if (Math.random() < enemyCombatConstants.enemyPhysicalCritChance) {
