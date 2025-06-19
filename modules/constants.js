@@ -13,33 +13,33 @@ export const rarityData = {
 
 export const spellCastChance = {
   Cleric: 60,   // percent chance to cast a spell
-  Druid: 60,
-  Enchanter: 70,
-  Magician: 60,
+  Druid: 75,
+  Enchanter: 80,
+  Magician: 75,
   Necromancer: 60,
-  Paladin: 30,   
-  Shaman: 70,
-  Shadowknight: 30,
+  Paladin: 20,   
+  Shaman: 80,
+  Shadowknight: 40,
   Wizard: 90     
 };
 
 export const classBaseStats = {
-  Bard:         { HP: 100, ATK: 13, DEF: 10, MAG: 5,  MR: 0 },
-  Beastlord:    { HP: 100, ATK: 12, DEF: 12, MAG: 0,  MR: 0 },
-  Berserker:    { HP: 110, ATK: 20, DEF: 12, MAG: 0,  MR: 0 },
-  Cleric:       { HP: 105, ATK: 7,  DEF: 10, MAG: 10, MR: 0 },
+  Bard:         { HP: 100, ATK: 13, DEF: 10, MAG: 0,  MR: 0 },
+  Beastlord:    { HP: 110, ATK: 12, DEF: 12, MAG: 0,  MR: 0 },
+  Berserker:    { HP: 120, ATK: 20, DEF: 12, MAG: 0,  MR: 0 },
+  Cleric:       { HP: 105, ATK: 10,  DEF: 10, MAG: 12, MR: 0 },
   Druid:        { HP: 90,  ATK: 7,  DEF: 7,  MAG: 15, MR: 0 },
-  Enchanter:    { HP: 80,  ATK: 13, DEF: 5,  MAG: 10, MR: 0 },
-  Magician:     { HP: 80,  ATK: 5,  DEF: 5,  MAG: 20, MR: 0 },
+  Enchanter:    { HP: 80,  ATK: 7, DEF: 7,  MAG: 15, MR: 0 },
+  Magician:     { HP: 80,  ATK: 7,  DEF: 7,  MAG: 20, MR: 0 },
   Monk:         { HP: 120, ATK: 15, DEF: 12, MAG: 0,  MR: 0 },
-  Necromancer:  { HP: 90,  ATK: 7,  DEF: 10, MAG: 15, MR: 0 },
-  Paladin:      { HP: 140, ATK: 15, DEF: 15, MAG: 5,  MR: 0 },
-  Ranger:       { HP: 130, ATK: 15, DEF: 12, MAG: 0,  MR: 0 },
-  Rogue:        { HP: 130, ATK: 15, DEF: 12, MAG: 0,  MR: 0 },
-  Shadowknight: { HP: 140, ATK: 20, DEF: 15, MAG: 5,  MR: 0 },
-  Shaman:       { HP: 130, ATK: 13, DEF: 15, MAG: 15, MR: 0 },
-  Warrior:      { HP: 150, ATK: 15, DEF: 20, MAG: 0,  MR: 0 },
-  Wizard:       { HP: 80,  ATK: 5,  DEF: 15, MAG: 20, MR: 0 }
+  Necromancer:  { HP: 90,  ATK: 10,  DEF: 10, MAG: 12, MR: 0 },
+  Paladin:      { HP: 130, ATK: 15, DEF: 15, MAG: 5,  MR: 0 },
+  Ranger:       { HP: 120, ATK: 18, DEF: 12, MAG: 0,  MR: 0 },
+  Rogue:        { HP: 120, ATK: 19, DEF: 12, MAG: 0,  MR: 0 },
+  Shadowknight: { HP: 130, ATK: 18, DEF: 15, MAG: 8,  MR: 0 },
+  Shaman:       { HP: 110, ATK: 13, DEF: 15, MAG: 18, MR: 0 },
+  Warrior:      { HP: 140, ATK: 15, DEF: 20, MAG: 0,  MR: 0 },
+  Wizard:       { HP: 80,  ATK: 7,  DEF: 15, MAG: 20, MR: 0 }
 };
 
 export const raceClassRestrictions = {
