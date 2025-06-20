@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Not all areas have bosses -->
 <bosses>
-  <boss id="1" name="Brokenclaw" area="1" level="10" ATK="37" DEF="30" MR="5" HP="250" xp="1100" drop1="5000" drop2="5001" drop3="5002" />
-  <boss id="2" name="Lord Elgnub" area="3" level="18" ATK="65" DEF="49" MR="20" HP="391" xp="1900" drop1="5003" drop2="5004" drop3="5005" />
-
+  <boss id="1" name="Brokenclaw" area="1" level="10" HP="236" ATK="23" DEF="21" MR="5" xp="1100" drop1="5000" drop2="5001" drop3="5002" />
+  <boss id="2" name="Lord Elgnub" area="3" level="18" HP="356" ATK="35" DEF="33" MR="20" xp="1900" drop1="5003" drop2="5004" drop3="5005" />
 </bosses>
