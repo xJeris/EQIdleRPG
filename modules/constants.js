@@ -33,7 +33,7 @@ export const classBaseStats = {
   Magician:     { HP: 95,  ATK: 7,  DEF: 7,  MAG: 9,  MR: 0 },  // Pet, Magic
   Monk:         { HP: 130, ATK: 9,  DEF: 12, MAG: 0,  MR: 0 },  // Melee
   Necromancer:  { HP: 90,  ATK: 9,  DEF: 9,  MAG: 9,  MR: 0 },  // Pet, Magic
-  Paladin:      { HP: 130, ATK: 9,  DEF: 12, MAG: 5,  MR: 0 },  // Melee, Magic
+  Paladin:      { HP: 130, ATK: 9,  DEF: 12, MAG: 8,  MR: 0 },  // Melee, Magic
   Ranger:       { HP: 120, ATK: 12, DEF: 9,  MAG: 0,  MR: 0 },  // DPS
   Rogue:        { HP: 120, ATK: 12, DEF: 9,  MAG: 0,  MR: 0 },  // DPS
   Shadowknight: { HP: 130, ATK: 10, DEF: 12, MAG: 8,  MR: 0 },  // Melee, Magic
