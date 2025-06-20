@@ -97,7 +97,7 @@ export function calculatePhysicalDamage(attacker, target) {
     // Cap the damage to ensure it doesn't exceed xx% of the defenders max HP.
     if (attacker.isEnemy) {
       // For enemies level 1 to 3, use a lower cap multiplier.
-      capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.9 : 0.16;
+      capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.10 : 0.16;
       damageCap = target.maxHP * capMultiplier;
     } else {
       // For players level 1 to 3, use a lower cap multiplier.
@@ -117,13 +117,13 @@ export function calculatePhysicalDamage(attacker, target) {
 export function calculateSpellDamage(attacker, target, spell) {
   // Calculate raw spell damage:
 
-  // rawDamage = (spell.baseDamage + player.MAG) * exp(-enemy.MR / 100) * 1.05
-  // The multiplier of 1.05 gives spells a slight bonus.
-  const rawDamage = (spell.baseDamage + attacker.MAG) * Math.exp(-target.MR / 100) * 1.05;
+  // rawDamage = (spell.baseDamage + player.MAG) * exp(-enemy.MR / 100) * 1.01
+  // The multiplier of 1.01 gives spells a slight bonus.
+  const rawDamage = (spell.baseDamage + attacker.MAG) * Math.exp(-target.MR / 100) * 1.01;
   
   // Cap the damage to ensure it doesn't exceed xx% of the enemy's HP.
   // For players level 1 to 3, use a lower cap multiplier.
-  const capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.12 : 0.18;
+  const capMultiplier = (attacker.level >= 1 && attacker.level <= 3) ? 0.12 : 0.17;
   const damageCap = target.maxHP * capMultiplier;
   
   // Calculate final damage as the lesser of rawDamage and the cap.
