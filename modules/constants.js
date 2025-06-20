@@ -24,22 +24,22 @@ export const spellCastChance = {
 };
 
 export const classBaseStats = {
-  Bard:         { HP: 100, ATK: 13, DEF: 10, MAG: 0,  MR: 0 },
-  Beastlord:    { HP: 110, ATK: 12, DEF: 12, MAG: 0,  MR: 0 },
-  Berserker:    { HP: 120, ATK: 20, DEF: 12, MAG: 0,  MR: 0 },
-  Cleric:       { HP: 105, ATK: 10,  DEF: 10, MAG: 12, MR: 0 },
-  Druid:        { HP: 110,  ATK: 7,  DEF: 7,  MAG: 15, MR: 0 },
-  Enchanter:    { HP: 95,  ATK: 7, DEF: 7,  MAG: 15, MR: 0 },
-  Magician:     { HP: 95,  ATK: 7,  DEF: 7,  MAG: 20, MR: 0 },
-  Monk:         { HP: 120, ATK: 15, DEF: 12, MAG: 0,  MR: 0 },
-  Necromancer:  { HP: 90,  ATK: 10,  DEF: 10, MAG: 12, MR: 0 },
-  Paladin:      { HP: 130, ATK: 15, DEF: 15, MAG: 5,  MR: 0 },
-  Ranger:       { HP: 120, ATK: 18, DEF: 12, MAG: 0,  MR: 0 },
-  Rogue:        { HP: 120, ATK: 19, DEF: 12, MAG: 0,  MR: 0 },
-  Shadowknight: { HP: 130, ATK: 18, DEF: 15, MAG: 8,  MR: 0 },
-  Shaman:       { HP: 110, ATK: 13, DEF: 15, MAG: 18, MR: 0 },
-  Warrior:      { HP: 140, ATK: 15, DEF: 20, MAG: 0,  MR: 0 },
-  Wizard:       { HP: 100,  ATK: 7,  DEF: 15, MAG: 20, MR: 0 }
+  Bard:         { HP: 120, ATK: 12, DEF: 9,  MAG: 0,  MR: 0 },  // DPS
+  Beastlord:    { HP: 110, ATK: 10, DEF: 10, MAG: 0,  MR: 0 },  // Pet, No Magic
+  Berserker:    { HP: 120, ATK: 12, DEF: 9,  MAG: 0,  MR: 0 },  // DPS
+  Cleric:       { HP: 110, ATK: 7,  DEF: 8,  MAG: 12, MR: 0 },  // Caster
+  Druid:        { HP: 110, ATK: 7,  DEF: 7,  MAG: 12, MR: 0 },  // Caster
+  Enchanter:    { HP: 95,  ATK: 7,  DEF: 7,  MAG: 12, MR: 0 },  // Caster
+  Magician:     { HP: 95,  ATK: 7,  DEF: 7,  MAG: 9,  MR: 0 },  // Pet, Magic
+  Monk:         { HP: 130, ATK: 9,  DEF: 12, MAG: 0,  MR: 0 },  // Melee
+  Necromancer:  { HP: 90,  ATK: 9,  DEF: 9,  MAG: 9,  MR: 0 },  // Pet, Magic
+  Paladin:      { HP: 130, ATK: 9,  DEF: 12, MAG: 5,  MR: 0 },  // Melee, Magic
+  Ranger:       { HP: 120, ATK: 12, DEF: 9,  MAG: 0,  MR: 0 },  // DPS
+  Rogue:        { HP: 120, ATK: 12, DEF: 9,  MAG: 0,  MR: 0 },  // DPS
+  Shadowknight: { HP: 130, ATK: 10, DEF: 12, MAG: 8,  MR: 0 },  // Melee, Magic
+  Shaman:       { HP: 110, ATK: 7,  DEF: 7,  MAG: 12, MR: 0 },  // Caster
+  Warrior:      { HP: 130, ATK: 10, DEF: 12, MAG: 0,  MR: 0 },  // Melee
+  Wizard:       { HP: 95, ATK: 7,  DEF: 7,  MAG: 12, MR: 0 }   // Caster
 };
 
 export const raceClassRestrictions = {
