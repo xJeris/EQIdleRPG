@@ -9,9 +9,18 @@ import { appendLog } from "./ui.js";
 import { player } from "./character.js";
 import { checkMilestones } from "./utils.js";
 
+// Create equipment score used to compare items
 export function calculateEquipmentScore(item) {
   let baseline = item.level * 10;
-  const weights = { ATK: 1.0, DEF: 0.8, MAG: 0.9 };
+  let weights;
+
+  // set weight of MAG and ATK item stats based on class
+  if (["Cleric","Druid","Enchanter","Magician","Necromancer","Shaman","Wizard"].includes(player.class)) {
+    weights = { ATK: 0.9, DEF: 0.8, MAG: 1.0 };
+  } else {
+    weights = { ATK: 1.0, DEF: 0.8, MAG: 0.9 };
+  }
+
   let modifierSum = 0;
   for (let stat in item.modifiers) {
     if (weights[stat] !== undefined) {
@@ -39,6 +48,7 @@ export function getEquipmentBonuses(equipment) {
   return { bonusATK, bonusDEF, bonusMAG, bonusMR };
 }
 
+// Determine if new item is better then currently equipped item
 export function equipIfBetter(newItem, slot, equipment) {
   const currentItem = equipment[slot];
   const newScore = calculateEquipmentScore(newItem);
@@ -50,13 +60,10 @@ export function equipIfBetter(newItem, slot, equipment) {
   return false;
 }
 
+// Assign pet to pet classes
 export function assignPetToPlayer() {
   if (["Magician", "Necromancer", "Beastlord"].includes(player.class)) {
-    console.log("Assigning pet to player:", player.name, "Class:", player.class, "Level:", player.level);
     if (window.gameData && window.gameData.pets) {
-
-      // Show all pets for this class. for DEBUGGING
-      //const allClassPets = window.gameData.pets.filter(pet => pet.class === player.class);
 
       // Now filter pets by level
       let possiblePets = window.gameData.pets.filter(pet =>
@@ -67,7 +74,6 @@ export function assignPetToPlayer() {
 
       if (possiblePets.length > 0) {
         // Assign the highest-level available pet
-        //let newPet = possiblePets[possiblePets.length - 1];
         let newPet = possiblePets.reduce((a, b) => (a.level > b.level ? a : b));
         player.pet = {
           id: newPet.id,

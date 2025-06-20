@@ -134,6 +134,7 @@ export function addXP(amount) {
       assignPetToPlayer();
     }
     
+    // Select area to fight for next level
     let newArea = findAreaForLevel(player.level);
     if (!player.currentArea) {
       appendLog("You enter a new area: " + newArea.name + ".");
@@ -142,6 +143,7 @@ export function addXP(amount) {
       appendLog("You have outgrown your current area and now move to " + newArea.name + ".");
       player.currentArea = newArea;
     } else {
+      // Chance to stay in same area as long as its level appropriate (50%)
       if (Math.random() < 0.5 && window.gameData && window.gameData.areas) {
         let possibleAreas = window.gameData.areas.filter(area =>
           area.id !== player.currentArea.id &&
@@ -404,9 +406,8 @@ async function simulateBossBattle() {
     let bossDropItems = window.gameData.items.filter(item => parseInt(item.id) === parseInt(selectedDropId));
     if (bossDropItems.length > 0) {
       let bossDrop = bossDropItems[0];
-      // Option 1: Equip the drop if it's better.
+      // Equip the drop if it's better or slot is empty
       equipIfBetter(bossDrop, bossDrop.slot, player.equipment);
-      // Option 2: Alternatively, you might notify the player that they've received this item.
       appendLog("The boss dropped " + getItemDisplayName(bossDrop) + "!");
     } else {
       appendLog("The boss did not drop any recognizable items.");
@@ -455,7 +456,7 @@ async function simulateBossBattle() {
       }
     }
 
-    player.currentHP = Math.floor(player.HP * bossCombatConstants.playerHPRecovery);
+    player.currentHP = Math.floor(player.maxHP * bossCombatConstants.playerHPRecovery);
     updateStatsUI(player, getEquipmentBonuses(player.equipment));
 
     appendLog("<span style='color: blue;'>You prepare for the next battle.</span>");
@@ -795,11 +796,6 @@ async function simulateCombat() {
     if (player.spellCooldown && player.spellCooldown > 0) {
       player.spellCooldown = 0;
     }
-
-    // Heal the player fully between fights.
-    player.currentHP = player.HP;
-    appendLog("<span style='color: green;'>You feel rejuvenated and fully healed!</span>");
-    updateStatsUI(player, getEquipmentBonuses(player.equipment));
   
     // If a pet died during combat, grant a new pet before next battle.
     if (petAllowed && player.petDied) {
@@ -814,7 +810,7 @@ async function simulateCombat() {
 
   } else if (petAllowed && player.petDied && player.currentHP <= 0) {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
-    player.currentHP = player.HP;
+    player.currentHP = player.maxHP;
     player.xp = Math.floor(player.xp * enemyCombatConstants.playerXPLoss);
 
     // At the end of fight, reset spell cooldown if it was active.
@@ -825,14 +821,20 @@ async function simulateCombat() {
     assignPetToPlayer();
   } else {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
-    player.currentHP = player.HP;
+    player.currentHP = player.maxHP;
     player.xp = Math.floor(player.xp * enemyCombatConstants.playerXPLoss);
+
 
     // At the end of fight, reset spell cooldown if it was active.
     if (player.spellCooldown && player.spellCooldown > 0) {
       player.spellCooldown = 0;
     }
   }
+
+  // Heal the player fully between fights.
+    player.currentHP = player.maxHP;
+    appendLog("<span style='color: green;'>You feel rejuvenated and fully healed!</span>");
+    updateStatsUI(player, getEquipmentBonuses(player.equipment));
 
   // Equipment drop chance.
   if (Math.random() < enemyCombatConstants.equipDropChance) { // 10% chance for an item drop
@@ -853,7 +855,9 @@ async function simulateCombat() {
 
   if (validItems.length > 0) {
     let randomItem = validItems[Math.floor(Math.random() * validItems.length)];
+    // Equip the drop if it's better or slot is empty
     equipIfBetter(randomItem, randomItem.slot, player.equipment);
+    appendLog("The enemy dropped " + getItemDisplayName(randomItem) + "!");
     }
       
     updateUI(player, player.equipment, getEquipmentBonuses());
