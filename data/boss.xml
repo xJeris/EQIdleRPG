@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Not all areas have bosses -->
 <bosses>
-  <boss id="1" name="Brokenclaw" area="1" level="10" HP="236" ATK="23" DEF="21" MR="5" xp="1100" drop1="5000" drop2="5001" drop3="5002" />
-  <boss id="2" name="Lord Elgnub" area="3" level="18" HP="356" ATK="35" DEF="33" MR="20" xp="1900" drop1="5003" drop2="5004" drop3="5005" />
+  <boss id="1" name="Brokenclaw" area="1" level="10" HP="236" ATK="23" DEF="21" MR="5" xp="825" drop1="5000" drop2="5001" drop3="5002" />
+  <boss id="2" name="Lord Elgnub" area="3" level="16" HP="356" ATK="35" DEF="33" MR="20" xp="1275" drop1="5003" drop2="5004" drop3="5005" />
+  <boss id="3" name="Emperor Crush" area="6" level="21" HP="414" ATK="39" DEF="38" MR="0" xp="1650" drop1="5006" drop2="5007" drop3="5008" />
+
 </bosses>

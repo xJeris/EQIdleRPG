@@ -65,4 +65,8 @@ Scaling for Level and Rarity on non-boss items:
   <item id="5003" name="Gnoll Slayer" slot="Main Hand" level="2" rarity="Common" modifiers="ATK:+8" />
   <item id="5004" name="Fine Steel Wakizashi" slot="Main Hand" level="2" rarity="Common" modifiers="ATK:+6" />
   <item id="5005" name="Onyx Earring" slot="Ring 2" level="2" rarity="Common" modifiers="MAG:+4" />
+
+  <item id="5006" name="Simple Defiant Tunic " slot="Torso" level="2" rarity="Uncommon" modifiers="DEF:+6,MAG:+5" />
+  <item id="5007" name="Simple Defiant Cloak" slot="Back" level="2" rarity="Uncommon" modifiers="DEF:+5,ATK:+5" />
+  <item id="5008" name="Simple Defiant Cap" slot="Head" level="2" rarity="Uncommon" modifiers="ATK:+5,DEF:+5" />
 </items>
