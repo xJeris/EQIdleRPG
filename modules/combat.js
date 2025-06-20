@@ -835,6 +835,7 @@ async function simulateCombat() {
     player.currentHP = player.maxHP;
     appendLog("<span style='color: green;'>You feel rejuvenated and fully healed!</span>");
     updateStatsUI(player, getEquipmentBonuses(player.equipment));
+    await delay(500);
 
   // Equipment drop chance.
   if (Math.random() < enemyCombatConstants.equipDropChance) { // 10% chance for an item drop
