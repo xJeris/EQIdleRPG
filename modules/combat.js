@@ -408,7 +408,7 @@ async function simulateBossBattle() {
       let bossDrop = bossDropItems[0];
       // Equip the drop if it's better or slot is empty
       equipIfBetter(bossDrop, bossDrop.slot, player.equipment);
-      appendLog("The boss dropped " + getItemDisplayName(bossDrop) + "!");
+      appendLog("<span style='color: #e755c8'>The boss dropped " + getItemDisplayName(bossDrop) + "!</span>");
     } else {
       appendLog("The boss did not drop any recognizable items.");
     }
@@ -810,7 +810,7 @@ async function simulateCombat() {
 
   } else if (petAllowed && player.petDied && player.currentHP <= 0) {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
-    player.currentHP = player.maxHP;
+    player.currentHP = player.HP;
     player.xp = Math.floor(player.xp * enemyCombatConstants.playerXPLoss);
 
     // At the end of fight, reset spell cooldown if it was active.
@@ -821,7 +821,7 @@ async function simulateCombat() {
     assignPetToPlayer();
   } else {
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
-    player.currentHP = player.maxHP;
+    player.currentHP = player.HP;
     player.xp = Math.floor(player.xp * enemyCombatConstants.playerXPLoss);
 
 
@@ -832,7 +832,7 @@ async function simulateCombat() {
   }
 
   // Heal the player fully between fights.
-    player.currentHP = player.maxHP;
+    player.currentHP = player.HP;
     appendLog("<span style='color: green;'>You feel rejuvenated and fully healed!</span>");
     updateStatsUI(player, getEquipmentBonuses(player.equipment));
     await delay(500);
@@ -858,7 +858,7 @@ async function simulateCombat() {
     let randomItem = validItems[Math.floor(Math.random() * validItems.length)];
     // Equip the drop if it's better or slot is empty
     equipIfBetter(randomItem, randomItem.slot, player.equipment);
-    appendLog("The enemy dropped " + getItemDisplayName(randomItem) + "!");
+    appendLog("<span style='color: #e755c8'>The enemy dropped " + getItemDisplayName(randomItem) + "!</span>");
     }
       
     updateUI(player, player.equipment, getEquipmentBonuses());
