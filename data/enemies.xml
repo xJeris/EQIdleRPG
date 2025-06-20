@@ -263,17 +263,17 @@
       <area id="4"/>
     </areas>
   </enemy>
-  <enemy id="52" name="a scaled wolf tracker" minLevel="19" maxLevel="19" HP="276" ATK="49" DEF="43" MR="0" xp="1000">
+  <enemy id="52" name="a scaled wolf tracker" minLevel="19" maxLevel="19" HP="276" ATK="46" DEF="43" MR="0" xp="1000">
     <areas>
       <area id="4"/>
     </areas>
   </enemy>
-  <enemy id="53" name="a burynai cutter" minLevel="20" maxLevel="20" HP="292" ATK="51" DEF="45" MR="0" xp="1050">
+  <enemy id="53" name="a burynai cutter" minLevel="20" maxLevel="20" HP="292" ATK="48" DEF="45" MR="0" xp="1050">
     <areas>
       <area id="4"/>
     </areas>
   </enemy>
-  <enemy id="54" name="a scaled wolf prowler" minLevel="19" maxLevel="20" HP="276" ATK="49" DEF="43" MR="0" xp="1000">
+  <enemy id="54" name="a scaled wolf prowler" minLevel="19" maxLevel="20" HP="276" ATK="46" DEF="43" MR="0" xp="1000">
     <areas>
       <area id="4"/>
     </areas>
@@ -379,7 +379,7 @@
       <area id="5"/>
     </areas>
   </enemy>
-  <enemy id="75" name="a Leatherfoot Medic" minLevel="19" maxLevel="20" HP="276" ATK="49" DEF="43" MR="0" xp="1000">
+  <enemy id="75" name="a Leatherfoot Medic" minLevel="19" maxLevel="20" HP="276" ATK="46" DEF="43" MR="0" xp="1000">
     <areas>
       <area id="5"/>
     </areas>

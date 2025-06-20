@@ -62,8 +62,9 @@ export function scaleGenericEnemy(baseEnemy, targetLevel, hpScale, atkScale, def
   // Iteratively apply the scaling factors from level 2 up to targetLevel.
   for (let lvl = 2; lvl <= targetLevel; lvl++) {
     currentStats.HP = Math.floor(currentStats.HP * hpScale);
-    currentStats.ATK = Math.ceil(currentStats.ATK * (0.09+atkScale));
-    currentStats.DEF = Math.ceil(currentStats.DEF * (0.09+defScale));
+    // old formula:  currentStats.ATK = Math.ceil(currentStats.ATK * (0.09+atkScale));
+    currentStats.ATK = Math.ceil(currentStats.ATK * atkScale);
+    currentStats.DEF = Math.ceil(currentStats.DEF * defScale);
     // Increase XP requirement by a fixed amount per level; you can adjust the logic as needed.
     currentStats.xp += 50;
   }
