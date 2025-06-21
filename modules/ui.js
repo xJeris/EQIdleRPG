@@ -24,6 +24,30 @@ export function updateAreaInfo(area) {
   }
 }
 
+export function updateGameTotals() {
+  const totalsList = document.getElementById("totalsList");
+  if (!totalsList) {
+    console.warn("Totals list element not found");
+    return;
+  }
+
+  totalsList.innerHTML = '';
+
+  const gameTotals = {
+    "Bosses Slain": player.bossKills || 0,
+    "Enemies Defeated": player.enemyKills || 0,
+    "Gear Found": player.itemDrops || 0,
+    "Defeats": player.deathCount || 0
+  };
+
+  // Iterate over the gameTotals, creating an <li> for each total.
+  for (const key in gameTotals) {
+    const li = document.createElement("li");
+    li.textContent = `${key}: ${gameTotals[key]}`;
+    totalsList.appendChild(li);
+  }
+}
+
 export function showMilestonesOverlay() {
   const overlay = document.getElementById("milestonesOverlay");
   const list = document.getElementById("milestonesList");

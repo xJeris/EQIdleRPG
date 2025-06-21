@@ -4,7 +4,7 @@
  **********************************************************************************/
 
 import { delay, randomizeDamage, getEffectiveMR, checkMilestones, scaleGenericEnemy, calculatePhysicalDamage, calculateSpellDamage } from "./utils.js";
-import { appendLog, updateUI, updateStatsUI, updateAreaInfo, getItemDisplayName } from "./ui.js";
+import { appendLog, updateUI, updateStatsUI, updateAreaInfo, getItemDisplayName, updateGameTotals } from "./ui.js";
 import { equipIfBetter, getEquipmentBonuses, assignPetToPlayer } from "./equipment.js";
 import { player } from "./character.js";
 import { spellCastChance, classesWithPets, enemyCombatConstants, bossCombatConstants, dmgModifiers, playerXpScaling, playerScalingSet1, playerScalingSet2 } from "./constants.js";
@@ -42,6 +42,10 @@ export function loadProgress() {
     player.milestones = player.milestones || [];
     player.enemyKills = player.enemyKills || 0;
     player.bossKills = player.bossKills || 0;
+
+    // Additional game stat total tracking
+    player.itemDrops = player.itemDrops || 0;
+    player.deathCount = player.deathCount || 0;
 
   } catch (err) {
     console.error("Error parsing saved player data:", err);
@@ -408,6 +412,8 @@ async function simulateBossBattle() {
       let bossDrop = bossDropItems[0];
       // Equip the drop if it's better or slot is empty
       equipIfBetter(bossDrop, bossDrop.slot, player.equipment);
+      player.itemDrops++;
+      updateGameTotals();
       appendLog("<span style='color: #e755c8'>The boss dropped " + getItemDisplayName(bossDrop) + "!</span>");
     } else {
       appendLog("The boss did not drop any recognizable items.");
@@ -428,6 +434,8 @@ async function simulateBossBattle() {
     }
 
     } else {
+      player.deathCount++;
+      updateGameTotals();
       appendLog("<span class='loseOutcome'>You were defeated by " + currentBoss.name + ".</span>");
       player.currentHP = 0;
       player.xp = Math.floor(player.xp * bossCombatConstants.playerXPLoss);
@@ -790,6 +798,7 @@ async function simulateCombat() {
     appendLog("<span class='winOutcome'>You defeated " + currentEnemy.name + "!</span>");
     addXP(currentEnemy.xp);
     player.enemyKills++;
+    updateGameTotals();
     checkMilestones("kill", player.enemyKills);
 
     // At the end of fight, reset spell cooldown if it was active.
@@ -809,6 +818,8 @@ async function simulateCombat() {
     }
 
   } else if (petAllowed && player.petDied && player.currentHP <= 0) {
+    player.deathCount++;
+    updateGameTotals();
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
     player.currentHP = player.HP;
     player.xp = Math.floor(player.xp * enemyCombatConstants.playerXPLoss);
@@ -820,6 +831,8 @@ async function simulateCombat() {
 
     assignPetToPlayer();
   } else {
+    player.deathCount++;
+    updateGameTotals();
     appendLog("<span class='loseOutcome'>You were defeated by " + currentEnemy.name + ".</span>");
     player.currentHP = player.HP;
     player.xp = Math.floor(player.xp * enemyCombatConstants.playerXPLoss);
@@ -855,6 +868,8 @@ async function simulateCombat() {
     );
 
   if (validItems.length > 0) {
+      player.itemDrops++;
+      updateGameTotals();
     let randomItem = validItems[Math.floor(Math.random() * validItems.length)];
     // Equip the drop if it's better or slot is empty
     equipIfBetter(randomItem, randomItem.slot, player.equipment);
@@ -872,6 +887,7 @@ async function simulateCombat() {
 // Game Loop
 export async function startGameLoop() {
   gameRunning = true;
+    updateGameTotals();
   while (gameRunning) {
     // 2% chance to encounter a boss (0.02 probability)
     if (Math.random() < bossCombatConstants.bossEncChance) {

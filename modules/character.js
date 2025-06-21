@@ -37,6 +37,8 @@ export let player = {
   milestones: [], // Array to track achieved milestones
   enemyKills:0,
   bossKills: 0,
+  itemDrops: 0,
+  deathCount: 0,
   pet: null,
   petDied: false
 };
