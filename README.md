@@ -40,6 +40,9 @@ Place the folders and files in your desired web-server directory. Navigate to th
 ## Changelog
 
 Major Updates:
+- 06/21/25 <br/>
+&emsp; - Added totals tracking for player events (e.g., items found, kills, deaths). <br/>
+
 - 06/18/25 <br/>
 &emsp; - Moved area name below the adventure log, and allowed for optional description flavor text. <br/>
 &emsp; - Added customizable Milestones (achievements). <br/>
