@@ -30,7 +30,6 @@ Possible future enhancements that could be made.
 - **Songs:** Allow bards to play songs.
 - **Updated Combat:** Allow pet classes to attack while their pet is alive instead of only if it dies.
 - **Images:** Add Character and Enemy Images to the interface.
-- **Improved UI:** Update the UI to look better.
 - **Flavor Text:** Add to or update the games flavor text.
 
 ## Installation
@@ -41,6 +40,7 @@ Place the folders and files in your desired web-server directory. Navigate to th
 
 Major Updates:
 - 06/21/25 <br/>
+&emsp; - Improved the UI. New borders, font, backgrounds, buttons, etc. <br/>
 &emsp; - Added totals tracking for player events (e.g., items found, kills, deaths). <br/>
 
 - 06/18/25 <br/>
