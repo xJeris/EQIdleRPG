@@ -8,8 +8,9 @@
     padding: 0;
   }
   h2 {
-    border-bottom: 1px solid #444;
+    /*border-bottom: 1px solid #444;*/
     padding-bottom: 5px;
+    font-size: 24px;
   }
 
   ul {
@@ -147,17 +148,17 @@
   
   /* Base style for fantasy buttons */
   .fantasy-button {
-    font-family: 'Cinzel', fantasy, serif; /* Keeps the fantasy theme */
+    font-family: 'Cinzel', fantasy, serif; 
     background: linear-gradient(145deg, #8A7B5A, #5C4C36);
     border: 2px solid #D4AF37;
     color: #fff;
-    padding: 8px 16px;  /* Reduced padding */
+    padding: 8px 16px;  
     text-transform: uppercase;
-    font-size: 14px;    /* Slightly smaller font-size */
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); /* Adjust shadow if needed */
+    font-size: 14px;    
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); 
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    border-radius: 4px; /* Slightly smaller border radius */
+    border-radius: 4px; 
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   }
 
@@ -175,4 +176,16 @@
   .fantasy-button:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5);
+  }
+
+  .fantasy-header {
+    font-family: 'Cinzel', fantasy, serif;
+    color: #D4AF37;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+  }
+
+  #h4 {
+    border-bottom: 1px solid #D4AF37;
   }

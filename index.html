@@ -87,8 +87,9 @@
   <!-- Main Game UI (hidden until character creation is complete) -->
   <div id="gameUI" style="display: none;">
     <div id="playerStats">
-      <h2>Character Info</h2>
+      <h2 class="fantasy-header">Character Info</h2>
       <p id="playerInfo">Name: - | Race: - | Class: -</p>
+      <h4 id="h4" class="fantasy-header">Stats</h4>
       <ul id="statsList">
         <!-- The JS will populate this list -->
       </ul>
@@ -96,13 +97,13 @@
         <!-- The JS will populate this list -->
       </ul>
       <div id="equipment">
-        <h4><span style="color: rgb(255, 134, 35)">Equipment</span></h4>
+        <h4 id="h4" class="fantasy-header">Equipment</h4>
         <ul id="equipmentList">
           <!-- The JS will populate this list -->
         </ul>
       </div>
       <div id="gameTotals">
-        <h4><span style="color: rgb(255, 134, 35)">Adventure Totals</span></h4>
+        <h4 id="h4" class="fantasy-header">Adventure Totals</h4>
         <ul id="totalsList">
           <!-- The JS will populate this list -->
         </ul>
@@ -111,7 +112,7 @@
       <button id="milestonesButton" class="fantasy-button">Milestones</button> &nbsp;&nbsp;&nbsp; <button id="resetButton" class="fantasy-button">New Game</button>
     </div>
     <div id="gameText">
-      <h2>Adventure Log</h2>
+      <h2 class="fantasy-header">Adventure Log</h2>
       <div id="combatLog"></div>
 
       <div id="areaInfo" style="margin-top: 1em;">

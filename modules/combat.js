@@ -268,7 +268,7 @@ async function simulateBossBattle() {
       
       damageReceived = randomizeDamage(damageReceived);
       player.pet.currentHP -= damageReceived;
-      appendLog(currentBoss.name + " attacks for " + damageReceived + " damage. Pet HP: " + player.pet.currentHP);
+      appendLog(currentBoss.name + " attacks for " + damageReceived + " damage.&nbsp; Pet HP: " + player.pet.currentHP);
       await delay(1000);
 
       updateStatsUI(player, getEquipmentBonuses(player.equipment));
@@ -341,7 +341,7 @@ async function simulateBossBattle() {
 
         damageReceived = randomizeDamage(damageReceived);
         player.currentHP -= damageReceived;
-        appendLog(currentBoss.name + " counterattacks for " + damageReceived + " damage. Your HP: " + player.currentHP);
+        appendLog(currentBoss.name + " counterattacks for " + damageReceived + " damage.&nbsp; Your HP: " + player.currentHP);
         await delay(1000);
       
         updateStatsUI(player, getEquipmentBonuses(player.equipment));
@@ -377,7 +377,7 @@ async function simulateBossBattle() {
       
       bossDamage = randomizeDamage(bossDamage);
       player.currentHP -= bossDamage;
-      appendLog(currentBoss.name + " attacks for " + bossDamage + " damage. Your HP: " + player.currentHP);
+      appendLog(currentBoss.name + " attacks for " + bossDamage + " damage.&nbsp; Your HP: " + player.currentHP);
       await delay(1000);
 
       updateStatsUI(player, getEquipmentBonuses(player.equipment));
@@ -695,7 +695,7 @@ async function simulateCombat() {
 
           damageDealt = randomizeDamage(damageDealt);
           currentEnemy.HP -= damageDealt;
-          appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Enemy HP: " + currentEnemy.HP);
+          appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage!&nbsp; Enemy HP: " + currentEnemy.HP);
           await delay(1000);
           if (currentEnemy.HP <= 0) break;
         
@@ -711,7 +711,7 @@ async function simulateCombat() {
           damageReceived = randomizeDamage(damageReceived);
           player.currentHP -= damageReceived;
           currentHealth = player.currentHP;
-          appendLog(currentEnemy.name + " counterattacks for " + damageReceived + " damage. Your HP: " + currentHealth);
+          appendLog(currentEnemy.name + " counterattacks for " + damageReceived + " damage.&nbsp; Your HP: " + currentHealth);
           await delay(1000);
         
           updateStatsUI(player, getEquipmentBonuses(player.equipment));
@@ -748,7 +748,7 @@ async function simulateCombat() {
     
     damageDealt = randomizeDamage(damageDealt);
     currentEnemy.HP -= damageDealt;
-    appendLog(attackerName + " attacks, dealing " + damageDealt + " damage! Enemy HP: " + currentEnemy.HP);
+    appendLog(attackerName + " attacks, dealing " + damageDealt + " damage!&nbsp; Enemy HP: " + currentEnemy.HP);
     await delay(1000);
     
     if (currentEnemy.HP <= 0) break;
@@ -772,7 +772,7 @@ async function simulateCombat() {
       currentHealth = player.pet.currentHP;
     }
     
-    appendLog(currentEnemy.name + " attacks for " + damageReceived + " damage. " + attackerName + " HP: " + currentHealth);
+    appendLog(currentEnemy.name + " attacks for " + damageReceived + " damage.&nbsp; " + attackerName + " HP: " + currentHealth);
     await delay(1000);
 
     // At the end of the player's turn, decrement cooldown if active
@@ -887,6 +887,8 @@ async function simulateCombat() {
 // Game Loop
 export async function startGameLoop() {
   gameRunning = true;
+    updateUI(player, player.equipment, getEquipmentBonuses());
+    updateStatsUI(player, getEquipmentBonuses(player.equipment));
     updateGameTotals();
   while (gameRunning) {
     // 2% chance to encounter a boss (0.02 probability)
