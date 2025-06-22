@@ -1,6 +1,7 @@
 /* Global styling */
-body {
-    font-family: Arial, sans-serif;
+  body {
+    font-family: 'Cinzel', fantasy, serif;
+    /*font-family: Arial, sans-serif;*/
     background-color: #282c34;
     color: #f0f0f0;
     margin: 0;
@@ -131,23 +132,47 @@ body {
     font-size: 14px;
     margin-top: 5px;
   }
-  /* #characterCreation button { */
   #startAdv {
     margin-top: 15px;
     padding: 10px;
     width: 100%;
-    background: #61dafb;
-    border: none;
-    font-size: 16px;
     cursor: pointer;
   }
   #resetCharacter {
     margin-top: 15px;
     padding: 10px;
     width: 100%;
-    background: #f2ff7b;
-    border: none;
-    font-size: 16px;
     cursor: pointer;
   }
   
+  /* Base style for fantasy buttons */
+  .fantasy-button {
+    font-family: 'Cinzel', fantasy, serif; /* Keeps the fantasy theme */
+    background: linear-gradient(145deg, #8A7B5A, #5C4C36);
+    border: 2px solid #D4AF37;
+    color: #fff;
+    padding: 8px 16px;  /* Reduced padding */
+    text-transform: uppercase;
+    font-size: 14px;    /* Slightly smaller font-size */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); /* Adjust shadow if needed */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border-radius: 4px; /* Slightly smaller border radius */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .fantasy-button:hover {
+    background: linear-gradient(145deg, #5C4C36, #8A7B5A);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .fantasy-button:active {
+    transform: translateY(0px);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .fantasy-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5);
+  }
