@@ -57,6 +57,10 @@ body {
   #banner {
     height: 100px;
     background-color: #20252b; 
+    background-image: url('/img/banner_bg.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     border:#a7a7a7 1px solid;
     color: #fff; 
     font-size: 20pt;
