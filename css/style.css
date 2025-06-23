@@ -70,7 +70,7 @@
     padding: 10px;
     overflow: hidden;
   }
-  
+
   /* Combat log styling */
   #combatLog {
     border: 5px solid transparent;
@@ -132,6 +132,13 @@
     padding: 5px;
     font-size: 14px;
     margin-top: 5px;
+  }
+  #characterCreation input#playerName {
+    width: 96%;
+  }
+  #characterCreation input#levelInput {
+    width: 96%;
+    margin: 0;
   }
   #startAdv {
     margin-top: 15px;

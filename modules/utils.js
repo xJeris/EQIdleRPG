@@ -3,9 +3,11 @@
  * Contains helper functions.
  ***********************************************************************************/
 
-import { dmgModifiers } from "./constants.js"; 
-import { appendLog } from "./ui.js";
+import { dmgModifiers, classBaseStats, playerScalingSet1, playerScalingSet2, playerXpScaling } from "./constants.js"; 
+import { appendLog, updateUI, updateAreaInfo } from "./ui.js";
 import { player } from "./character.js";
+import { assignPetToPlayer } from "./equipment.js";
+import { findAreaForLevel, startGameLoop, saveProgress } from "./combat.js";
 
 export function parseModifiers(str) {
   if (!str) return {};
@@ -131,4 +133,73 @@ export function calculateSpellDamage(attacker, target, spell) {
   
   // Round the result to a whole number. You can choose Math.floor or Math.round.
   return Math.floor(finalDamage);
+}
+
+
+/**
+ * FOR DEVELOPMENT TESTING
+ * Scales up the player's stats based on the selected level (1-100)
+ * and the player's class selection.
+ *
+ * The level to scale the player to (1-100)
+ */
+export function scalePlayerStats(selectedLevel) {
+  if (selectedLevel < 1 || selectedLevel > 100) {
+    console.error("Selected level must be between 1 and 100.");
+    return;
+  }
+
+  // Get the base stats for the chosen class.
+  const baseStats = classBaseStats[player.class];
+  if (!baseStats) {
+    console.error(`Base stats for class "${player.class}" not found.`);
+    return;
+  }
+
+  // Use temporary (float) variables for iteration.
+  let hp  = baseStats.HP;
+  let atk = baseStats.ATK;
+  let def = baseStats.DEF;
+  let mag = baseStats.MAG;
+  let mr  = baseStats.MR;
+
+  // Loop from level 2 until the selected level.
+  // Each iteration uses the new stat values to compute the next level.
+  for (let lvl = 2; lvl <= selectedLevel; lvl++) {
+    // Pick the scaling set based on current level.
+    const scaling = (lvl <= 50) ? playerScalingSet1 : playerScalingSet2;
+    hp  = hp  * scaling.hpIncreaseFactor;
+    atk = atk * scaling.AtkIncreaseFactor;
+    def = def * scaling.DefIncreaseFactor;
+    mag = mag * scaling.MagIncreaseFactor;
+    if (scaling.MrIncreaseFactor !== 0) {
+      mr  = mr * scaling.MrIncreaseFactor;
+    }
+  }
+
+  // Update the player object.
+  player.level = selectedLevel;
+  player.HP  = Math.round(hp);
+  player.ATK = Math.round(atk);
+  player.DEF = Math.round(def);
+  player.MAG = Math.round(mag);
+  player.MR  = Math.round(mr);
+  player.maxHP = player.HP;
+  player.currentHP = player.HP;
+  
+  // Set the experience needed for the next level.
+  player.xpNeeded = Math.round(1000 * Math.pow(playerXpScaling, selectedLevel - 1));
+
+  // Assign pet if applicable.
+  assignPetToPlayer();
+    
+  // Set initial area.
+  player.currentArea = findAreaForLevel(player.level);
+  updateUI(player, player.equipment, {});
+  updateAreaInfo(player.currentArea);
+  saveProgress();
+  document.getElementById("characterCreation").style.display = "none";
+  document.getElementById("gameUI").style.display = "flex";
+  appendLog("Welcome, " + player.name + "! Your adventure begins in " + player.currentArea.name + ".");
+  startGameLoop();
 }

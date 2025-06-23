@@ -39,6 +39,9 @@ Place the folders and files in your desired web-server directory. Navigate to th
 ## Changelog
 
 Major Updates:
+- 06/23/25 <br/>
+&emsp; - Added developer mode. Level can be set to test features. <br/>
+
 - 06/21/25 <br/>
 &emsp; - Improved the UI. New borders, font, backgrounds, buttons, etc. <br/>
 &emsp; - Added totals tracking for player events (e.g., items found, kills, deaths). <br/>

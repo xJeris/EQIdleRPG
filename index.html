@@ -62,6 +62,11 @@
           <option value="Wizard" selected>Wizard</option>
         </select>
       </label>
+      <!-- Dev: Level Input (hidden by default) -->
+      <div id="devLevelContainer" style="display: none;">
+        <label for="levelInput">Level:</label>
+        <input type="text" id="levelInput" name="level" placeholder="1">
+      </div>
       <label>
         Gender:
         <select id="playerGender" required>
@@ -123,7 +128,6 @@
     </div>
   </div>
 
-  <!-- <script src="js/app.js"></script> -->
-  <script type="module" src="./modules/index.js"></script> 
+  <script type="module" src="./modules/index.js"></script>
 </body>
 </html>

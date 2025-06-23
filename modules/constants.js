@@ -3,6 +3,8 @@
  * Contains global constant data used throughout the application.
  ***********************************************************************************/
 
+export const devMode = 0; // Turn on Development mode
+
 export const rarityData = {
   "Common":    { multiplier: 1.0, color: "white" },
   "Uncommon":  { multiplier: 1.1, color: "green" },
@@ -82,6 +84,7 @@ export const playerScalingSet2 = {
 };
 
 export const playerXpScaling = 1.241; // XP scaling factor (default: 2.482) for leveling up, used to calculate xpNeeded for each level.
+export const zoneChange = 0.5; // Chance to stay in same zone when leveling up if its still level appropriate.
 
 export const enemyCombatConstants = {
   playerXPLoss: 0.9, // Player loses 10% of their XP after dying in combat - player.xp = Math.floor(player.xp * 0.9).

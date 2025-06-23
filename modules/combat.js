@@ -7,7 +7,7 @@ import { delay, randomizeDamage, getEffectiveMR, checkMilestones, scaleGenericEn
 import { appendLog, updateUI, updateStatsUI, updateAreaInfo, getItemDisplayName, updateGameTotals } from "./ui.js";
 import { equipIfBetter, getEquipmentBonuses, assignPetToPlayer } from "./equipment.js";
 import { player } from "./character.js";
-import { spellCastChance, classesWithPets, enemyCombatConstants, bossCombatConstants, dmgModifiers, playerXpScaling, playerScalingSet1, playerScalingSet2 } from "./constants.js";
+import { spellCastChance, classesWithPets, enemyCombatConstants, bossCombatConstants, dmgModifiers, playerXpScaling, zoneChange, playerScalingSet1, playerScalingSet2 } from "./constants.js";
 
 // Global flag to control the game loop.
 export let gameRunning = false;
@@ -148,7 +148,7 @@ export function addXP(amount) {
       player.currentArea = newArea;
     } else {
       // Chance to stay in same area as long as its level appropriate (50%)
-      if (Math.random() < 0.5 && window.gameData && window.gameData.areas) {
+      if (Math.random() < zoneChange && window.gameData && window.gameData.areas) {
         let possibleAreas = window.gameData.areas.filter(area =>
           area.id !== player.currentArea.id &&
           player.level >= area.recommendedLevel &&
