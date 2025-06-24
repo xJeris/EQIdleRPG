@@ -5,6 +5,7 @@
 
 import { rarityData } from "./constants.js";
 import { player } from './character.js';
+import { getEquipmentBonuses } from "./equipment.js";
 window.player = player;
 
 export function appendLog(message) {
@@ -85,34 +86,55 @@ export function updateEquipmentUI(equipment) {
   });
 }
 
-export function updateStatsUI(player, equipmentBonuses = { bonusATK: 0, bonusDEF: 0, bonusMAG: 0, bonusMR: 0 }) {
-  
+export function formatStat(effective, base, opts = {}) {
+  const { up = 'green', down = 'red' } = opts;
+  if      (effective > base) return `<span style="color:${up}">${effective}</span>`;
+  else if (effective < base) return `<span style="color:${down}">${effective}</span>`;
+  else    return `${effective}`;
+}
+
+export function updateStatsUI(player) {
+
   if (!player) {
     console.error("updateStatsUI: player is undefined");
     return;
   }
 
+  // Collect any stat bonuses
+  const {
+    bonusATK = 0,
+    bonusDEF = 0,
+    bonusMAG = 0,
+    bonusMR  = 0
+  } = getEquipmentBonuses(player.equipment);
+
+  // Add bonuses to base stats
   const statsList = document.getElementById("statsList");
   statsList.innerHTML = "";
-  const effectiveATK = player.ATK + equipmentBonuses.bonusATK;
-  const effectiveDEF = player.DEF + equipmentBonuses.bonusDEF;
-  const effectiveMAG = player.MAG + equipmentBonuses.bonusMAG;
-  const effectiveMR = player.MR + equipmentBonuses.bonusMR;
+  const effectiveATK = player.ATK + bonusATK;
+  const effectiveDEF = player.DEF + bonusDEF;
+  const effectiveMAG = player.MAG + bonusMAG;
+  const effectiveMR = player.MR + bonusMR;
+
+  let displayATK = formatStat(effectiveATK, player.ATK);
+  let displayDEF = formatStat(effectiveDEF, player.DEF);
+  let displayMAG = formatStat(effectiveMAG, player.MAG);
+  let displayMR = formatStat(effectiveMR, player.MR);
 
   const stats = {
     "Level": player.level,
     "XP": player.xp + " / " + player.xpNeeded,
     "HP": (player.currentHP || 0) + " / " + (player.HP || 0),
-    "ATK": (player.ATK || 0) + " (+" + (equipmentBonuses.bonusATK || 0) + ") = " + (effectiveATK || 0),
-    "DEF": (player.DEF || 0) + " (+" + (equipmentBonuses.bonusDEF || 0) + ") = " + (effectiveDEF || 0),
-    "MAG": (player.MAG || 0) + " (+" + (equipmentBonuses.bonusMAG || 0) + ") = " + (effectiveMAG || 0),
-    "MR": (player.MR || 0) + " (+" + (equipmentBonuses.bonusMR || 0) + ") = " + (effectiveMR || 0)
+    "ATK": displayATK,
+    "DEF": displayDEF,
+    "MAG": displayMAG,
+    "MR": displayMR
   };
 
   // Iterate over the stats object, creating an <li> for each stat.
   for (const key in stats) {
     const li = document.createElement("li");
-    li.textContent = key + ": " + stats[key];
+    li.innerHTML = key + ": " + stats[key];
     statsList.appendChild(li);
   }
 
