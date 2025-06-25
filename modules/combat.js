@@ -3,10 +3,11 @@
  * Contains combat simulation functions, XP/level mechanics, and save/load progress.
  **********************************************************************************/
 
-import { delay, randomizeDamage, getEffectiveMR, checkMilestones, scaleGenericEnemy, calculatePhysicalDamage, calculateSpellDamage } from "./utils.js";
+import { delay, randomizeDamage, getEffectiveMR, checkMilestones, scaleGenericEnemy, calculatePhysicalDamage, calculateSpellDamage, onEnemyHit, onPlayerHit } from "./utils.js";
 import { appendLog, updateUI, updateStatsUI, updateAreaInfo, getItemDisplayName, updateGameTotals } from "./ui.js";
 import { equipIfBetter, getEquipmentBonuses, assignPetToPlayer } from "./equipment.js";
 import { player } from "./character.js";
+import { updateImageBar, refreshHPBar } from "./index.js";
 import { spellCastChance, classesWithPets, enemyCombatConstants, bossCombatConstants, dmgModifiers, playerXpScaling, zoneChange, playerScalingSet1, playerScalingSet2 } from "./constants.js";
 
 // Global flag to control the game loop.
@@ -167,6 +168,8 @@ export function addXP(amount) {
   }
 }
 
+export let enemy ='';
+
 /****************************
  ********** BOSSES **********
  ****************************/
@@ -197,7 +200,11 @@ async function simulateBossBattle() {
     isBoss: true
   };
 
+  currentBoss.currentHP = currentBoss.HP;
+
   appendLog("<span style='color: #da0000;'><strong>A Boss Encounter!</strong> A fearsome " + currentBoss.name + " (Level " + currentBoss.level + ") appears!</span>");
+  enemy = currentBoss;
+  updateImageBar(player, enemy);
 
   // Get equipment bonuses for the player.
   const equipmentBonuses = getEquipmentBonuses(player.equipment);
@@ -233,7 +240,7 @@ async function simulateBossBattle() {
     let petIterations = 0;
     const maxPetIterations = 150;
 
-    while (currentBoss.HP > 0 && player.pet && player.pet.currentHP > 0) {
+    while (currentBoss.currentHP > 0 && player.pet && player.pet.currentHP > 0) {
 
       // FAILSAFE for long running combat loops.
       petIterations++;
@@ -252,11 +259,11 @@ async function simulateBossBattle() {
       }
 
       damageDealt = randomizeDamage(damageDealt);
-      currentBoss.HP -= damageDealt;
-      appendLog(player.pet.name + " attacks, dealing " + damageDealt + " damage! Boss HP: " + currentBoss.HP);
+      currentBoss.currentHP -= damageDealt;
+      appendLog(player.pet.name + " attacks, dealing " + damageDealt + " damage! Boss HP: " + currentBoss.currentHP);
       await delay(1000);
 
-      if (currentBoss.HP <= 0) break;
+      if (currentBoss.currentHP <= 0) break;
 
       let damageReceived = calculatePhysicalDamage(currentBoss, activeCombatant);
 
@@ -293,7 +300,7 @@ async function simulateBossBattle() {
     let playerIterations = 0;
     const maxPlayerIterations = 150;
 
-    while (currentBoss.HP > 0 && player.currentHP > 0) {
+    while (currentBoss.currentHP > 0 && player.currentHP > 0) {
 
       // FAILSAFE for long running combat loops.
       playerIterations++;
@@ -324,11 +331,11 @@ async function simulateBossBattle() {
         }
 
         damageDealt = randomizeDamage(damageDealt);
-        currentBoss.HP -= damageDealt;
-        appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Boss HP: " + currentBoss.HP);
+        currentBoss.currentHP -= damageDealt;
+        appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Boss HP: " + currentBoss.currentHP);
         await delay(1000);
       
-        if (currentBoss.HP <= 0) break;
+        if (currentBoss.currentHP <= 0) break;
       
         // Enemy counterattack remains physical.
         let damageReceived = calculatePhysicalDamage(currentBoss, activeCombatant);
@@ -361,11 +368,11 @@ async function simulateBossBattle() {
       }
 
       playerDamage = randomizeDamage(playerDamage);
-      currentBoss.HP -= playerDamage;
-      appendLog("You attack " + currentBoss.name + " dealing " + playerDamage + " damage! Boss HP: " + currentBoss.HP);
+      currentBoss.currentHP -= playerDamage;
+      appendLog("You attack " + currentBoss.name + " dealing " + playerDamage + " damage! Boss HP: " + currentBoss.currentHP);
       await delay(1000);
 
-      if (currentBoss.HP <= 0) break;
+      if (currentBoss.currentHP <= 0) break;
 
       let bossDamage = calculatePhysicalDamage(currentBoss, activeCombatant);
 
@@ -391,7 +398,7 @@ async function simulateBossBattle() {
 }
 
   // Final Outcome
-  if (currentBoss.HP <= 0) {
+  if (currentBoss.currentHP <= 0) {
     appendLog("<span class='winOutcome'>You have defeated " + currentBoss.name + "!</span>");
     addXP(currentBoss.xp);
     player.bossKills++;
@@ -528,6 +535,7 @@ async function simulateCombat() {
     // Now scale the enemy from level 1 up to enemyLevel.
     const scaledEnemy = scaleGenericEnemy(baseEnemy, enemyLevel, hpScale, atkScale, defScale);
     scaledEnemy.maxHP = scaledEnemy.HP; // Store maxHP for damage calculations
+    scaledEnemy.currentHP = scaledEnemy.HP; 
 
     currentEnemy = scaledEnemy;
   } else {
@@ -604,6 +612,7 @@ async function simulateCombat() {
 
     // Set the enemy's maxHP based on its scaled HP.
     currentEnemy.maxHP = currentEnemy.HP;
+    currentEnemy.currentHP = currentEnemy.HP;
   }
 
   // Customize enemy appearance message based on level difference with player.
@@ -619,6 +628,8 @@ async function simulateCombat() {
   }
 
   appendLog(enemyMessage);
+  enemy = currentEnemy;
+  updateImageBar(player, enemy);
 
   // Determine active combatant.
   // If a pet exists and is alive, let it fight; otherwise, use the player.
@@ -655,9 +666,9 @@ async function simulateCombat() {
 
   // Main combat loop:
   while (
-    currentEnemy.HP > 0 &&
+    currentEnemy.currentHP > 0 &&
     ((activeCombatant === player && player.currentHP > 0) ||
-     (activeCombatant !== player && activeCombatant.HP > 0))
+     (activeCombatant !== player && activeCombatant.currentHP > 0))
   ) {
 
     // FAILSAFE for long running combat loops.
@@ -694,10 +705,11 @@ async function simulateCombat() {
           }
 
           damageDealt = randomizeDamage(damageDealt);
-          currentEnemy.HP -= damageDealt;
-          appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage!&nbsp; Enemy HP: " + currentEnemy.HP);
+          currentEnemy.currentHP -= damageDealt;
+          onEnemyHit(damageDealt, currentEnemy);
+          appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage!&nbsp; Enemy HP: " + currentEnemy.currentHP);
           await delay(1000);
-          if (currentEnemy.HP <= 0) break;
+          if (currentEnemy.currentHP <= 0) break;
         
           // Enemy counterattack remains physical.
           let damageReceived = calculatePhysicalDamage(currentEnemy, activeCombatant);
@@ -711,6 +723,7 @@ async function simulateCombat() {
           damageReceived = randomizeDamage(damageReceived);
           player.currentHP -= damageReceived;
           currentHealth = player.currentHP;
+          onPlayerHit(damageReceived, player);
           appendLog(currentEnemy.name + " counterattacks for " + damageReceived + " damage.&nbsp; Your HP: " + currentHealth);
           await delay(1000);
         
@@ -747,11 +760,12 @@ async function simulateCombat() {
     }
     
     damageDealt = randomizeDamage(damageDealt);
-    currentEnemy.HP -= damageDealt;
-    appendLog(attackerName + " attacks, dealing " + damageDealt + " damage!&nbsp; Enemy HP: " + currentEnemy.HP);
+    currentEnemy.currentHP -= damageDealt;
+    onEnemyHit(damageDealt, currentEnemy);
+    appendLog(attackerName + " attacks, dealing " + damageDealt + " damage!&nbsp; Enemy HP: " + currentEnemy.currentHP);
     await delay(1000);
     
-    if (currentEnemy.HP <= 0) break;
+    if (currentEnemy.currentHP <= 0) break;
     
     // Enemy counterattack.
     let damageReceived = calculatePhysicalDamage(currentEnemy, activeCombatant);
@@ -766,6 +780,7 @@ async function simulateCombat() {
       damageReceived = randomizeDamage(damageReceived);
       player.currentHP -= damageReceived;
       currentHealth = player.currentHP;
+      onPlayerHit(damageReceived, player);
     } else {
       damageReceived = randomizeDamage(damageReceived);
       player.pet.currentHP -= damageReceived;
@@ -794,7 +809,7 @@ async function simulateCombat() {
   }
 
   // Determine battle outcome.
-  if (currentEnemy.HP <= 0) {
+  if (currentEnemy.currentHP <= 0) {
     appendLog("<span class='winOutcome'>You defeated " + currentEnemy.name + "!</span>");
     addXP(currentEnemy.xp);
     player.enemyKills++;
@@ -851,7 +866,7 @@ async function simulateCombat() {
     await delay(500);
 
   // Equipment drop chance.
-  if (Math.random() < enemyCombatConstants.equipDropChance) { // 10% chance for an item drop
+  if (currentEnemy.currentHP <= 0 && Math.random() < enemyCombatConstants.equipDropChance) { // 10% chance for an item drop
     // 1. Randomly select an equipment slot
     const allSlots = ["Head", "Torso", "Legs", "Back", "Main Hand", "Offhand", "Ring 1", "Ring 2"];
     const randomSlot = allSlots[Math.floor(Math.random() * allSlots.length)];
@@ -890,6 +905,7 @@ export async function startGameLoop() {
     updateUI(player, player.equipment, getEquipmentBonuses());
     updateStatsUI(player, getEquipmentBonuses(player.equipment));
     updateGameTotals();
+    updateImageBar(player);
   while (gameRunning) {
     // 2% chance to encounter a boss (0.02 probability)
     if (Math.random() < bossCombatConstants.bossEncChance) {

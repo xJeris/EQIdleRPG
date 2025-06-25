@@ -29,7 +29,6 @@ Possible future enhancements that could be made.
 - **Pets Casting:** Allow pets to cast spells. They already have the MAG stat in their XML to support this.
 - **Songs:** Allow bards to play songs.
 - **Updated Combat:** Allow pet classes to attack while their pet is alive instead of only if it dies.
-- **Images:** Add Character and Enemy Images to the interface.
 - **Flavor Text:** Add to or update the games flavor text.
 
 ## Installation
@@ -39,6 +38,9 @@ Place the folders and files in your desired web-server directory. Navigate to th
 ## Changelog
 
 Major Updates:
+- 06/25/25 <br/>
+&emsp; - Added player and enemy images and health bars above the Adventure Log. Fallback image included. <br/>
+
 - 06/23/25 <br/>
 &emsp; - Added developer mode. Level can be set to test features. <br/>
 

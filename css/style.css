@@ -70,6 +70,62 @@
     padding: 10px;
     overflow: hidden;
   }
+  /* IMAGE BAR LAYOUT */
+  #imageBar {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;                /* space between player & enemy */
+    margin-bottom: 12px;      /* to Adventure Log */
+  }
+
+  /* each portrait + stats container */
+  .portrait-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* the 75×75 icon */
+  .portrait-wrapper img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border: 5px solid transparent;
+    border-image: url('/img/fullframe.png') 5 stretch;
+    background: #12141b;
+  }
+
+  /* the text & bar to the right */
+  .portrait-wrapper .stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* name label */
+  .portrait-wrapper .stats .name {
+    font-size: 16px;
+    color: #FFD700;
+    margin-bottom: 4px;
+  }
+
+  /* container for the HP bar */
+  .portrait-wrapper .stats .hp-bar {
+    width: 120px;               /* adjust to taste */
+    height: 12px;
+    background: #333;           /* empty‐bar bg */
+    border: 1px solid #555;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* the red “fill” that shrinks */
+  .portrait-wrapper .stats .hp-bar .fill {
+    height: 100%;
+    background: red;
+    width: 100%;
+    transition: width 0.3s ease-in-out;
+  }
 
   /* Combat log styling */
   #combatLog {

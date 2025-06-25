@@ -7,7 +7,8 @@ import { dmgModifiers, classBaseStats, playerScalingSet1, playerScalingSet2, pla
 import { appendLog, updateUI, updateAreaInfo } from "./ui.js";
 import { player } from "./character.js";
 import { assignPetToPlayer } from "./equipment.js";
-import { findAreaForLevel, startGameLoop, saveProgress } from "./combat.js";
+import { findAreaForLevel, startGameLoop, saveProgress, enemy } from "./combat.js";
+import { refreshHPBar } from "./index.js";
 
 export function parseModifiers(str) {
   if (!str) return {};
@@ -49,6 +50,14 @@ export function checkMilestones(eventType, value) {
       appendLog(`<span style="color: gold;">Milestone achieved: ${m.name}!</span>`);
     }
   });
+}
+
+// Helper function to refresh HP bars
+export function onPlayerHit(dmg) {
+  refreshHPBar('player', player.currentHP, player.maxHP);
+}
+export function onEnemyHit(dmg) {
+  refreshHPBar('enemy', enemy.currentHP, enemy.maxHP);
 }
 
 // Generic Enemy Scaling Function
