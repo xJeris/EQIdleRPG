@@ -38,7 +38,7 @@
   }
   #areaInfo {
     border: 5px solid transparent;
-    border-image: url('/img/fullframe.png') 5 stretch;
+    border-image: url('../img/fullframe.png') 5 stretch;
     margin-top: 16px;
     padding: 10px;
     background: #23262e;
@@ -59,7 +59,7 @@
   #banner {
     height: 100px;
     background-color: #20252b; 
-    background-image: url('/img/banner_bg.png');
+    background-image: url('../img/banner_bg.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -91,7 +91,7 @@
     height: 75px;
     object-fit: cover;
     border: 5px solid transparent;
-    border-image: url('/img/fullframe.png') 5 stretch;
+    border-image: url('../img/fullframe.png') 5 stretch;
     background: #12141b;
   }
 
