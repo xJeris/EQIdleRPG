@@ -8,11 +8,16 @@ import { player } from './character.js';
 import { getEquipmentBonuses } from "./equipment.js";
 window.player = player;
 
-export function appendLog(message) {
+export function appendLog(message, maxRows=100) {
   const logDiv = document.getElementById("combatLog");
   const p = document.createElement("p");
   p.innerHTML = message;
   logDiv.appendChild(p);
+
+  while (logDiv.children.length > maxRows) {
+    logDiv.removeChild(logDiv.firstChild);
+  }
+  
   logDiv.scrollTop = logDiv.scrollHeight;
 }
 
