@@ -192,5 +192,6 @@ export function handleCharacterCreation(e) {
   document.getElementById("characterCreation").style.display = "none";
   document.getElementById("gameUI").style.display = "flex";
   appendLog("Welcome, " + player.name + "! Your adventure begins in " + player.currentArea.name + ".");
+  console.log("Initial player data:", window.gameData.player); //debug
   startGameLoop();
 }

@@ -27,14 +27,25 @@ window.addEventListener("DOMContentLoaded", () => {
           if (typeof devMode !== "undefined" && devMode === 1) {
             // Special behavior when in dev mode
             console.log("Dev mode active: executing alternative handler.");
-            // Retrieve the level input value
-            const levelInputElem = document.getElementById("levelInput");
-            let selectedLevel = levelInputElem.value;
-            selectedLevel = parseInt(selectedLevel, 10);
+
+            // Retrieve the input value
+            const nameInput = document.getElementById("playerName");
+            const classInput = document.getElementById("playerClass");
+            const levelInput = document.getElementById("levelInput");
+
+            // Save these values
+            const playerName = nameInput.value.trim() || "Developer";
+            const classValue = classInput.value.trim();
+            const selectedLevel = parseInt(levelInput.value, 10);
+
+            player.name = playerName;
+            player.class = classValue;
+            //let selectedLevel = levelInputElem.value;
+            //selectedLevel = parseInt(selectedLevel, 10);
 
             // Retrieve and assign the class value from the form
-            const classValue = document.getElementById("playerClass").value.trim();
-            player.class = classValue;
+            //const classValue = document.getElementById("playerClass").value.trim();
+            //player.class = classValue;
 
             scalePlayerStats(selectedLevel);
           } else {
@@ -147,7 +158,7 @@ export function updateImageBar(player, enemy) {
   bar.appendChild(makePortrait({
     imgSrc:     `img/${raceKey}_${classKey}.png`,
     onErrorSrc: 'img/player_default.png',
-    label:      player.name,
+    label:  player?.name || 'Player',
     currentHP:  player.currentHP,
     maxHP:      player.maxHP,
     unitType:   'player'

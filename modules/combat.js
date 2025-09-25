@@ -260,6 +260,7 @@ async function simulateBossBattle() {
 
       damageDealt = randomizeDamage(damageDealt);
       currentBoss.currentHP -= damageDealt;
+      onEnemyHit(damageDealt, currentBoss);
       appendLog(player.pet.name + " attacks, dealing " + damageDealt + " damage! Boss HP: " + currentBoss.currentHP);
       await delay(1000);
 
@@ -275,6 +276,7 @@ async function simulateBossBattle() {
       
       damageReceived = randomizeDamage(damageReceived);
       player.pet.currentHP -= damageReceived;
+      onPlayerHit(damageReceived, player.pet);
       appendLog(currentBoss.name + " attacks for " + damageReceived + " damage.&nbsp; Pet HP: " + player.pet.currentHP);
       await delay(1000);
 
@@ -332,6 +334,7 @@ async function simulateBossBattle() {
 
         damageDealt = randomizeDamage(damageDealt);
         currentBoss.currentHP -= damageDealt;
+        onEnemyHit(damageDealt, currentBoss);
         appendLog("You cast " + chosenSpell.name + ", dealing " + damageDealt + " magical damage! Boss HP: " + currentBoss.currentHP);
         await delay(1000);
       
@@ -369,6 +372,7 @@ async function simulateBossBattle() {
 
       playerDamage = randomizeDamage(playerDamage);
       currentBoss.currentHP -= playerDamage;
+      onEnemyHit(playerDamage, currentBoss);
       appendLog("You attack " + currentBoss.name + " dealing " + playerDamage + " damage! Boss HP: " + currentBoss.currentHP);
       await delay(1000);
 
@@ -384,6 +388,7 @@ async function simulateBossBattle() {
       
       bossDamage = randomizeDamage(bossDamage);
       player.currentHP -= bossDamage;
+      onPlayerHit(bossDamage, player);
       appendLog(currentBoss.name + " attacks for " + bossDamage + " damage.&nbsp; Your HP: " + player.currentHP);
       await delay(1000);
 
@@ -523,13 +528,13 @@ async function simulateCombat() {
     // Scale the fallback enemy's base stats according to the chosen level
     let hpScale, atkScale, defScale;
       if (enemyLevel <= 50) {
-      hpScale = 1.055;
-      atkScale = 1.04;
-      defScale = 1.04;
-    } else {
-      hpScale = 1.065;
-      atkScale = 1.06;
+      hpScale = 1.045;
+      atkScale = 1.07;
       defScale = 1.06;
+    } else {
+      hpScale = 1.060;
+      atkScale = 1.12;
+      defScale = 1.10;
     }
 
     // Now scale the enemy from level 1 up to enemyLevel.
